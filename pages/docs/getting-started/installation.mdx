@@ -1,0 +1,57 @@
+import { Callout } from 'nextra-theme-docs'
+
+# Installation
+
+## Requirements
+
+Ubuntu 18.04 LTS or higher is recommended. However other major Linux distribution are supported but may lead to installation issues. Please file an issue if you encounter one.
+
+If Docker is already installed on your machine, Tipi will use it to run the dashboard. Otherwise, it will install Docker for you.
+
+<Callout type="warning">
+If you already have docker installed make sure to have the docker compose plugin installed.<br/>
+Run `docker compose version` to check if it is installed. Instructions to install it can be found [here](https://docs.docker.com/compose/install/linux/).
+</Callout>
+
+
+## Download and install Tipi
+
+Download the latest version of Tipi:
+
+```bash
+curl -L https://setup.runtipi.io | bash
+```
+
+If you have some issue with the command above, you can also download the script directly from github:
+  
+```bash
+curl -L https://raw.githubusercontent.com/meienberger/runtipi/master/scripts/install.sh | bash
+```
+
+The script will prompt you the ip address of the dashboard once configured.
+
+## Commands
+
+If you already installed Tipi, you can start it manually by running the `start.sh` script in the `runtipi` folder.
+
+```bash
+cd runtipi
+sudo ./scripts/start.sh
+```
+
+Tipi will run by default on port 80. To select another port you can create a `settings.json` file in the `state` folder.
+See the [Custom Settings](/docs/getting-started/custom-settings) section for more information.
+
+To stop Tipi, run the stop script.
+
+```bash
+sudo ./scripts/stop.sh
+```
+
+## Update Tipi
+
+To update Tipi to the latest version, run the update script.
+
+```bash
+sudo ./scripts/system.sh update
+```
