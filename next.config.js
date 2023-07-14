@@ -6,11 +6,7 @@ const withNextra = require('nextra')({
 module.exports = withNextra({
   output: 'export',
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'raw.githubusercontent.com',
-      },
-    ],
+    unoptimized: true,
   },
+  basePath: "/new_docs",
 });
