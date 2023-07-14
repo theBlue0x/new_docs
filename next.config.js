@@ -3,13 +3,20 @@ const withNextra = require('nextra')({
   themeConfig: './theme.config.tsx',
 });
 
-module.exports = withNextra({
+const assetPrefix = "/reading-notes";
+
+const nextConfig = {
+  output: "export",
   images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'raw.githubusercontent.com',
-      },
-    ],
+    unoptimized: true,
   },
-});
+  reactStrictMode: true,
+  swcMinify: true,
+  trailingSlash: true,
+  basePath: assetPrefix,
+};
+
+module.exports = {
+  ...withNextra(),
+  ...nextConfig,
+};
