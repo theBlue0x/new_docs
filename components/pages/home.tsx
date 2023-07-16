@@ -1,13 +1,17 @@
 import Image from 'next/image';
 import React from 'react';
 import {
-  ArrowDownTrayIcon,
-  CursorArrowRaysIcon,
   DocumentDuplicateIcon,
-  LockClosedIcon,
+  WalletIcon,
+  BuildingStorefrontIcon,
+  ArrowTrendingUpIcon,
 } from '@heroicons/react/24/outline';
 
+import { ReactCompareSlider } from 'react-compare-slider';
+
 import screenshot from '../../public/images/screenshot.png';
+import before from '../../public/images/before.png';
+import after from '../../public/images/after.png';
 
 import Link from 'next/link';
 import { toast, Toaster } from 'react-hot-toast';
@@ -24,15 +28,18 @@ export default function Home() {
         <div className="flex w-full flex-col justify-between md:mr-4 md:w-10/12 lg:w-9/12 xl:w-7/12">
           <div>
             <h1 className="mx-auto max-w-5xl text-6xl font-extrabold leading-[1.1] tracking-tighter sm:text-7xl">
-              <span className="inline-block bg-gradient-to-r from-red-500 to-blue-500 bg-clip-text pr-1 text-transparent ">
-                Homeserver
+              <span className="inline-block bg-gradient-to-r from-blue-700 from-10% via-sky-500 via-30% to-emerald-300 to-85%  bg-clip-text pr-1 text-transparent ">
+                Together.
+              <br/>
+              We Are the Bank.
               </span>
-              management made easy.
             </h1>
             <p className="mt-6 max-w-2xl text-xl font-medium leading-tight text-gray-400">
-              Free and open-source, Runtipi lets you install all your favorite self-hosted apps
-              without the hassle of configuring and managing each service. One-click installs and
-              updates for more than 120 popular apps.
+              Open-sourced.  Decentralized.  Secure.
+              <br/>
+              <br/>
+              Blue0x is a monetary system built on computational trust that eliminates the need for intermediaries and returns control of national & personal finance back to the people.
+              <br/>
             </p>
           </div>
           <div className="mt-4 mb-6 flex h-32 flex-col gap-3 md:my-0 md:flex-row md:items-center xl:flex-row">
@@ -46,10 +53,10 @@ export default function Home() {
             </div>
             <div className="relative rounded-md xl:w-auto">
               <button
-                onClick={() => onClick('curl -L https://setup.runtipi.io | bash')}
+                onClick={() => onClick('curl -L https://get.blue0x.com | bash')}
                 className="flex w-full items-center justify-center rounded-md border border-gray-200 bg-black/10 px-8 py-3 font-mono text-sm font-medium text-gray-600 dark:border-gray-700 dark:bg-white/10 dark:text-gray-300 md:py-3 md:px-10 md:text-base md:leading-6 betterhover:hover:bg-gray-50 betterhover:dark:hover:bg-gray-900"
               >
-                curl -L https://setup.runtipi.io | bash
+                curl -L https://get.blue0x.com | bash
                 <DocumentDuplicateIcon className="ml-2 -mr-3 h-6 w-6 text-gray-400" />
               </button>
             </div>
@@ -94,17 +101,12 @@ export default function Home() {
           <div className="lg:col-span-2 lg:col-start-1 lg:row-start-1 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
             <div className="lg:pr-4">
               <div className="lg:max-w-lg">
-                <p className="text-base font-semibold leading-7 text-blue-700">Deploy faster</p>
+                <p className="text-base font-semibold leading-7 text-blue-700">All-in-one</p>
                 <h1 className="light:text-gray-900 mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
-                  Don&apos;t waste time on configuration
+                  Everything you need is already here
                 </h1>
                 <p className="light:text-gray-700 mt-6 text-xl leading-8">
-                  Chose any app from our{' '}
-                  <a className="text-blue-700" href="/docs/apps-available">
-                    app store
-                  </a>{' '}
-                  and install it pre-configured. It just works and everything can be customized to
-                  your needs.
+                  Blue0x is not just a blockchain network.  An entire ecosystem is pre-built and ready to go.  All operating completely on-chain and fully transparent.
                 </p>
               </div>
             </div>
@@ -113,7 +115,7 @@ export default function Home() {
             <Image
               className="w-[48rem] max-w-none rounded-xl bg-gray-900 shadow-xl ring-1 ring-gray-400/10 sm:w-[57rem]"
               src={screenshot}
-              alt="Screenshot of the Runtipi dashboard"
+              alt="Screenshot of the Blue0x dashboard"
             />
           </div>
           <div className="lg:col-span-2 lg:col-start-1 lg:row-start-2 lg:mx-auto lg:grid lg:w-full lg:max-w-7xl lg:grid-cols-2 lg:gap-x-8 lg:px-8">
@@ -121,42 +123,45 @@ export default function Home() {
               <div className="light:text-gray-700 max-w-xl text-base leading-7 lg:max-w-lg">
                 <ul role="list" className="light:text-gray-600 space-y-8">
                   <li className="flex gap-x-3">
-                    <CursorArrowRaysIcon
+                    <WalletIcon
                       className="mt-1 h-5 w-5 flex-none text-blue-700"
                       aria-hidden="true"
                     />
                     <span>
                       <strong className="light:text-gray-900 font-semibold dark:text-blue-700">
-                        One click install.
+                        Browser-based Wallet.
                       </strong>{' '}
-                      Install your favorite self-hosted apps with a single click. No configuration,
-                      no docker knowledge required.
+                      Run on a VPS, a local machine, or your mobile phone!  Any device with a browser can run a Blue0x wallet. 
                     </span>
                   </li>
                   <li className="flex gap-x-3">
-                    <LockClosedIcon
+                    <BuildingStorefrontIcon
                       className="mt-1 h-5 w-5 flex-none text-blue-700"
                       aria-hidden="true"
                     />
                     <span>
                       <strong className="light:text-gray-900 font-semibold dark:text-blue-700">
-                        SSL certificates.
+                        Blue0x Marketplace.
                       </strong>{' '}
-                      Expose your apps to the world instantly. Automatic SSL certificates management
-                      with Let&apos;s Encrypt.
+                      Buy and Sell anything, anytime, anywhere on the first decentralized crypto {' '}
+                        <a className="text-blue-500" href="https://market.blue0x.com">
+                          Marketplace.
+                        </a>{' '}
                     </span>
                   </li>
                   <li className="flex gap-x-3">
-                    <ArrowDownTrayIcon
+                    <ArrowTrendingUpIcon
                       className="mt-1 h-5 w-5 flex-none text-blue-700"
                       aria-hidden="true"
                     />
                     <span>
                       <strong className="light:text-gray-900 font-semibold text-gray-900 dark:text-blue-700">
-                        Easy updates and configuration.
+                        Blue0x Exchange.
                       </strong>{' '}
-                      Update your apps with a single click. Customize your apps with a simple web
-                      UI.
+                      Trade a growing list of international currencies on the first decentralized foreign {' '}
+                        <a className="text-blue-500" href="https://exchange.blue0x.com">
+                          Exchange.
+                        </a>{' '}
                     </span>
                   </li>
                 </ul>
@@ -169,14 +174,18 @@ export default function Home() {
       <div className="relative from-gray-50 to-gray-100">
         <div className="mx-auto px-4 py-16 sm:pt-20 sm:pb-24 lg:max-w-7xl lg:pt-24">
           <h2 className="text-4xl font-extrabold tracking-tight dark:text-white lg:text-center">
-            Easy to use and to customize
+            Easy to setup and use
           </h2>
           <p className="mx-auto mt-4 text-lg font-medium text-gray-400 lg:max-w-3xl lg:text-center lg:text-xl">
-            Each app comes with a pre-configured state that works out of the box. You can customize
-            it as you want to fit your needs.
+            No matter your skill set or hardware, we got you covered.
           </p>
-          <div className="my-4 flex justify-center">
-            
+          <div className="my-8 flex justify-center">
+            <div className="overflow-hidden rounded-md shadow lg:w-7/12">
+              <ReactCompareSlider
+                itemOne={<Image src={before} alt="Exchange image" className="w-full object-cover" />}
+                itemTwo={<Image src={after} alt="Market image" className="w-full object-cover" />}
+              />
+            </div>
           </div>
         </div>
       </div>

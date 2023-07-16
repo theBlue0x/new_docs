@@ -1,92 +1,71 @@
 import React from 'react';
 import Image from 'next/image';
 import { DocsThemeConfig } from 'nextra-theme-docs';
-
-import logo from './public/tipi.png';
+import { Footer } from "./components/Footer";
+import logo from './public/blue0x.png';
 import { useRouter } from 'next/router';
-
-const footer = () => {
-  return (
-    <div className="flex w-full items-center justify-between">
-      <div className="flex-1">Runtipi - Homeserver management made easy</div>
-      {/* <div className="flex-1"> */}
-      {/*   <a */}
-      {/*     rel="noopener noreferrer" */}
-      {/*     target="_blank" */}
-      {/*     href="https://vercel.com/?utm_source=runtipi&utm_campaign=oss" */}
-      {/*   > */}
-      {/*     <img */}
-      {/*       height="34px" */}
-      {/*       src="https://images.ctfassets.net/e5382hct74si/78Olo8EZRdUlcDUFQvnzG7/fa4cdb6dc04c40fceac194134788a0e2/1618983297-powered-by-vercel.svg" */}
-      {/*       alt="Powered by vercel" */}
-      {/*     /> */}
-      {/*   </a> */}
-      {/* </div> */}
-    </div>
-  );
-};
 
 const config: DocsThemeConfig = {
   useNextSeoProps() {
     const { asPath } = useRouter();
 
-    const title = asPath === '/' ? 'Runtipi - Homeserver management made easy' : 'Runtipi - %s';
+    const title = asPath === '/' ? 'Blue0x - Together. We Are the Bank.' : 'Blue0x - %s';
 
     return {
       titleTemplate: title,
-      description: 'Homeserver management made easy',
-      canonical: 'https://runtipi.io',
+      description: 'Together. We Are the Bank.',
+      canonical: 'https://blue0x.com',
       openGraph: {
-        url: 'https://runtipi.io',
-        title: 'Runtipi - Homeserver management made easy',
+        url: 'https://blue0x.com',
+        title: 'Blue0x - Together.  We Are the Bank.',
         description:
-          'Free and open-source, Runtipi lets you install all your favorite self-hosted apps without the hassle of configuring and managing each service. One-click installs and updates for more than 80 popular apps.',
+            'Free. Open-source. Decentralized. We are taking back control of money.',
         images: [
           {
             url: 'https://runtipi.io/images/tipi-og.png',
             width: 1200,
             height: 630,
-            alt: 'Runtipi usage screenshot',
+            alt: 'Blue0x screenshot',
             type: 'image/png',
           },
         ],
-        siteName: 'Runtipi',
+        siteName: 'Blue0x',
       },
       twitter: {
-        handle: '@runtipi',
+        handle: '@Blue0x',
         cardType: 'summary_large_image',
       },
     };
   },
   nextThemes: {
-    forcedTheme: 'light',
+    forcedTheme: 'dark',
   },
   logo: (
     <div className="flex">
       <Image src={logo} alt="Tipi logo" className="h-6 w-6" />
-      <span className="ml-2 font-bold">Runtipi</span>
+      <span className="ml-2 font-bold">Blue0x</span>
     </div>
   ),
   darkMode: false,
   project: {
-    link: 'https://github.com/meienberger/runtipi',
+    link: 'https://github.com/Blue0x',
   },
   chat: {
     link: 'https://discord.gg/Bu9qEPnHsc',
   },
-  docsRepositoryBase: 'https://github.com/theBlue0x/runtipi-docs',
+  docsRepositoryBase: 'https://github.com/Blue0x/new_docs',
   footer: {
-    text: footer(),
+    text: <Footer />,
   },
   head: (
     <>
       <meta httpEquiv="Content-Language" content="en" />
-      <meta name="description" content="Runtipi: Homeserver management made simple" />
+      <meta name="description" content="Blue0x: Together. We Are the Bank." />
       <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:site" content="@runtipi" />
-      <meta property="og:title" content="Runtipi: Homeserver management made easy" />
-      <meta property="og:description" content="Runtipi: Homeserver management made easy" />
-      <meta name="apple-mobile-web-app-title" content="Runtipi" />
+      <meta name="twitter:site" content="@Blue0x" />
+      <meta property="og:title" content="Blue0x: Together. We Are the Bank." />
+      <meta property="og:description" content="Blue0x: Together. We Are the Bank." />
+      <meta name="apple-mobile-web-app-title" content="Blue0x" />
     </>
   ),
 };
