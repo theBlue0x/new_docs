@@ -8,5 +8,5 @@ module.exports = withNextra({
   images: {
     unoptimized: true,
   },
-  basePath: '/blue0x.com',
+  basePath: '',
 });
