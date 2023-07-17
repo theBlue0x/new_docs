@@ -1,0 +1,81 @@
+## Create Transaction
+
+The following API calls create BLX transactions using HTTP POST requests. Follow the links for examples and HTTP POST request parameters specific to each call. Calls in <i>italics</i> are phasing-safe. Refer to [Create Phasing Poll](voting.mdx#create-poll)
+
+- _Send Money_
+- _Set Account Information_
+- _Set Account Property_
+- Buy Alias
+- Sell Alias
+- Delete Alias
+- Set Alias
+- Send Message
+- _Cancel Order_
+- _Dividend Payment_
+- _Issue Asset_
+- _Place Order_
+- _Transfer Asset_
+- _DGS Delisting_
+- DGS Delivery
+- DGS Feedback
+- _DGS Listing_
+- DGS Price Change
+- DGS Purchase
+- DGS Quantity Change
+- DGS Refund
+- _Lease Balance_
+- Currency Buy
+- Currency Sell
+- Currency Reserve Claim
+- Currency Reserve Increase
+- Delete Currency
+- Issue Currency
+- Publish Exchange Offer
+- Transfer Currency
+- Create Poll
+- Cast Vote
+- _Approve Transaction_
+- Extend Tagged Data
+- Upload Tagged Data
+
+### Create Transaction Request
+
+The following HTTP POST parameters are common to all API calls that create transactions:
+
+- `secretPhrase` is the secret passphrase of the account (optional, but transaction neither signed nor broadcast if omitted)
+- `publicKey` is the public key of the account (optional if `secretPhrase` provided)
+- `feeNQT` is the fee (in NQT) for the transaction:
+  - minimum 10 BLX for [Issue Asset](assets.mdx#issue-asset), unless singleton asset is issued, for which the fee 0.01 BLX
+  - 0.2 BLX in base fee for [Set Alias](alias.mdx#set-alias), with 0.02 BLX additional fee for each 32 chars of name plus URI total length, after the first 32 chars
+  - \[25000, 1000, 40\] BLX for \[3-letter, 4-letter, 5-letter\] [Issue Currency](monetary_system.mdx#issue-currency)
+  - 40 BLX for re-issue of any currency
+  - 0.10 BLX for a [Create Poll](voting.mdx#create-poll), including 20 options and total size of poll name plus poll description plus total option length not exceeding 320 chars. For each option above 20, an additional fee of 0.01 BLX, and for each 32 chars after 320, an additional fee of 0.02 BLX.
+  - \[2, 21\] BLX for a \[basic, required-minimum-balance\] [Create Phasing Poll](phasing.mdx#create-phasing-poll). 0.01 BLX will be added for each option (answer) beyond 20, and 0.01 BLX for each 32 bytes of hashedSecret or linkedFullHash fields.
+  - 0.01 BLX for the first 32 bytes of a unencrypted non-prunable [message](messaging.mdx#send-message), 0.01 BLX for each additional 32 bytes
+  - 0.02 BLX for the first 32 bytes of an encrypted non-prunable [message](messaging.mdx#send-message), 0.01 BLX for each additional 32 bytes. The length is measured excluding the nonce and the 16 byte AES initialization vector.
+  - 0.01 BLX for the first 1024 bytes of a prunable [message](messaging.mdx#send-message), 0.01 BLX for each additional 1024 prunable bytes
+  - 0.01 BLX for [Set Account Info](account.mdx#set-account-info), including 32 chars, with 0.02 BLX additional fee for each 32 chars
+  - 0.1 BLX for [Marketplace Listing](marketplace.mdx#dgs-listing), including 32 chars of name plus description. With 0.02 BLX additional fee for each 32 chars.
+  - 0.01 BLX for [Marketplace Delivery](marketplace.mdx#dgs-delivery), including 32 bytes of encrypted goods data (AES initialization bytes and nonce excluded). With 0.02 BLX additional fee for each 32 bytes.
+  - 0.02 BLX for transactions that make use of `referencedTransactionFullHash` property when creating a new transaction.
+  - 0.01 BLX otherwise.
+- `deadline` is the deadline (in minutes) for the transaction to be confirmed, 32767 minutes maximum
+- `referencedTransactionFullHash` creates a chained transaction, meaning that the current transaction cannot be confirmed unless the referenced transaction is also confirmed (optional)
+- `broadcast` is set to `false` to prevent broadcasting the transaction to the network (optional)
+
+**Note:** An optional arbitrary message can be appended to any transaction by adding message-related parameters as in [Send Message](messaging.mdx#send-message).
+
+**Note:** Any phasing-safe transaction (refer to [Create Transaction](create_transaction.mdx#create-transaction)) can have its execution deferred either conditionally or unconditionally (refer to [Create Phasing Poll](phasing.mdx#create-phasing-poll)).
+
+### Create Transaction Response
+
+The following JSON response fields are common to all API calls that create transactions:
+
+- `signatureHash` (S) is a SHA-256 hash of the transaction signature
+- `unsignedTransactionBytes` (S) are the unsigned transaction bytes
+- `transactionJSON` (O) is a transaction object (refer to [Get Transaction](transactions.mdx#get-transaction) for details)
+- `broadcasted` (B) is `true` if the transaction was broadcast, `false` otherwise
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+- `transactionBytes` (S) are the signed transaction bytes
+- `fullHash` (S) is the full hash of the signed transaction
+- `transaction` (S) is the ID of the newly created transaction

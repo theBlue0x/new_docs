@@ -2,10 +2,16 @@
   "introduction": {
     "title": "Introduction"
   },
+  "components": {
+    "title": "Components"
+  },
   "getting-started": {
     "title": "Getting Started"
   },
-  "reference": {
-    "title": "Reference"
+  "api": {
+    "title": "API"
+  },
+  "node-rewards": {
+    "title": "Node Rewards"
   }
 }

@@ -1,42 +1,37 @@
-import { useRouter } from "next/router";
-import { useState, ReactNode, FormEvent } from "react";
-import {getPagesUnderRoute} from "nextra/context";
+import React, { useEffect, useState } from 'react';
 
-export function Footer() {
+const Footer = () => {
+  const [blocks, setBlocks] = useState('');
+  const [response, setResponse] = useState('');
+
+  useEffect(() => {
+    const url = 'https://api.blue0x.com/nxt?=%2Fnxt&requestType=getState';
+
+    const fetchData = async () => {
+      try {
+        const response = await fetch(url);
+        const json = await response.json();
+        setBlocks(json.numberOfBlocks);
+        setResponse(json.requestProcessingTime);
+      } catch (error) {
+        console.log('error', error);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
-    <footer className="" aria-labelledby="footer-heading">
-      <div className=" mx-auto max-w-7xl">
-        <SubmitForm />
-      </div>
+    <footer className="w-full p-4 dark:bg-black md:flex md:items-center md:justify-between md:p-6">
+      <span className="flex content-center items-center text-sm font-medium text-green-500">
+        <span className="mr-2 flex h-2.5 w-2.5 shrink-0 rounded-full bg-green-500"></span>
+        Up
+        <span className="mr-2 flex h-2.5 w-2.5 shrink-0"></span>
+        Blocks : {blocks}
+        <span className="mr-2 flex h-2.5 w-2.5 shrink-0"></span>
+        Response : {response} ms
+      </span>
     </footer>
   );
-}
+};
 
-function SubmitForm() {
-  const [email, setEmail] = useState("");
-  const router = useRouter();
-
-  const subscribe = async (e: FormEvent) => {
-    e.preventDefault();
-
-    const params = {
-      
-    }
-
-    await fetch(
-      `https://cloudquery.us1.list-manage.com/subscribe/post-json?${params.toString()}`,
-      { mode: "no-cors" }
-    );
-
-    router.push("/");
-  };
-
-  return (
-    <div className="sm:flex sm:max-w-md items-center text-center">
-      <span className="inline-flex items-center text-green-500">
-        <span className="w-3 h-3 mr-3 bg-green-500 rounded-full"></span>
-          All Systems Operational
-      </span>
-    </div>
-  );
-}
+export default Footer;

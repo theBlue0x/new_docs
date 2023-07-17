@@ -1,0 +1,260 @@
+## Phasing Operations
+
+### Approve Transaction
+
+Approve (vote for) a phased transaction. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request 'The Blue0x API') for common parameters.
+
+- `requestType` is `approveTransaction`
+- `transactionFullHash` is the full hash of the transaction to be approved (may be used up to 10 times per API request)
+- `revealedSecret` is the secret phrase (required only for `phasingVotingModel 5`, refer to [Create Phasing Poll](#create-phasing-poll 'The Blue0x API'))
+- `revealedSecretIsText` is a way of specifying whether revealedSecret is text or binary.
+
+**Note:** This transaction will be accepted in the blockchain only if all phased transactions it is voting for are already in it.
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
+
+**Example:** Refer to [Approve Transaction](examples.mdx#approve-transaction) example.
+
+### Create Phasing Poll
+
+Create a phased transaction with conditional deferred execution based on the result of a vote, on a list of linked transactions or on the revelation of a secret; or simply with unconditional deferred execution. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request 'The Blue0x API') for common parameters.
+
+- `requestType` is any type from the [Create Transaction](create_transaction.mdx#create-transaction 'The Blue0x API') list which is phasing-safe, indicated with italics such as `send Money`
+- `phased` is `true` to create a phased transaction (optional but required for all of the following parameters, which are all optional for unphased transactions)
+- `phasingFinishHeight` is the block height at which the poll will finish; the transaction will be executed at this block height only if all conditions (if any) have been met, otherwise the transaction will never be executed
+- `phasingVotingModel` is an integer code for the method of approval:
+  - `-1` for `None`
+  - `0` for `Vote By Account`
+  - `1` for `Vote By Account Balance`
+  - `2` for `Vote By Asset Balance`
+  - `3` for `Vote By Currency Balance`
+  - `4` for `by Linked Transactions`
+  - `5` for `by Secret`
+- `phasingQuorum` is the number of "votes" needed for transaction approval (required if `phasingVotingModel` >= `0`, default `0`):
+  - `0` for voting model `-1`
+  - `the number of accounts` for model `0`
+  - `total NQT` for model `1`
+  - `total QNT` for models `2` and `3`
+  - `the number of transactions` for model `4`
+  - `1` for model `5`
+- `phasingMinBalance` is the minimum balance (in NQT or QNT) required for voting (optional, default `0`)
+- `phasingMinBalanceModel` is (required if `phasingMinBalance` > `0`, must match `phasingVotingModel` when `phasingVotingModel` = `1`, `2` or `3`):
+  - `1` for BLX balance
+  - `2` for an asset balance
+  - `3` for a currency balance
+- `phasingHolding` is the asset or currency ID (required if `phasingMinBalanceModel` = `2` or `3`)
+- `phasingWhitelisted` is the account ID of an account allowed to vote for the transaction; once used, `only` whitelisted accounts are allowed to vote (optional, may be used up to ten times per API request)
+- `phasingLinkedFullHash` is the full hash of a transaction that must be in the blockchain at the `phasingFinishHeight`; transactions already in the blockchain before the acceptance of the phased transaction can also be linked, as long as they are not more than 60 days old, or themselves phased transactions (required only for voting model `4`, may be used up to ten times per API request)
+- `phasingHashedSecret` is the hash of a secret phrase (up to 100 bytes long) required for approval (required only for voting model `5`)
+- `phasingHashedSecretAlgorithm` is the hash function used: `2` for SHA256, `6` for RIPEMD160 and `62` for SHA256 followed by RIPEMD160, according to [Get Constants](server.mdx#get-constants 'The Blue0x API') (required for a `phasingHashedSecret`)
+
+**Note:** When a balance affects the poll result, the result depends only on the balance (including pending outgoing phased transfers) computed just prior to the finish height.
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
+
+**Example:** Refer to [Create Phasing Poll](examples.mdx#create-phasing-poll) example.
+
+### Get Account Phased Transaction Count
+
+Get the number of pending phased transactions associated with an account given the account ID.
+
+**Request:**
+
+- `requestType` is `getAccountPhasedTransactionCount`
+- `account` is the account ID
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `numberOfPhasedTransactions` (N) is the number of pending phased transactions
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Account Phased Transaction Count](examples.mdx#get-account-phased-transaction-count) example.
+
+### Get Account Phased Transactions
+
+Get pending phased transactions associated with an account given the account ID in reverse chronological creation order.
+
+**Request:**
+
+- `requestType` is `getAccountPhasedTransactions`
+- `account` is the account ID
+- `firstIndex` is a zero-based index to the first phased transaction to retrieve (optional)
+- `lastIndex` is a zero-based index to the last phased transaction to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:** Refer to [Get Transaction](transactions.mdx#get-transaction 'The Blue0x API') for details.
+
+**Example:** Refer to [Get Account Phased Transactions](examples.mdx#get-account-phased-transactions) example.
+
+### Get Asset Phased Transactions
+
+Get pending phased transactions based on an asset in reverse chronological creation order. These transactions can be considered transaction approval requests.
+
+**Request:**
+
+- `requestType` is `getAssetPhasedTransactions`
+- `asset` is the asset ID
+- `account` is an account ID of the account that created the phased transactions (optional)
+- `withoutWhitelist` is `true` to omit phased transactions that include a whitelist (optional)
+- `firstIndex` is a zero-based index to the first phased transaction to retrieve (optional)
+- `lastIndex` is a zero-based index to the last phased transaction to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:** Refer to [Get Transaction](transactions.mdx#get-transaction 'The Blue0x API') for details.
+
+**Example:** Refer to [Get Asset Phased Transactions](examples.mdx#get-asset-phased-transactions) example.
+
+### Get Currency Phased Transactions
+
+Get pending phased transactions based on a currency in reverse chronological creation order. These transactions can be considered transaction approval requests.
+
+**Request:**
+
+- `requestType` is `getCurrencyPhasedTransactions`
+- `currency` is the currency ID
+- `account` is an account ID of the account that created the phased transactions (optional)
+- `withoutWhitelist` is `true` to omit phased transactions that include a whitelist (optional)
+- `firstIndex` is a zero-based index to the first phased transaction to retrieve (optional)
+- `lastIndex` is a zero-based index to the last phased transaction to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:** Refer to [Get Transaction](transactions.mdx#get-transaction 'The Blue0x API') for details.
+
+**Example:** Refer to [Get Currency Phased Transactions](examples.mdx#get-currency-phased-transactions) example.
+
+### Get Linked Phased Transactions
+
+Gets the phased transactions with by-transaction voting model for a given `linkedFullHash`, regardless of their phasing status (pending, approved or rejected). Since the corresponding table is trimmed after finish height however, the result will not include those transactions that finished before the last trimming height.
+
+**Request:**
+
+- `requestType` is `getLinkedPhasedTransactions`
+- `linkedFullHash` is the full hash of the transaction transaction
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `transactions` (A) is an array of transactions (refer to [Get Transaction](transactions.mdx#get-transaction 'The Blue0x API') for details)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Linked Phased Transactions](examples.mdx#get-linked-phased-transactions) example.
+
+### Get Phasing Poll
+
+Get the details of a phasing poll.
+
+**Request:**
+
+- `requestType` is `getPhasingPoll`
+- `transaction` is the transaction ID of the phasing poll
+- `countVotes` is `true` to compute the poll `result` while the votes are still available (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `transaction` (S) is the transaction ID of the phasing poll
+- `account` (S) is the number of the account that created the phasing poll
+- `accountRS` (S) is the Reed-Solomon address of the account that created the phasing poll
+- `finishHeight` (N) is the block height at which the poll finished or will finish
+- `votingModel` (N) is the voting model (refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request 'The Blue0x API'))
+- `quorum` (S) is the minimum number of votes needed to approve the poll
+- `transactionFullHash` (S) is the full hash of the phasing poll transaction
+- `finished` (B) is `true` if the poll is finished, `false` otherwise (omitted if `finished` is `false`)
+- `result` (S) is the sum of the `result` of each account that approved (voted for) the transaction; an account's `result` is `1` if the voting model is `0`, `4` or `5`; it is the NQT, asset QNT or currency QNT balance of the account if the voting model is `1`, `2` or `3` respectively; however, the `result` is `0` if `minBalance` is not met
+- `approved` (B) is `true` if the poll was approved, `false` otherwise
+- `minBalance` (S) is the required minimum balance of voting accounts to be eligible to vote
+- `minBalanceModel` (N) is the minimum balance model (refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request 'The Blue0x API'))
+- `hashedSecret` (S) is the hash of a secret that must be included in each approval (vote) transaction for the approval to be accepted (refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request 'The Blue0x API'))
+- `linkedFullHashes` (A) is an array of full hashes of linked transactions (omitted if `votingModel` != `4`)
+- `whitelist` (A) is an array of whitelist objects containing the following two fields (omitted if `votingModel` != `5`):
+  - `whitelisted` (S) is the number of the whitelisted account
+  - `whitelistedRS` (S) is the Reed-Solomon address of the whitelisted account
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Phasing Poll](examples.mdx#get-phasing-poll) example.
+
+### Get Phasing Poll Vote
+
+Get a cast phasing poll vote given a phased transaction ID and an account ID of a voter, if it is still available.
+
+**Request:**
+
+- `requestType` is `getPhasingPollVote`
+- `transaction` is the phased transaction ID
+- `account` is the account ID of a voter in the poll
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `voter` (S) is the account ID of the voter in the poll
+- `voterRS` (S) is the Reed-Solomon address of the `voter`
+- `transaction` (S) is the phased transaction ID
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Phasing Poll Vote](examples.mdx#get-phasing-poll-vote) example.
+
+### Get Phasing Poll Votes
+
+Get all cast phasing poll votes in a phasing poll given a phased transaction ID, if they are still available.
+
+**Request:**
+
+- `requestType` is `getPhasingPollVotes`
+- `transaction` is the phased transaction ID
+- `firstIndex` is a zero-based index to the first vote to retrieve (optional)
+- `lastIndex` is a zero-based index to the last vote to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:** Refer to [Get Phasing Poll Vote](#get-phasing-poll-vote 'The Blue0x API')
+
+**Example:** Refer to [Get Phasing Poll Votes](examples.mdx#get-phasing-poll-votes) example.
+
+### Get Phasing Polls
+
+Get phasing poll details given multiple phased transaction IDs.
+
+**Request:**
+
+- `requestType` is `getPhasingPolls`
+- `transaction` is one of the multiple phased transaction IDs
+- `transaction` is one of the multiple phased transaction IDs
+- `countVotes` is `true` to compute the poll `result` while the votes are still available (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:** Refer to [Get Phasing Poll](#get-phasing-poll 'The Blue0x API').
+
+**Example:** Refer to [Get Phasing Polls](examples.mdx#get-phasing-polls) example.
+
+### Get Voter Phased Transactions
+
+Get pending phased transactions which include a whitelist in reverse chronological creation order. These transactions can be considered transaction approval requests.
+
+**Request:**
+
+- `requestType` is `getVoterPhasedTransactions`
+- `account` is a whitelisted account ID included in the phased transactions
+- `firstIndex` is a zero-based index to the first phased transaction to retrieve (optional)
+- `lastIndex` is a zero-based index to the last phased transaction to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:** Refer to [Get Transaction](transactions.mdx#get-transaction 'The Blue0x API') for details.
+
+**Example:** Refer to [Get Voter Phased Transactions](examples.mdx#get-voter-phased-transactions) example.

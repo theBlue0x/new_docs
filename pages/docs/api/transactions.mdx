@@ -1,0 +1,230 @@
+## Transaction Operations
+
+### Broadcast Transaction
+
+Broadcast a transaction to the network. POST only.
+
+**Request:**
+
+- `requestType` is `broadcastTransaction`
+- `transactionBytes` is the bytecode of a signed transaction (optional)
+- `transactionJSON` is the transaction object (optional if `transactionBytes` provided)
+- `prunableAttachmentJSON` is the attachment object embedded in `transactionJSON` containing a prunable message (required if `transactionJSON` not provided because `transactionBytes` never includes prunable data)
+
+**Response:**
+
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+- `fullHash` (S) is the full hash of the signed transaction
+- `transaction` (S) is the transaction ID
+
+**Example:** Refer to [Broadcast Transaction](examples.mdx#broadcast-transaction) example.
+
+### Calculate Full Hash
+
+Calculate the full hash of a transaction.
+
+**Request:**
+
+- `requestType` is `calculateFullHash`
+- `unsignedTransactionJSON` is the unsigned transaction JSON object (optional)
+- `unsignedTransactionBytes` are the unsigned bytes of a transaction (optional if `unsignedTransactionJSON` is provided)
+- `signatureHash` is a SHA-256 hash of the transaction signature
+
+**Response:**
+
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+- `fullHash` (S) is the full hash of the signed transaction
+
+**Example:** Refer to [Calculate Full Hash](examples.mdx#calculate-full`Hash) example.
+
+### Get Expected Transactions
+
+Returns the non-phased unconfirmed transactions expected to be included in the next block (only), plus the phased transactions scheduled to finish in that block (whether approved or not).
+
+**Request:**
+
+- `requestType` is `getExpectedTransactions`
+- `account` is one account ID (optional)
+- `account` is one account ID (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `expectedTransactions` (A) is an array of expected transactions (refer to [Get Transaction](#get-transaction 'The Blue0x API') for details)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Expected Transactions](examples.mdx#get-expected-transactions) example.
+
+### Get Referencing Transactions
+
+Gets the transactions referencing a given transaction id.
+
+**Request:**
+
+- `requestType` is `getReferencingTransactions`
+- `transaction` is one transaction ID
+- `firstIndex` is a zero-based index to the first block ID to retrieve (optional)
+- `lastIndex` is a zero-based index to the last block ID to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `transactions` (A) is an array of transactions (refer to [Get Transaction](#get-transaction 'The Blue0x API') for details)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Referencing Transactions](examples.mdx#get-referencing-transactions) example.
+
+### Get Transaction
+
+Get a transaction object given a transaction ID.
+
+**Request:**
+
+- `requestType` is `getTransaction`
+- `transaction` is the transaction ID (optional)
+- `fullHash` is the full hash of the transaction (optional if transaction ID is provided)
+- `includePhasingResult` is `true` to retrieve execution status of each phased transaction (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `sender` (S) is the account ID of the sender
+- `senderRS` (S) is the Reed-Solomon address of the sender
+- `feeNQT` (S) is the fee (in NQT) of the transaction
+- `amountNQT` (S) is the amount (in NQT) of the transaction
+- `transactionIndex` (N) is a zero-based index giving the order of the transaction in its block
+- `timestamp` (N) is the time (in seconds since the genesis block) of the transaction
+- `referencedTransactionFullHash` (S) is the full hash of a transaction referenced by this one, omitted if no previous transaction is referenced
+- `confirmations` (N) is the number of transaction confirmations
+- `subtype` (N) is the transaction subtype (refer to [Get Constants](index.mdx#get-constants 'The Blue0x API') for a current list of subtypes)
+- `block` (S) is the ID of the block containing the transaction
+- `blockTimestamp` (N) is the timestamp (in seconds since the genesis block) of the block
+- `height` (N) is the height of the block in the blockchain
+- `senderPublicKey` (S) is the public key of the sending account for the transaction
+- `type` (N) is the transaction type (refer to [Get Constants](index.mdx#get-constants 'The Blue0x API') for a current list of types)
+- `deadline` (N) is the deadline (in minutes) for the transaction to be confirmed
+- `signature` (S) is the digital signature of the transaction
+- `recipient` (S) is the account number of the recipient, if applicable
+- `recipientRS` (S) is the Reed-Solomon address of the recipient, if applicable
+- `fullHash` (S) is the full hash of the signed transaction
+- `signatureHash` (S) is a SHA-256 hash of the transaction signature
+- `approved` (B) is a boolean indicating if the transaction is approved (only included when `includePhasingResult` is true and the transaction is phased)
+- `result` (S) is a string containing the result of the transaction (only included when `includePhasingResult` is true and the transaction is phased)
+- `executionHeight` (N) is the height the transaction was executed (only included when `includePhasingResult` is true and the transaction is phased)
+- `transaction` (S) is the transaction ID
+- `version` (N) is the transaction version number
+- `phased` (B) is `true` if the transaction is phased, `false` otherwise
+- `ecBlockId` (N) is the economic clustering block ID
+- `ecBlockHeight` (N) is the economic clustering block height
+- `attachment` (O) is an object containing any additional data needed for the transaction, if applicable
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Note:** The `block`, `blockTimestamp` and `confirmations` fields are omitted for unconfirmed transactions. Double-spending transactions are not retrieved.
+
+**Example:** Refer to [Get Transaction](examples.mdx#get-transaction) example.
+
+### Get Transaction Bytes
+
+Get the bytecode of a transaction.
+
+**Request:**
+
+- `requestType` is `getTransactionBytes`
+- `transaction` is a transaction ID
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `confirmations` (N) is the number of transaction confirmations
+- `transactionBytes` (S) are the bytes contained in the transaction
+- `unsignedTransactionBytes` (S) are the unsigned bytes contained in the transaction
+- `prunableAttachmentJSON` (O) is the prunable attachment JSON object, if applicable, because `transactionBytes` never includes prunable data
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Transaction Bytes](examples.mdx#get-transaction-bytes) example.
+
+### Parse Transaction
+
+Get a transaction object given a (signed or unsigned) transaction bytecode, or re-parse a transaction object. Verify the signature.
+
+**Request:**
+
+- `requestType` is `parseTransaction`
+- `transactionBytes` is the signed or unsigned bytecode of the transaction (optional)
+- `transactionJSON` is the transaction object (optional if transactionBytes is included)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:** Refer to [Get Transaction](#get-transaction 'The Blue0x API') for additional fields.
+
+- `verify` (B) is `true` if the signature is verified, `false` otherwise
+
+**Example:** Refer to [Parse Transaction](examples.mdx#parse-transaction) example.
+
+### Retrieve Pruned Transaction
+
+Force retrieval of the prunable data for a given transaction, even if past the configured nxt.maxPrunableLifetime.
+
+**Request:**
+
+- `requestType` is `retrievePrunedTransaction`
+- `transaction` is transaction ID
+
+**Response:** Refer to [Get Transaction](#get-transaction 'The Blue0x API') for fields.
+
+**Example:** Refer to [Retrieve Pruned Transaction](examples.mdx#retrieve-pruned-transaction) example.
+
+### Send Transaction
+
+It broadcasts a transaction to the network without validating it, without re-broadcasting it and without adding it locally as unconfirmed transaction. Specially intended for roaming or light clients to send transactions to remote peers. POST only.
+
+**Request:**
+
+- `requestType` is `sendTransaction`
+- `transactionBytes` is the bytecode of a signed transaction (optional)
+- `transactionJSON` is the transaction object (optional if `transactionBytes` provided)
+- `prunableAttachmentJSON` is the attachment object embedded in `transactionJSON` containing a prunable message (required if `transactionJSON` not provided because `transactionBytes` never includes prunable data)
+- `adminPassword` is a string with the admin password (optional)
+
+**Response:**
+
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+- `fullHash` (S) is the full hash of the signed transaction
+- `transaction` (S) is the transaction ID
+
+**Example:** Refer to [Send Transaction](examples.mdx#send-transaction) example.
+
+### Sign Transaction
+
+Calculates the full hash, signature hash, and transaction ID of an unsigned transaction.
+
+**Request:**
+
+- `requestType` is `signTransaction`
+- `unsignedTransactionJSON` is the `transactionJSON` field of the transaction, without a signature subfield
+- `unsignedTransactionBytes` is the `unsignedTransactionBytes` field of the transaction (optional, if `unsignedTransactionJSON` provided)
+- `prunableAttachmentJSON` is a prunable attachment JSON object, if applicable, because `unsignedTransactionBytes` never includes prunable data (optional if the transaction has already been broadcast and the prunable message can still be retrieved from the database)
+- `secretPhrase` is the secret passphrase of the signing account
+- `validate` is `false` to skip validation of the transaction bytes being signed (useful on nodes where the full blockchain is not downloaded)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `signatureHash` (S) is a SHA-256 hash of the transaction signature, used in escrow transactions
+- `verify` (B) is `true` the signature is verified, `false` if not
+- `transactionJSON` (O) is the signed transaction JSON object
+- `transactionBytes` (S) are the signed transaction bytes
+- `fullHash` (S) is the full hash of the signed transaction
+- `prunableAttachmentJSON` (O) is the prunable attachment JSON object, if applicable, because `transactionBytes` never includes prunable data
+- `transaction` (S) is the transaction ID, derived from the `fullHash`
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Sign Transaction](examples.mdx#sign-transaction) example.

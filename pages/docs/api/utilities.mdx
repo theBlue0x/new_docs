@@ -1,0 +1,142 @@
+## Utilities
+
+### Decode QR Code
+
+Decodes a base64-encoded jpeg to a UTF-8 string. POST only.
+
+**Request:**
+
+- `requestType` is `decodeQRCode`
+- `qrCodeBase64` is a base64-encoded jpeg string to be decoded
+
+**Response**
+
+- `qrCodeData` (S) is a UTF-8 string containing the decoded data from the base64 string
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Decode QR Code](examples.mdx#decode-qr-code) example.
+
+### Detect Mime Type
+
+Gets the mime type of uploaded file or data.
+
+**Request:**
+
+- `requestType` is `detectMimeType`
+- `data` is the data (optional)
+- `file` is the pathname of a data file to upload (optional if `data` provided)
+- `filename` is a filename to associate with `data` (optional if `file` uploaded in which case the uploaded filename is always used)
+- `isText` is `false` if `data` is a hex string (optional)
+
+**Response**
+
+- `type` (S) is the mime type
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Detect Mime Type](examples.mdx#detect-mime-type) example.
+
+### Encode QR Code
+
+Encodes a UTF-8 string to a base64-encoded jpeg. POST only.
+
+**Request:**
+
+- `requestType` is `encodeQRCode`
+- `qrCodeData` is a UTF-8 text string to be encoded
+- `width` is the width of the output image (optional)
+- `height` is the height of the output image (optional)
+
+**Response**
+
+- `qrCodeBase64` (S) is a base64 string encoding a jpeg image of the QR code
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Encode QR Code](examples.mdx#encode-qr-code) example.
+
+### Full Hash To Id
+
+Converts a full hash to an ID.
+
+**Request:**
+
+- `requestType` is `fullHashToId`
+- `fullHash` is the full hash 64-digit (32-byte) hex string
+
+**Response:**
+
+- `stringId` (S) is the ID corresponding to the hash, in the form of an decimal string
+- `longId` (S) is the signed long integer (8-bytes) representation of the ID used internally, returned as a string
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Full Hash To Id](examples.mdx#full-hash-to-id) example.
+
+### Hash
+
+Calculates the hash of a secret for use in [phased transactions](phasing.mdx#create-phasing-poll 'The Blue0x API') with voting model 5 (`Vote By Secret`).
+
+**Request:**
+
+- `requestType` is `hash`
+- `hashAlgorithm` is the hash function used: `2` for SHA256, `3` for SHA3, `5` for SCRYPT, `6` for RIPEMD160, `25` for Keccack25 and `62` for SHA256 followed by RIPEMD160, according to [Get Constants](server.mdx#get-constants 'The Blue0x API')
+- `secret` is a secret phrase in text form or hex string form
+- `secretIsText` is `true` if `secret` is text, `false` if it is a hex string (optional)
+
+**Note:** `secret` is converted from a hex string to a byte array, which is what the hash algorithm expects, unless `secretIsText` is `true`, in which case `secret` is first converted from text to a UTF-8 hex string as by [Hex Convert](#hex-convert 'The Blue0x API').
+
+**Response:**
+
+- `hash` (S) is the hash of the secret, in the form of a hex string
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Hash](examples.mdx#hash) example.
+
+### Hex Convert
+
+Converts a text string into a UTF-8 hex string and if the text input is already a hex string, also into text.
+
+**Request:**
+
+- `requestType` is `hexConvert`
+- `string` is a text string, possibly a hex string
+
+**Response:**
+
+- `binary` (S) is the converted UTF-8 hex string
+- `text` (S) is a text string converted from `string` if it is a valid UTF-8 hex string
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Hex Convert](examples.mdx#hex-convert) example.
+
+### Long Convert
+
+Converts an ID to the signed long integer representation used internally.
+
+**Request:**
+
+- `requestType` is `longConvert`
+- `id` is a numerical ID, in decimal form but equivalent to an 8-byte unsigned integer as produced by SHA-256 hashing
+
+**Response:**
+
+- `stringId` (S) is the numerical ID
+- `longId` (S) is the signed long integer (8-bytes) representation of the ID used internally, returned as a string
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Long Convert](examples.mdx#long-convert) example.
+
+### RS Convert
+
+Get both the Reed-Solomon account address and the account number given an account ID.
+
+**Request:**
+
+- `requestType` is `rsConvert`
+- `account` is an account ID (either RS address or number)
+
+**Response:**
+
+- `accountRS` (S) is the Reed-Solomon address of the account
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+- `account` (S) is the account number
+
+**Example:** Refer to [RS Convert](examples.mdx#rs-convert) example.

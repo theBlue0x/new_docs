@@ -1,0 +1,41 @@
+## Hallmark Operations
+
+### Decode Hallmark
+
+Decode a node hallmark.
+
+**Request:**
+
+- `requestType` is `decodeHallmark`
+- `hallmark` is the hallmark value
+
+**Response:**
+
+- `valid` (B) is `true` if `host` is less than 100 characters, `weight` > 0 and the embedded signature is verified
+- `weight` (N) is the weight assigned to the hallmark
+- `host` (S) is the IP address or domain name associated with the hallmark
+- `account` (S) is the account number associated with the hallmark
+- `accountRS` (S) is the Reed-Solomon address of the account
+- `date` (S) is the date the hallmark was created, in YYYY-MM-DD format
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Decode Hallmark](examples.mdx#decode-hallmark) example.
+
+### Generate Hallmark
+
+Generates a node hallmark. POST only.
+
+**Request:**
+
+- `requestType` is `markHost`
+- `secretPhrase` is the secret passphrase for the account that will be hallmarked on the node
+- `host` is the IP address or domain name of the node
+- `weight` is the weight to assign to the node
+- `date` is the current date in YYYY-MM-DD format
+
+**Response:**
+
+- `hallmark` (S) is the hallmark hex string
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Generate Hallmark](examples.mdx#generate-hallmark) example.

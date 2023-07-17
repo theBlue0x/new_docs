@@ -1,0 +1,216 @@
+## Voting System Operations
+
+### Cast Vote
+
+Cast a vote on a poll. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request 'The Blue0x API') for common parameters.
+
+- `requestType` is `castVote`
+- `poll` is the poll ID
+- `vote00` is an integer within the allowed range to vote for option (answer) 0 (optional if `minNumberOfOptions` met, default is `\-128`)
+- `vote01` is an integer within the allowed range to vote for option (answer) 1 (optional if `minNumberOfOptions` met, default is `\-128`)
+- `vote02` is an integer within the allowed range to vote for option (answer) 2 (optional if `minNumberOfOptions` met, default is `\-128`)
+
+**Note:** The allowed vote values are integers between `minRangeValue` and `maxRangeValue`, inclusive. This range, along with the minimum and maximum number of options that can and must be voted on are specified when the poll is created. Refer to [Create Poll](#create-poll 'The Blue0x API').
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
+
+**Example:** Refer to [Cast Vote](examples.mdx#cast-vote) example.
+
+### Create Poll
+
+Create a new poll. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request 'The Blue0x API') for common parameters.
+
+- `requestType` is `createPoll`
+- `name` is the name of the poll
+- `description` is the description of the poll, or the question to be answered
+- `finishHeight` is the block height when the poll is completed
+- `votingModel` is `0` for `One Vote Per Account`, `1` for `Vote By BLX Balance`, `2` for `Vote By Asset Balance` and `3` for `Vote By Currency Balance`
+- `minNumberOfOptions` is the minimum number of options (answers) that must be voted for
+- `maxNumberOfOptions` is the maximum number of options (answers) that can be voted for
+- `minRangeValue` is the minimum integer value for an option (answer) (>= `0`)
+- `maxRangeValue` is the maximum integer value for an option (answer) (>= `minRangeValue`)
+- `minBalance` is the minimum balance (in NQT or QNT) required for voting (optional, default 0)
+- `minBalanceModel` is (required if `minBalance` > `0`, must match `votingModel` when `votingModel` > `0`)
+  - `1` for BLX balance
+  - `2` for an asset balance
+  - `3` for a currency balance
+- `holding` is the asset or currency ID (required if `minBalanceModel` > `1`)
+- `option00` is the name of option (answer) 0
+- `option01` is the name of option (answer) 1 (optional)
+- `option02` is the name of option (answer) 2 (optional)
+
+**Note:** When a balance affects the poll result, the result depends only on the balance (including pending outgoing phased transfers) computed just prior to the finish height.
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API'). The transaction ID is also the poll ID.
+
+**Example:** Refer to [Create Poll](examples.mdx#create-poll) example.
+
+### Get Poll
+
+Get the details of a poll.
+
+**Request:**
+
+- `requestType` is `getPoll`
+- `poll` is the poll ID
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `poll` (S) is the poll ID
+- `account` (S) is the account number of the poll creator
+- `accountRS` (S) is the Reed-Solomon address of the account
+- `name` (S) is the name of the poll
+- `description` (S) is the description of the poll, or the question to be answered
+- `finishHeight` (N) is the block height when the poll is completed
+- `finished` (B) is `true` if the poll is completed, `false` otherwise
+- `votingModel` (N) is `0` for -one Vote Per Account`, `1`for`Vote By BLX Balance`, `2`for`Vote By Asset Balance`and`3`for`Vote By Currency Balance`
+- `minNumberOfOptions` (N) is the minimum number of options (answers) that must be voted for
+- `maxNumberOfOptions` (N) is the maximum number of options (answers) that can be voted for
+- `minBalance` (S) is the minimum balance (in NQT or QNT) required for voting
+- `minBalanceModel` (N) is `1` for BLX balance, `2` for an asset balance, `3` for a currency balance when `minBalance` > 0
+- `holding` is the asset or currency ID when minBalanceModel > 1
+- `options` (A) is the array of options (answers)
+- `minRangeValue` (N) is the minimum integer value for an option (answer)
+- `maxRangeValue` (N) is the maximum integer value for an option (answer)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Poll](examples.mdx#get-poll) example.
+
+### Get Poll Result
+
+Get the result of a poll.
+
+**Request:**
+
+- `requestType` is `getPollResult`
+- `poll` is the poll ID
+- `votingModel` (optional, default null)
+- `holding` (optional, default null)
+- `minBalance` (optional, default `0`)
+- `minBalanceModel` (required if `minBalance` > `0`, must match `votingModel` when `votingModel` > `0`)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Note:** The `votingModel`, `holding`, `minBalance` and `minBalanceModel` parameters are optional and default to the original values specified when the poll was created (refer to [Create Poll](#create-poll 'The Blue0x API')). The original values can only be overridden while the votes are still stored in the database, until 1441 blocks after the poll is completed. If `votingModel` is specified, `holding`, `minBalance` and `minBalanceModel` or the defaults specified above apply, otherwise they are ignored.
+
+**Response:**
+
+- `poll` (S) is the poll ID
+- `votingModel` (N) is the votingModel used to calculate `results` (refer to Note above)
+- `minBalanceModel` (N) is the minBalanceModel used to calculate `results` (refer to Note above)
+- `minBalance` (S) is the minBalance used to calculate `results` (refer to Note above)
+- `holding` (S) is the asset or currency ID if the voting model uses an asset or currency balance to determine `weight`, if applicable (refer to Note above)
+- `decimals` (N) is the number decimal places used by the asset or currency, if applicable
+- `finished` (B) is `true` if the poll is complete, `false` otherwise
+- `options` (A) is the array of options (answers) of the poll
+- `results` (A) is an array of result objects with the following fields for each result:
+  - `weight` (S) is the sum of the `weight` of each account that voted for the corresponding option (answer); an account's `weight` is `1` if the voting model is `0`, otherwise it is the NQT, asset QNT or currency QNT balance of the account if the voting model is `1`, `2` or `3` respectively; however, the `weight` is `0` if `minBalance` is not met
+  - `result` (S) is the sum over each account that voted for the corresponding option (answer) of: the product of the account's `weight` and the `rangeValue` selected when the vote was cast.
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Poll Result](examples.mdx#get-poll-result) example.
+
+### Get Poll Vote
+
+Get a poll vote given a poll ID and an account ID.
+
+**Request:**
+
+- `requestType` is `getPollVote`
+- `poll` is the poll ID
+- `account` is the account ID
+- `includeWeights` is `true` to calculate and return the weight assigned to each vote (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `votes` (A) is an array of votes, the range values (S) corresponding to each option (answer) with empty strings for non-votes
+- `voter` (S) is the account number of the voter
+- `voterRS` (S) is the Reed-Solomon address of the voter
+- `transaction` (S) is the transaction ID of the vote
+- `weight` (S) is the weight assigned to each vote (applies if `includeWeights` is `true`)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Note:** Votes are deleted from the database 1441 blocks after the poll is finished. Only aggregate results are kept (refer to [Get Poll Result](#get-poll-result 'The Blue0x API')).
+
+**Example:** Refer to [Get Poll Vote](examples.mdx#get-poll-vote) example.
+
+### Get Poll Votes
+
+Get all votes on a poll in reverse chronological order.
+
+**Request:**
+
+- `requestType` is `getPollVotes`
+- `poll` is the poll ID
+- `includeWeights` is `true` to calculate and return the weight assigned to each vote (optional)
+- `firstIndex` is a zero-based index to the first vote to retrieve (optional)
+- `lastIndex` is a zero-based index to the last vote to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `votes` (A) is an array of vote objects (refer to [Get Poll Vote](#get-poll-vote 'The Blue0x API') for details)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Note:** Votes are deleted from the database 1441 blocks after the poll is finished. Only aggregate results are kept (refer to [Get Poll Result](#get-poll-result 'The Blue0x API')).
+
+**Example:** Refer to [Get Poll Votes](examples.mdx#get-poll-votes) example.
+
+### Get Polls
+
+Get poll details in reverse creation order.
+
+**Request:**
+
+- `requestType` is `getPolls`
+- `account` is a creation account ID filter (optional)
+- `timestamp` is the earliest poll (in seconds since the genesis block) to retrieve (optional)
+- `firstIndex` is a zero-based index to the first poll to retrieve (optional)
+- `lastIndex` is a zero-based index to the last poll to retrieve (optional)
+- `includeFinished` is `true` to include completed polls (optional)
+- `finishedOnly` is `true` to exclude not yet executed, phased transactions (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `polls` (A) is an array of polls (refer to [Get Poll](#get-poll 'The Blue0x API') for details)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Polls](examples.mdx#get-polls) example.
+
+### Search Polls
+
+Search for poll details given a name/description query string.
+
+**Request:**
+
+- `requestType` is `searchPolls`
+- `query` is a full text query on the poll fields `name` (S) and `description` (S) in the [standard Lucene syntax](https://lucene.apache.org/core/2`9`4/queryparsersyntax.html#Overview) (optional)
+- `firstIndex` is a zero-based index to the first poll to retrieve (optional)
+- `lastIndex` is a zero-based index to the last poll to retrieve (optional)
+- `includeFinished` is `true` to include completed polls (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `polls` (A) is an array of polls (refer to [Get Poll](#get-poll 'The Blue0x API') for details)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Search Polls](examples.mdx#search-polls) example.

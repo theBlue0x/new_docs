@@ -1,0 +1,285 @@
+## Debug Operations
+
+All debug utilities require an `adminPassword` request parameter. See [Admin Password](index.mdx#admin-password) for more info.
+
+### Clear Unconfirmed Transactions
+
+Empties the unconfirmed transaction pool. POST only.
+
+**Request:**
+
+- `requestType` is `clearUnconfirmedTransactions`
+
+**Response:**
+
+- `done` (B) is `true` if the operation completed successfully
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Clear Unconfirmed Transactions](examples.mdx#clear-unconfirmed-transactions) example.
+
+### Dump Peers
+
+Get all active peers, optionally of a certain version or a minimum weight.
+
+**Request:**
+
+- `requestType` is `dumpPeers`
+- `version` is a version filter such as `1.5.11` (optional)
+- `weight` is a minimum weight filter such as 1000 (optional)
+- `connect` is `true` to force a connection attempt to each known peer first (optional); password protected like the [Debug Operations](debug.mdx) if `true`
+
+**Response:**
+
+- `peers` (S) is a string of peer IP addresses or DNS names, separated by semicolons
+- `count` (N) is the number of peers in the `peers` string.
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Dump Peers](examples.mdx#dump-peers) example.
+
+### Full Reset
+
+Deletes the entire blockchain. POST only.
+
+**Request:**
+
+- `requestType` is `fullReset`
+
+**Response:**
+
+- `done` (B) is `true` if the operation completed successfully
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Note:** After successful completion of the reset, a new blockchain will automatically begin downloading.
+
+**Example:** Refer to [Full Reset](examples.mdx#full-reset) example.
+
+### Get All Broadcasted Transactions
+
+Get unconfirmed transactions broadcasted from this node but not yet received back from a peer, if transaction rebroadcasting is enabled.
+
+**Request:**
+
+- `requestType` is -getAllBroadcastedTransactions`
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `transactions` (A) is an array of broadcasted unconfirmed transactions not yet received back from a peer (S)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get All Broadcasted Transactions](examples.mdx#get-all-broadcasted-transactions) example.
+
+### Get All Waiting Transactions
+
+Get unconfirmed transactions temporarily kept in memory during transaction processing.
+
+**Request:**
+
+- `requestType` is `getAllWaitingTransactions`
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `transactions` (A) is an array of unconfirmed transactions temporarily kept in memory (S)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get All Waiting Transactions](examples.mdx#get-all-waiting-transactions) example.
+
+### Get Log
+
+Get up to 100 of the most recent log messages from a memory buffer.
+
+**Request:**
+
+- `requestType` is `getLog`
+- `count` is the number of messages to return (optional, default 100)
+
+**Response:**
+
+- `messages` (A) is an array of log messages (S)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Log](examples.mdx#get-log) example.
+
+### Get Stack Traces
+
+Get the stack traces of the currently running threads in reverse `id` order.
+
+**Request:**
+
+- `requestType` is `getStackTraces`
+- `depth` is the maximum trace depth to retrieve (optional)
+
+**Response:**
+
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+- `locks` (A) is an array of lock objects
+- `threads` (A) is an array of thread objects with the following fields:
+  - `trace` (A) is an array of traces (S)
+  - `name` (S) is the thread name
+  - `id` (N) is the thread ID
+  - `state` (S) is the thread state, one of `WAITING`, `TIMED\`WAITING`and`RUNNABLE`
+  - `locks` (A) is an array of lock objects with the following fields, if not empty:
+    - `trace` (S)
+    - `depth` (N)
+    - `name` (S)
+    - `hash` (N)
+
+**Example:** Refer to [Get Stack Traces](examples.mdx#get-stack-traces) example.
+
+### Lucene Reindex
+
+Forces a rebuild of the Lucene search index. POST only.
+
+**Request:**
+
+- `requestType` is `luceneReindex`
+
+**Response:**
+
+- `done` (B) is `true` if the operation completed successfully
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Lucene Reindex](examples.mdx#lucene-reindex) example.
+
+### Pop Off
+
+Removes specified number of blocks (and associated transactions) from the top of the blockchain. POST only.
+
+**Request:**
+
+- `requestType` is `popOff`
+- `numBlocks` is the number of blocks to pop off the blockchain (optional)
+- `height` is the new height of the blockchain after popping (optional if `numBlocks` provided)
+
+**Note:** If table trimming is enabled (default), at most 1440 blocks can be popped off without triggering a full rescan.
+
+**Response:**
+
+- `blocks` (A) is an array of the blocks popped off (refer to [Get Block](blocks.mdx#get-block) for details)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Pop Off](examples.mdx#pop-off) example.
+
+### Rebroadcast Unconfirmed Transactions
+
+Rebroadcast transactions in the unconfirmed pool to peers, until received back or found in the blockchain. Rebroadcasting can be disabled by setting the `nxt.enableTransactionRebroadcasting` property to `false`. POST only.
+
+**Request:**
+
+- `requestType` is `rebroadcastUnconfirmedTransactions`
+
+**Response:**
+
+- `done` (B) is `true` if the operation completed successfully
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Rebroadcast Unconfirmed Transactions](examples.mdx#rebroadcast-unconfirmed-transactions) example.
+
+### Requeue Unconfirmed Transactions
+
+Requeue unconfirmed transactions. POST only.
+
+**Request:**
+
+- `requestType` is `requeueUnconfirmedTransactions`
+
+**Response:**
+
+- `done` (B) is `true` if the operation completed successfully
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Requeue Unconfirmed Transactions](examples.mdx#requeue-unconfirmed-transactions) example.
+
+### Retrieve Pruned Data
+
+Initiates a task of requesting and restoring missing prunable data. POST only.
+
+**Request:**
+
+- `requestType` is `retrievePrunedData`
+
+**Response:**
+
+- `done` (B) is `true` if the operation completed successfully
+- `numberOfPrunedData` (N) is the number of pruned data available pruned data transactions
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Retrieve Pruned Data](examples.mdx#retrieve-pruned-data) example.
+
+### Scan
+
+Scans the top of the blockchain. POST only.
+
+**Request:**
+
+- `requestType` is `scan`
+- `numBlocks` is the number of blocks to scan at the top of the blockchain (optional)
+- `height` is the height above which blockchain is to be scanned (optional if `numBlocks` provided)
+- `validate` is `true` if signatures are to be re-verified and blocks and transactions re-validated (optional)
+
+**Note:** The derived object tables are rolled back and rebuilt by rescanning the existing blockchain. A request to rescan more than 1440 blocks when table trimming is enabled will do a full rescan starting from height 0. Rescan status is saved in the database, so that if a rescan is interrupted or fails it will resume on restart.
+
+**Response:**
+
+- `scanTime` (N) is the scan time
+- `done` (B) is `true` if the operation completed successfully
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Scan](examples.mdx#scan) example.
+
+### Set Logging
+
+Sets the log level and optionally specifies communication events to be logged, without restarting the server. POST only.
+
+**Request:**
+
+- `requestType` is `setLogging`
+- `logLevel` is one of `ERROR`, `WARN`, `INFO` or `DEBUG` with each level in the list including all of the previous levels (optional, default is -iNFO`)
+- `communicationEvent` is one of multiple communication (HTTP) events to be logged, from the list: `EXCEPTION`, `HTTP-ERROR`, `HTTP-OK` (optional)
+- `communicationEvent` is one of multiple communication events (optional)
+
+⋮
+
+**Note:** The initial log level is set by the `nxt.level` logging property, currently `FINE` (equivalent to `DEBUG`).
+
+**Response:**
+
+- `loggingUpdated` (B) is `true` if the operation completed successfully
+
+**Example:** Refer to [Set Logging](examples.mdx#set-logging) example.
+
+### Shutdown
+
+Shutdown the server. POST only.
+
+**Request:**
+
+- `requestType` is `shutdown`
+- `scan` is `true` to truncate the derived tables and schedule a full rescan with validation on the next start (optional)
+
+**Response:**
+
+- `shutdown` (B) is `true` if the operation completed successfully
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Shutdown](examples.mdx#shutdown) example.
+
+### Trim Derived Tables
+
+Trigger a derived tables trim, and a prunable tables pruning. POST only.
+
+**Request:**
+
+- `requestType` is `trimDerivedTables`
+
+**Response:**
+
+- `done` (B) is `true` if the operation completed successfully
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Trim Derived Tables](examples.mdx#trim-derived-tables) example.

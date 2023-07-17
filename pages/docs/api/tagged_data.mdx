@@ -1,0 +1,310 @@
+## Tagged Data Operations
+
+Tagged data are similar to [prunable](index.mdx#prunable-data 'The Blue0x API') plain messages without a recipient, but with additional searchable metadata fields.
+
+### Download Tagged Data
+
+Download tagged data as a file if it is still available.
+
+**Request:**
+
+- `requestType` is `downloadTaggedData`
+- `transaction` is the transaction ID of the tagged data
+- `retrieve` is `true` to retrieve pruned data from other nodes if not available (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:** The downloaded data file named `nxt`, unless there is an error in the request.
+
+**Example:** Refer to [Download Tagged Data](examples.mdx#download-tagged-data) example.
+
+### Extend Tagged Data
+
+Extend the expiration time of already uploaded tagged data. POST only.
+
+**Request:**
+
+- `requestType` is `extendTaggedData`
+- `transaction` is the transaction ID of the tagged data
+- `data` is the tagged data (optional)
+- `file` is the pathname of a data file to upload (optional if `data` provided)
+- `filename`
+- `name`
+- `description`
+- `tags`
+- `type`
+- `channel`
+- `isText`
+
+**Note:** The `data` and metadata (`filename`, `name`, `description`, `tags`, `type`, `channel` and `isText`) parameters can be omitted if the tagged data has not yet expired; otherwise, the tagged data can be restored to the blockchain only if these fields have exactly the same values as when the data was uploaded (refer to [Upload Tagged Data](#upload-tagged-data 'The Blue0x API')).
+
+**Note:** Anyone can submit an extension, not only the original uploader. Each extend transaction increases the expiration deadline by two weeks (24 hours on Testnet). Extending an existing tagged data from another account does not change the original submitter account ID by which it is indexed and searchable.
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
+
+**Example:** Refer to [Extend Tagged Data](examples.mdx#extend-tagged-data) example.
+
+### Get Account Tagged Data
+
+Get all available tagged data uploaded by a given account in reverse chronological order.
+
+**Request:**
+
+- `requestType` is `getAccountTaggedData`
+- `account` is the account ID
+- `includeData` is `true` to include `data` (optional)
+- `firstIndex` is a zero-based index to the first tagged data to retrieve (optional)
+- `lastIndex` is a zero-based index to the last tagged data to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `data` (A) is an array of tagged data objects (refer to [Get Tagged Data](#get-tagged-data 'The Blue0x API') with `hash` omitted for details)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Account Tagged Data](examples.mdx#get-account-tagged-data) example.
+
+### Get All Tagged Data
+
+Get all available tagged data in reverse chronological order.
+
+**Request:**
+
+- `requestType` is `getAllTaggedData`
+- `includeData` is `true` to include `data` (optional)
+- `firstIndex` is a zero-based index to the first tagged data to retrieve (optional)
+- `lastIndex` is a zero-based index to the last tagged data to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `data` (A) is an array of tagged data objects (refer to [Get Tagged Data](#get-tagged-data 'The Blue0x API') with `hash` omitted for details)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get All Tagged Data](examples.mdx#get-all-tagged-data) example.
+
+### Get Channel Tagged Data
+
+Get available tagged data by channel, optionally filtered by account, in reverse chronological order.
+
+**Request:**
+
+- `requestType` is `getChannelTaggedData`
+- `channel` is the channel string
+- `account` is an account ID (optional)
+- `includeData` is `true` to include `data` (optional)
+- `firstIndex` is a zero-based index to the first tagged data to retrieve (optional)
+- `lastIndex` is a zero-based index to the last tagged data to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `data` (A) is an array of tagged data objects (refer to [Get Tagged Data](#get-tagged-data 'The Blue0x API') with `hash` omitted for details)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Channel Tagged Data](examples.mdx#get-channel-tagged-data) example.
+
+### Get Data Tag Count
+
+Get the total number of distinct available data tags.
+
+**Request:**
+
+- `requestType` is `getDataTagCount`
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `numberOfDataTags` (N) is the total number of distinct data tags
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Data Tag Count](examples.mdx#get-data-tag-count) example.
+
+### Get Data Tags
+
+Get the distinct tags of all available tagged data, with the number of uses of each tag, in order of number of uses, then alphabetical order.
+
+**Request:**
+
+- `requestType` is `getDataTags`
+- `firstIndex` is a zero-based index to the first tag to retrieve (optional)
+- `lastIndex` is a zero-based index to the last tag to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `tags` (A) is an array of tag objects including the fields:
+  - `tag` (S) is a tag word
+  - `count` (N) is the number of uses of `tag` among all tagged data
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Data Tags](examples.mdx#get-data-tags) example.
+
+### Get Data Tags Like
+
+Prefix search of available data tags, return in alphabetical order.
+
+**Request:**
+
+- `requestType` is `getDataTagsLike`
+- `tagPrefix` is the prefix to search for (2 character minimum) among all data tags
+- `firstIndex` is a zero-based index to the first tag to retrieve (optional)
+- `lastIndex` is a zero-based index to the last tag to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `tags` (A) is an array of tag objects including the fields:
+  - `tag` (S) is a tag word
+  - `count` (N) is the number of uses of `tag` among all tagged data
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Data Tags Like](examples.mdx#get-data-tags-like) example.
+
+### Get Tagged Data
+
+Get available tagged data given a transaction ID.
+
+**Request:**
+
+- `requestType` is `getTaggedData`
+- `transaction` is the transaction ID
+- `includeData` is `true` to include `data` (optional)
+- `retrieve` is `true` to retrieve pruned data from other nodes if not available (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `data` (S) is the tagged data
+- `hash` (S) is the hash of the tagged data
+- `filename` (S) is the metadata `filename` field
+- `name` (S) is the metadata `name` field
+- `description` (S) is the metadata `description` field
+- `tags` (S) is the metadata `tags` field
+- `parsedTags` (A) is an array of tag words (S) parsed from `tags`
+- `type` (S) is the metadata `type` field
+- `channel` (S) is the metadata `channel` field
+- `isText` (B) is the metadata `isText` field
+- `account` (S) is the number of the account that originally uploaded the tagged data
+- `accountRS` (S) is the Reed-Solomon address of the uploading account
+- `transaction` (S) is the transaction ID
+- `transactionTimestamp` (N) is the transaction timestamp (in seconds since the genesis block)
+- `blockTimestamp` (N) is the block timestamp (in seconds since the genesis block)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Note:** Refer to [Upload Tagged Data](#upload-tagged-data 'The Blue0x API') for details about the `data` and metadata (`filename`, `name`, `description`, `tags`, `type`, `channel` and `isText`) fields.
+
+**Example:** Refer to [Get Tagged Data](examples.mdx#get-tagged-data) example.
+
+### Get Tagged Data Extend Transactions
+
+Retrieves all tagged data extend transactions for a given tagged data upload transaction.
+
+**Request:**
+
+- `requestType` is `getTaggedDataExtendTransactions`
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `extendTransactions` (A) is an array of transactions
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Tagged Data Extend Transactions](examples.mdx#get-tagged-data-extend-transactions) example.
+
+### Search Tagged Data
+
+Full text search on available tagged data name, description and tags; optionally filtered by tag, channel or uploading account; return in reverse relevance order.
+
+**Request:**
+
+- `requestType` is `searchTaggedData`
+- `query` is a full text query on the metadata fields `name` (S), `description` (S) and `tags` (S) in the [standard Lucene syntax](https://lucene.apache.org/core/2`9`4/queryparsersyntax.html#Overview)
+- `tag` is a word in the `tags` string (optional)
+- `channel` is a channel string (optional)
+- `account` is an account ID (optional)
+- `includeData` is `true` to include `data` (optional)
+- `firstIndex` is a zero-based index to the first tagged data to retrieve (optional)
+- `lastIndex` is a zero-based index to the last tagged data to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `data` (A) is an array of tagged data objects (refer to [Get Tagged Data](#get-tagged-data 'The Blue0x API') with `hash` omitted for details)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Search Tagged Data](examples.mdx#search-tagged-data) example.
+
+### Upload Tagged Data
+
+Upload and broadcast new tagged data. POST only.
+
+**Request:** Refer to [Create Transaction Request](#create-transaction-request 'The Blue0x API') for common parameters.
+
+- `requestType` is `uploadTaggedData`
+- `data` is the data (optional)
+- `file` is the pathname of a data file to upload (optional if `data` provided)
+- `filename` is a filename to associate with `data` (optional if `file` uploaded in which case the uploaded filename is always used)
+- `name` is the name or title of `data` (optional if `file` uploaded in which case the uploaded filename is used, but `name` takes precedence if provided)
+- `description` is a description of `data` (optional)
+- `tags` is a list of up to 5 words from 3 to 20 characters long and separated by spaces and/or commas, describing the actual content of `data`; for example: `audio,mp3,classical` (optional)
+- `type` is the mime type of `data` such as `torrent`, `pdf`, `doc`, `image`, etc. (optional)
+- `channel` is a data feed label such as `pirate bay torrents`, `wikileaks`, etc. (optional)
+- `isText` is `false` if `data` is a hex string (optional)
+
+**Note:** The maximum length of `data` plus all associated metadata is 42 kilobytes. The maximum length of `description` is 1000 bytes. The maximum length of the other metadata (`name`, `tags`, `type`, `channel` and `filename`) is 100 bytes each.
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
+
+**Example:** Refer to [Upload Tagged Data](examples.mdx#upload-tagged-data) example.
+
+### Verify Tagged Data
+
+Verify expired tagged data downloaded from another node, against the hash in the blockchain.
+
+**Request:**
+
+- `requestType` is `verifyTaggedData`
+- `transaction` is the transaction ID of the tagged data
+- `data` is the tagged data (optional)
+- `file` is the pathname of a data file to upload (optional if `data` provided)
+- `filename`
+- `name`
+- `description`
+- `tags`
+- `type`
+- `channel`
+- `isText`
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Note:** The `data` and metadata (`filename`, `name`, `description`, `tags`, `type`, `channel` and `isText`) must have exactly the same values as when the data was uploaded (refer to [Upload Tagged Data](#upload-tagged-data 'The Blue0x API')).
+
+**Response:**
+
+- `verify` (B) is `true` if the hash of the provided `data` and metadata matches the hash in the blockchain
+- `hash` (S) is the hash of the tagged data
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+- `version.TaggedDataUpload` (N) is `1`, the version number
+
+**Note:** This call returns an error if there is a hash mismatch.
+
+**Example:** Refer to [Verify Tagged Data](examples.mdx#verify-tagged-data) example.

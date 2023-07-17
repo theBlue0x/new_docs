@@ -6,9 +6,15 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
+    'plugin:@next/next/recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:tailwindcss/recommended',
   ],
+  settings: {
+    react: {
+     version: "detect",
+    },
+  },
   overrides: [],
   parser: '@typescript-eslint/parser',
   parserOptions: {

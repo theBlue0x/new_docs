@@ -1,0 +1,613 @@
+## Account Operations
+
+### Delete Account Property
+
+Deletes an account property. POST only.
+
+**Request:**
+
+- `requestType` is `deleteAccountProperty`
+- `property` is the name of the property
+- `recipient` is the account where a property should be removed (optional)
+- `setter` is the account who set the property (optional)
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
+
+**Example:** Refer to [Delete Account Property](examples.mdx#delete-account-property) example.
+
+### Get Account
+
+Get account information given an account ID.
+
+**Request:**
+
+- `requestType` is `getAccount`
+- `account` is the account ID
+- `includeLessors` is `true` to include `lessors`, `lessorsRS` and `lessorsInfo` (optional)
+- `includeAssets` is `true` to include `assetBalances` and `unconfirmedAssetBalances` (optional)
+- `includeCurrencies` is `true` to include `accountCurrencies` (optional)
+- `includeEffectiveBalance` is `true` to include `effectiveBalanceNXT` and `guaranteedBalanceNQT` (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `unconfirmedBalanceNQT` (S) is `balanceNQT` less unconfirmed outgoing transactions, the balance displayed in the client
+- `effectiveBalanceNXT` (N) is the balance (in BLX) of the account available for forging: the unleased guaranteedBalance of this account plus the leased guaranteedBalance of all lessors to this account
+- `lessorsInfo` (A) is an array of lessor objects including the fields:
+  > `currentHeightTo` (S),
+  > `nextHeightFrom` (S),
+  > `effectiveBalanceNXT` (S),
+  > `nextLesseeRS` (S),
+  > `currentLesseeRS` (S),
+  > `currentHeightFrom` (S),
+  > `nextHeightTo` (S)
+- `lessors` (A) is an array of lessor account IDs
+- `currentLessee` (S) is the account number of the lessee, if applicable
+- `currentLeasingHeightTo` (N) is the block height when the lease completes, if applicable
+- `forgedBalanceNQT` (S) is the balance (in NQT) that the account has forged
+- `balanceNQT` (S) is the minimally confirmed basic balance (in NQT) of the account
+- `publicKey` (S) is the public key of the account
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+- `assetBalances` (A) is an array of asset objects including the fields `balanceQNT` (S) and `asset` (S) ID
+- `guaranteedBalanceNQT` (S) is the balance (in NQT) of the account with at least 1440 confirmations
+- `unconfirmedAssetBalances` (A) is an array of asset objects including the fields `unconfirmedBalanceQNT` (S) and `asset` (S) ID
+- `currentLesseeRS` (S) is the Reed-Solomon address of the lessee account
+- `accountRS` (S) is the Reed-Solomon address of the account
+- `lessorsRS` (A) is an array of Reed-Solomon lessor account addresses
+- `accountCurrencies` (A) is an array of currency objects (refer to [Get Account Currencies](monetary_system.mdx#get-account-currencies 'The Blue0x API') for details)
+- `name` (S) is the name associated with the account, if applicable
+- `description` (S) is the description of the account, if applicable
+- `account` (S) is the account number
+- `currentLeasingHeightFrom` (N) is the block height when the lease starts, if applicable
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+
+**Example:** Refer to [Get Account](examples.mdx#get-account) example.
+
+### Get Account Block Count
+
+Get the number of blocks forged by an account.
+
+**Request:**
+
+- `requestType` is `getAccountBlockCount`
+- `account` is an account ID
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `numberOfBlocks` (N) is the number of blocks forged by the account
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Account Block Count](examples.mdx#get-account-block-count) example.
+
+### Get Account Block Ids
+
+Get the block IDs of all blocks forged (generated) by an account in reverse block height order.
+
+**Request:**
+
+- `requestType` is `getAccountBlockIds`
+- `account` is the account ID
+- `timestamp` is the earliest block (in seconds since the genesis block) to retrieve (optional)
+- `firstIndex` is a zero-based index to the first block ID to retrieve (optional)
+- `lastIndex` is a zero-based index to the last block ID to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `blockIds` (A) is an array of block IDs
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millsec)
+
+**Example:** Refer to [Get Account Block Ids](examples.mdx#get-account-block-ids) example.
+
+### Get Account Blocks
+
+Get all blocks forged (generated) by an account in reverse block height order.
+
+**Request:**
+
+- `requestType` is `getAccountBlocks`
+- `account` is the account ID
+- `timestamp` is the earliest block (in seconds since the genesis block) to retrieve (optional)
+- `firstIndex` is a zero-based index to the first block to retrieve (optional)
+- `lastIndex` is a zero-based index to the last block to retrieve (optional)
+- `includeTransactions` is `true` to retrieve transaction details, otherwise only transaction IDs are retrieved (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `blocks` (A) is an array of blocks (refer to [Get Block](blocks.mdx#get-block 'The Blue0x API') for details)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Account Blocks](examples.mdx#get-account-blocks) example.
+
+### Get Account Id
+
+Get an account ID given a secret passphrase or public key. POST only.
+
+**Request:**
+
+- `requestType` is `getAccountId`
+- `secretPhrase` is the secret passphrase of the account (optional)
+- `publicKey` is the public key of the account (optional if `secretPhrase` provided)
+
+**Response:**
+
+- `accountRS` (S) is the Reed-Solomon address of the account
+- `publicKey` (S) is the public key of the account
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+- `account` (S) is the account number
+
+**Example:** Refer to [Get Account Id](examples.mdx#get-account-id) example.
+
+### Get Account Ledger
+
+Get multiple account ledger entries.
+
+**Request:**
+
+- `requestType` is `getAccountLedger`
+- `account` is the account ID (optional)
+- `firstIndex` is a zero-based index to the first block to retrieve (optional)
+- `lastIndex` is a zero-based index to the last block to retrieve (optional)
+- `event` is the event ID (optional)
+- `eventType` is a string representing the event type (optional)
+- `holdingType` is a string representing the holding type (optional)
+- `holding` is the holding ID (optional)
+- `includeTransactions` is true to retrieve transaction details, otherwise only transaction IDs are retrieved (optional)
+- `includeHoldingInfo` is true to retrieve asset or currency info (optional) with each ledger entry. The default is false.
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `entries` (A) is an array of ledger objects including the fields:
+  - `change` (S) is the change in the balance for the holding identified by 'holdingType'
+  - `eventType` (S) is the event type causing the account change
+  - `ledgerId` (S) is the ledger entry ID
+  - `holding` (S) is the item identifier for an asset or currency balance
+  - `isTransactionEvent` (B) is true if the event is associated with a transaction and false if it is associated with a block.
+  - `balance` (S) is the balance for the holding identified by 'holdingType'
+  - `holdingType` (S) is the item being changed (account balance, asset balance or currency balance)
+  - `accountRS` (S) is the Reed-Solomon address of the account
+  - `block` (S) is the block ID that created the ledger entry
+  - `event` (S) is the block or transaction associated with the event
+  - `account` (S) is the account number
+  - `height` (N) is the the block height associated with the event
+  - `timestamp` (N) is the the block timestamp associated with the event
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Account Ledger](examples.mdx#get-account-ledger) example.
+
+### Get Account Ledger Entry
+
+Get a specific account ledger entry.
+
+**Request:**
+
+- `requestType` is `getAccountLedgerEntry`
+- `ledgerId` is the ledger ID
+- `includeTransactions` is true to retrieve transaction details, otherwise only transaction IDs are retrieved (optional)
+- `includeHoldingInfo` is `true` to retrieve asset or currency info (optional) with the ledger entry. The default is false.
+
+**Response:**
+
+- `change` (S) is the change in the balance for the holding identified by 'holdingType'
+- `eventType` (S) is the event type causing the account change
+- `ledgerId` (S) is the ledger entry ID
+- `holding` (S) is the item identifier for an asset or currency balance
+- `isTransactionEvent` (B) is true if the event is associated with a transaction and false if it is associated with a block.
+- `balance` (S) is the balance for the holding identified by 'holdingType'
+- `holdingType` (S) is the item being changed (account balance, asset balance or currency balance)
+- `accountRS` (S) is the Reed-Solomon address of the account
+- `block` (S) is the block ID that created the ledger entry
+- `event` (S) is the block or transaction associated with the event
+- `account` (S) is the account number
+- `height` (N) is the the block height associated with the event
+- `timestamp` (N) is the the block timestamp associated with the event
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Account Ledger Entry](examples.mdx#get-account-ledger-entry) example.
+
+### Get Account Lessors
+
+Get the lessors to an account.
+
+**Request:**
+
+- `requestType` is `getAccountLessors`
+- `account` is the account ID
+- `height` is the height of the blockchain to determine the lessors (optional, default is last block)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Note:** If table trimming is enabled (default), the `height` must be within 1440 blocks of the last block.
+
+**Response:**
+
+- `accountRS` (S) is the Reed-Solomon address of the account
+- `account` (S) is the account number
+- `height` (N) is the height of the blockchain
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+- `lessors` (A) is an array of lessor objects including the fields:
+  - `lessorRS` (S)
+  - `lessor` (S)
+  - `guaranteedBalanceNQT` (S)
+
+**Example:** Refer to [Get Account Lessors](examples.mdx#get-account`lessors) example.
+
+### Get Account Properties
+
+Get the Account properties for a specific account or setter.
+
+**Request:**
+
+- `requestType` is `getAccountProperties`
+- `recipient` is the account ID to which the property is attached to
+- `setter` is the account ID who set the property (optional if `recipient` provided)
+- `property` is the property key (optional)
+- `firstIndex` is a zero-based index to the first block to retrieve (optional)
+- `lastIndex` is a zero-based index to the last block to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `setterRS`: (S) is the Reed-Solomon address of the setter account (only if setter is defined in the request)
+- `recipientRS`: (S) is the Reed-Solomon address of the recipient account (only if recipient is defined in the request)
+- `recipient`: (S) is the account number of the recipient account (only if recipient is defined in the request)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+- `setter`: (S) is the account number of the setter account (only if setter is defined in the request)
+- `properties`: (A) is an array of properties including the fields:
+  - `setterRS`: (S) is the Reed-Solomon address of the setter account (only if setter is omitted in the request)
+  - `recipientRS`: (S) is the Reed-Solomon address of the recipient account (only if recipient is omitted in the request)
+  - `recipient`: (S) is the account number of the recipient account (only if recipient is omitted in the request)
+  - `property`: (S) property name
+  - `setter`: (S) is the account number of the setter account (only if setter is omitted in the request)
+  - `value`: (S) property value
+
+**Example:** Refer to [Get Account Properties](examples.mdx#get-account-properties) example.
+
+### Get Account Public Key
+
+Get the public key associated with an account ID.
+
+**Request:**
+
+- `requestType` is `getAccountPublicKey`
+- `account` is the account ID
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `publicKey` (S) is the 32-byte public key associated with the account, returned as a hex string
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Account Public Key](examples.mdx#get-account-public-key) example.
+
+### Get Balance
+
+Get the balance of an account.
+
+**Request:**
+
+- `requestType` is `getBalance`
+- `account` is an account ID
+- `includeEffectiveBalance` is `true` to include `effectiveBalanceNXT` and `guaranteedBalanceNQT` (optional)
+- `height` is the height to retrieve account balance for, if still available (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `unconfirmedBalanceNQT` (S) is `balanceNQT` less unconfirmed outgoing transactions, the balance displayed in the client
+- `guaranteedBalanceNQT` (S) is the balance (in NQT) of the account with at least 1440 confirmations
+- `effectiveBalanceNXT` (N) is the balance (in Blue0x) of the account available for forging: the unleased guaranteedBalance of this account plus the leased guaranteedBalance of all lessors to this account
+- `forgedBalanceNQT` (S) is the balance (in NQT) that the account has forged
+- `balanceNQT` (S) is the minimally confirmed basic balance (in NQT) of the account
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Balance](examples.mdx#get-balance) example.
+
+### Get Blockchain Transactions
+
+Get the transactions associated with an account in reverse block timestamp order.
+
+**Request:**
+
+- `requestType` is `getBlockchainTransactions`
+- `account` is the account ID
+- `timestamp` is the earliest block (in seconds since the genesis block) to retrieve (optional)
+- `type` is the type of transactions to retrieve (optional)
+- `subtype` is the subtype of transactions to retrieve (optional)
+- `firstIndex` is a zero-based index to the first transaction to retrieve (optional)
+- `lastIndex` is a zero-based index to the last transaction to retrieve (optional)
+- `numberOfConfirmations` is the required number of confirmations per transaction (optional)
+- `withMessage` is `true` to retrieve only only transactions having a message attachment, either non-encrypted or decryptable by the account (optional)
+- `phasedOnly` is `true` to retrieve only phased transactions (optional unless `nonPhasedOnly` provided)
+- `nonPhasedOnly` is `true` to retrieve only nonphased transactions (optional unless `phasedOnly` provided)
+- `includeExpiredPrunable` is `true' to retrieve pruned data if available (optional)`
+- `includePhasingResult` is `true` to retrieve execution status of each phased transaction (optional)
+- `executedOnly` is `true` to exclude phased transactions that are not yet executed (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `transactions` (A) is an array of transactions (refer to [Get Transaction](transactions.mdx#get-transaction 'The Blue0x API') for details)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Blockchain Transactions](examples.mdx#get-blockchain-transactions) example.
+
+### Get Guaranteed Balance
+
+Get the balance of an account that is confirmed at least a specified number of times.
+
+**Request:**
+
+- `requestType` is `getGuaranteedBalance`
+- `account` is an account ID
+- `numberOfConfirmations` is the minimum number of confirmations for a transaction to be included in the guaranteed balance (optional, if omitted or zero then minimally confirmed transactions are included)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `guaranteedBalanceNQT` (S) is the balance (in NQT) of the account with at least `numberOfConfirmations` confirmations
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Guaranteed Balance](examples.mdx#get-guaranteed-balance) example.
+
+### Get Unconfirmed Transaction Ids
+
+Get a list of unconfirmed transaction IDs associated with an account.
+
+**Request:**
+
+- `requestType` is `getUnconfirmedTransactionIds`
+- `account` is one account ID (optional)
+- `account` is one account ID (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+- `firstIndex` is a zero-based index to the first transaction ID to retrieve (optional)
+- `lastIndex` is a zero-based index to the last transaction ID to retrieve (optional)
+
+**Response:**
+
+- `unconfirmedTransactionIds` (A) is an array of unconfirmed transaction IDs
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Unconfirmed Transaction Ids](examples.mdx#get-unconfirmed-transaction-ids) example.
+
+### Get Unconfirmed Transactions
+
+Get a list of unconfirmed transactions associated with an account.
+
+**Request:**
+
+- `requestType` is `getUnconfirmedTransactions`
+- `account` is one account ID (optional)
+- `account` is one account ID (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+- `firstIndex` is a zero-based index to the first unconfirmed transaction to retrieve (optional)
+- `lastIndex` is a zero-based index to the last unconfirmed transaction to retrieve (optional)
+
+**Response:**
+
+- `unconfirmedTransactions` (A) is an array of unconfirmed transactions (refer to [Get Transaction](transactions.mdx#get-transaction 'The Blue0x API') for details)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Unconfirmed Transactions](examples.mdx#get-unconfirmed-transactions) example.
+
+### Search Accounts
+
+Get accounts having a name or description that match a given query in reverse relevance order.
+
+**Request:**
+
+- `requestType` is `searchAccounts`
+- `query` is a full text query on the account fields `name` (S) and `description` (S) in the [standard Lucene syntax](https://lucene.apache.org/core/2`9`4/queryparsersyntax.html#Overview)
+- `firstIndex` is a zero-based index to the first account to retrieve (optional)
+- `lastIndex` is a zero-based index to the last account to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `accounts` (A) is an array of account objects with the following fields:
+  - `account` (S) is the account number
+  - `accountRS` (S) is the Reed-Solomon address of the account
+  - `name` (S) is the name of the account
+  - `description` (S) is the description of the account (if applicable)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Search Accounts](examples.mdx#search-accounts) example.
+
+### Send Money
+
+Send Blue0x to another account. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request 'The Blue0x API') for common parameters.
+
+- `requestType` is `sendMoney`
+- `amountNQT` is the amount (in NQT) in the transaction
+- `recipient` is the account ID of the recipient
+- `recipientPublicKey` is the public key of the receiving account (optional, enhances security of a new account)
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
+
+**Example:** Refer to [Send Money](examples.mdx#send-money) example.
+
+#### Send BLX
+
+Refer to [Send Money](account.mdx#send-money 'The Blue0x API').
+
+### Set Account Info
+
+Set account information. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request 'The Blue0x API') for common parameters.
+
+- `requestType` is `setAccountInfo`
+- `name` is a name to associate with the account (optional)
+- `description` is a description to associate with the account (optional)
+- `messagePatternRegex` is a regular expression pattern following the java.util.regex.Pattern specification; incoming transactions are only accepted if they contain a plain text message which matches this pattern (disabled indefinitely due to a security issue)
+- `messagePatternFlags` is a bitmask of java.util.regex.Pattern flags, such as 2 (Pattern.CASE\INSENSITIVE)
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
+
+**Example:** Refer to [Set Account Info](examples.mdx#set-account-info) example.
+
+### Set Account Property
+
+Set account property. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request 'The Blue0x API') for common parameters.
+
+- `requestType` is `setAccountProperty`
+- `recipient` is the account ID of the recipient.
+- `property` is the property name.
+- `value` is the property value.
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
+
+**Example:** Refer to [Set Account Property](examples.mdx#set-account-property) example.
+
+### Start Funding Monitor
+
+Starts a funding monitor that will transfer BLX, an ASSET or a CURRENCY from the funding account to a recipient account when the amount held by the recipient account drops below the threshold. The transfer will not be done until the current block height is greater than equal to the block height of the last transfer plus the interval. The funding account is identified by the secret phrase.
+
+The recipient accounts are identified by the specified account property (see [Set Account Property](account.mdx#set-account-property 'The Blue0x API')). Each account that has this property set by the funding account will be monitored for changes. The property value can be omitted or it can consist of a JSON string containing one or more values in the format: "amount" : long, "threshold": long, "interval": integer. POST only.
+
+**Request:**
+
+- `requestType` is `startFundingMonitor`
+- `property` is the name of the account property
+- `amount` is the amount to fund the recipient account with (in NQT or QNT)
+- `threshold` is the threshold
+- `interval` is the the number of blocks to wait after before funding the recipient
+- `secretPhrase` is the secret phrase of the funding account
+- `holdingType` is a string representing the holding type (optional)
+- `holding` is the holding ID (optional)
+
+**Response:**
+
+- `started` (B) is `true` if the monitor has been started
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Start Funding Monitor](examples.mdx#start-funding-monitor) example.
+
+### Stop Funding Monitor
+
+Stop a funding monitor. When the secret phrase is specified, a single monitor will be stopped. The monitor is identified by the secret phrase, holding and account property. The administrator password is not required and will be ignored.
+
+When the administrator password is specified, a single monitor can be stopped by specifying the funding account, holding and account property. If no account is specified, all monitors will be stopped.
+
+The holding type and account property name must be specified when the secret phrase or account is specified. Holding type codes are listed in getConstants. In addition, the holding identifier must be specified when the holding type is ASSET or CURRENCY. POST only.
+
+**Request:**
+
+- `requestType` is `stopFundingMonitor`
+- `secretPhrase` is the secret phrase of the funding account, used to stop a single monitor. (optional)
+- `adminPassword` is the admin password, used to stop a single monitor or all monitors (optional if `secretPhrase` is provided)
+- `property` is the name of the account property (optional)
+- `holdingType` is a string representing the holding type (optional)
+- `holding` is the holding ID (optional)
+- `account` is the account ID (optional)
+
+**Response:**
+
+- `stopped` (N) is the number of the monitors that have been stopped
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Stop Funding Monitor](examples.mdx#stop-funding-monitor) example.
+
+## Account Control Operations
+
+### Get All Phasing Only Controls
+
+Retrieve all accounts subject to phasing control with their respective restrictions.
+
+**Request:**
+
+- `requestType` is `getAllPhasingOnlyControls`
+- `firstIndex` is a zero-based index to the first block ID to retrieve (optional)
+- `lastIndex` is a zero-based index to the last block ID to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `phasingOnlyControls` (A) is an array with phasing only controls objects (Refer to [Get Phasing Only Control](#get-phasing-only-control 'The Blue0x API') for details)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get All Phasing Only Controls](examples.mdx#get-all-phasing-only-controls) example.
+
+### Get Phasing Only Control
+
+Retrieve phasing control with their respective restrictions for a specific account.
+
+**Request:**
+
+- `requestType` is `getPhasingOnlyControl`
+- `account` is the account ID
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `account` (S) is the account number
+- `accountRS` (S) is the Reed-Solomon address of the account
+- `quorum` (S) is the minimum number of votes needed to approve the transaction
+- `whitelist` (A) is an array with the whitelisted accounts including the fields:
+  - `whitelisted` (S) is the account number
+  - `whitelistedRS` (S) is the Reed-Solomon address of the account
+- `maxFees` (S) is the maximum fees the account can spend per block
+- `minDuration` (N) is the minimum duration of the phasing period
+- `maxDuration` (N) is the maximum duration of the phasing period
+- `votingModel` (N) is an integer code for the method of approval
+- `minBalance` (S) is the minimum balance (in NQT or QNT) required for voting
+- `minBalanceModel` (N) is the minimum balance model
+- `holding` (S) is the asset or currency ID (only included if holding != 0)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Phasing Only Control](examples.mdx#get-phasing-only-control) example.
+
+### Set Phasing Only Control
+
+Sets (or removes) phasing control for a specific account. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request 'The Blue0x API') for common parameters.
+
+- `requestType` is `setPhasingOnlyControl`
+- `controlVotingModel` is the voting model or -1 to remove phasing control
+- `controlQuorum` is the expected quorum (optional)
+- `controlMinBalance` is the expected minimum balance (optional)
+- `controlMinBalanceModel` is the expected minimum balance model (optional)
+- `controlHolding` is the holding ID (optional)
+- `controlWhitelisted` is the whitelisted accounts (optional, multiple values)
+- `controlWhitelisted` is the whitelisted accounts (optional, multiple values)
+- `controlMaxFees` is the maximum allowed accumulated total fees for not yet finished phased transactions (optional)
+- `controlMinDuration` is the minimum duration in block height (optional)
+- `controlMaxDuration` is the maximum phasing duration in block height (optional)
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
+
+**Example:** Refer to [Set Phasing Only Control](examples.mdx#set-phasing-only-control) example.

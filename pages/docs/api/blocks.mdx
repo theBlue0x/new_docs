@@ -1,0 +1,111 @@
+## Block Operations
+
+### Get Block
+
+Get a block object given a block ID or block height.
+
+**Request:**
+
+- `requestType` is `getBlock`
+- `block` is the block ID (optional)
+- `height` is the block height (optional if `block` provided)
+- `timestamp` is the timestamp (in seconds since the genesis block) of the block (optional if `height` provided)
+- `includeTransactions` is `true` to include transaction details (optional)
+- `includeExecutedPhased` is `true` to include approved and executed phased transactions (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Note:** `block` overrides `height` which overrides `timestamp`.
+
+**Response:**
+
+- `previousBlockHash` (S) is the 32-byte hash of the previous block
+- `payloadLength` (N) is the length (in bytes) of all transactions included in the block
+- `totalAmountNQT` (S) is the total amount (in NQT) of the transactions in the block
+- `generationSignature` (S) is the 32-byte generation signature of the generating account
+- `generator` (S) is the generating account number
+- `generatorPublicKey` (S) is the 32-byte public key of the generating account
+- `baseTarget` (S) is the base target for the next block generation
+- `payloadHash` (S) is the 32-byte hash of the payload (all transactions)
+- `generatorRS` (S) is the Reed-Solomon address of the generating account
+- `nextBlock` (S) is the next block ID
+- `numberOfTransactions` (N) is the number of transactions in the block
+- `blockSignature` (S) is the 64-byte block signature
+- `transactions` (A) is an array of transaction IDs or transaction objects (if `includeTransactions` provided, refer to [Get Transaction](transactions.mdx#get-transaction) for details)
+- `executedPhasedTransactions` (A) is an array of transaction IDs or transaction objects (if `includeExecutedPhased` provided, refer to [Get Transaction](transactions.mdx#get-transaction) for details)
+- `version` (N) is the block version
+- `totalFeeNQT` (S) is the total fee (in NQT) of the transactions in the block
+- `previousBlock` (S) is the previous block ID
+- `cumulativeDifficulty` (S) is the cumulative difficulty for the next block generation
+- `block` (S) is the block ID
+- `height` (N) is the zero-based block height
+- `timestamp` (N) is the timestamp (in seconds since the genesis block) of the block
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Block](examples.mdx#get-block) example.
+
+### Get Block Id
+
+Get a block ID given a block height.
+
+**Request:**
+
+- `requestType` is `getBlockId`
+- `height` is the block height
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `block` (S) is the block ID
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Block Id](examples.mdx#get-block-id) example.
+
+### Get Blocks
+
+Get blocks from the blockchain in reverse block height order.
+
+**Request:**
+
+- `requestType` is `getBlocks`
+- `timestamp` is the earliest block (in seconds since the genesis block) to retrieve (optional)
+- `firstIndex` is first block to retrieve (optional, default is zero or the last block on the blockchain)
+- `lastIndex` is the last block to retrieve (optional, default is `firstIndex` + 99)
+- `includeTransactions` is `true` to include transaction details (optional)
+- `includeExecutedPhased` is `true` to include approved and executed phased transactions (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `blocks` (A) is an array of blocks retrieved (refer to [Get Block](#get-block) for details)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Blocks](examples.mdx#get-blocks) example.
+
+### Get EC Block
+
+Get Economic Cluster block data.
+
+**Request:**
+
+- `requestType` is `getECBlock`
+- `timestamp` is the timestamp (in seconds since the genesis block) of the EC block (optional, default (or zero) is the current timestamp)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Note:** If `timestamp` is more than 15 seconds before the timestamp of the last block on the blockchain, `errorCode` 4 is returned.
+
+**Response:**
+
+- `ecBlockHeight` (N) is the EC block height
+- `ecBlockId` (S) is the EC block ID
+- `timestamp` (N) is the timestamp (in seconds since the genesis block) of the EC block
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get EC Block](examples.mdx#get-ec-block) example.

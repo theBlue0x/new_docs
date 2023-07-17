@@ -1,0 +1,793 @@
+## Asset Exchange Operations
+
+### Cancel Order
+
+Cancel an existing asset order. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request 'The Blue0x API') for common parameters.
+
+- `requestType` is either `cancelBidOrder` or `cancelAskOrder`
+- `order` is the order ID of the order being canceled
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
+
+**Example:** Refer to [Cancel Order](examples.mdx#cancel-order) example.
+
+#### Cancel Ask Order
+
+Refer to [Cancel Order](#cancel-order 'The Blue0x API').
+
+#### Cancel Bid Order
+
+Refer to [Cancel Order](#cancel-order 'The Blue0x API').
+
+### Delete Asset Shares
+
+Permanently deletes a specified quantity of owned asset shares.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request 'The Blue0x API') for common parameters.
+
+- `requestType` is `deleteAssetShares`
+- `asset` is the asset ID
+- `quantityQNT` is the quantity (in QNT) of the asset to be deleted
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
+
+**Example:** Refer to [Delete Asset Shares](examples.mdx#delete-asset-shares) example.
+
+### Dividend Payment
+
+Pay dividend to all shareholders of an asset. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request 'The Blue0x API') for common parameters.
+
+- `requestType` is `dividendPayment`
+- `asset` is the asset ID
+- `height` is the blockchain height at which asset holders shares will be counted (must be less than 1440 blocks in the past)
+- `amountNQTPerQNT` is dividend amount (in NQT per QNT of the asset)
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
+
+**Example:** Refer to [Dividend Payment](examples.mdx#dividend-payment) example.
+
+### Get Account Asset Count
+
+Get the number of assets owned by an account given the account ID.
+
+**Request:**
+
+- `requestType` is `getAccountAssetCount`
+- `account` is the account ID
+- `height` is the height of the blockchain to determine the asset count (optional, default is last block)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Note:** If table trimming is enabled (default), the height must be within 1440 blocks of the last block.
+
+**Response:**
+
+- `numberOfAssets` (N) is the number of assets owned by the account
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Account Asset Count](examples.mdx#get-account-asset-count) example.
+
+### Get Account Assets
+
+Get the assets owned by a given account in reverse quantity order.
+
+**Request:**
+
+- `requestType` is `getAccountAssets`
+- `account` is the account ID
+- `asset` is an asset ID filter (optional)
+- `height` is the blockchain height at which to retrieve balances (optional, default is the last block in the blockchain)
+- `includeAssetInfo` is `true` if asset information is to be included (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Note:** If table trimming is enabled (default), the height must be within 1440 blocks of the last block.
+
+**Response:**
+
+- `accountAssets` (A) is an array of asset objects (unless the `asset` parameter is specified) with the following fields for each asset:
+  - `quantityQNT` (S) is the quantity (in QNT) of the asset
+  - `unconfirmedQuantityQNT` (S) is the unconfirmed quantity (in QNT) of the asset
+  - `decimals` (N) is the number of decimal places used by the asset (if `includeAssetInfo` is `true`)
+  - `name` (S) is the asset name (if `includeAssetInfo` is `true`)
+  - `asset` (S) is the asset ID
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Account Assets](examples.mdx#get-account-assets) example.
+
+### Get Account Current Order Ids
+
+Get current asset order IDs given an account ID in reverse block height order.
+
+**Request:**
+
+- `requestType` is either `getAccountCurrentBidOrderIds` or `getAccountCurrentAskOrderIds`
+- `account` is the account ID
+- `asset` is an asset ID filter (optional)
+- `firstIndex` is a zero-based index to the first order ID to retrieve (optional)
+- `lastIndex` is a zero-based index to the last order ID to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `bidOrderIds` or `askOrderIds` (A) is an array of order IDs
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Account Current Order Ids](examples.mdx#get-account-current-order-ids) example.
+
+#### Get Account Current Ask Order Ids
+
+Refer to [Get Account Current Order Ids](#get-account-current-order-ids 'The Blue0x API').
+
+#### Get Account Current Bid Order Ids
+
+Refer to [Get Account Current Order Ids](#get-account-current-order-ids 'The Blue0x API').
+
+### Get Account Current Orders
+
+Get current asset orders given an account ID in reverse block height order.
+
+**Request:**
+
+- `requestType` is either `getAccountCurrentBidOrders` or `getAccountCurrentAskOrders`
+- `account` is the account ID
+- `asset` is an asset ID filter (optional)
+- `firstIndex` is a zero-based index to the first order to retrieve (optional)
+- `lastIndex` is a zero-based index to the last order to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `bidOrders` or `askOrders` (A) is an array of order objects (refer to [Get Order](#get-order 'The Blue0x API') for details)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Account Current Orders](examples.mdx#get-account-current-orders) example.
+
+#### Get Account Current Ask Orders
+
+Refer to [Get Account Current Orders](#get-account-current-orders 'The Blue0x API').
+
+#### Get Account Current Bid Orders
+
+Refer to [Get Account Current Orders](#get-account-current-orders 'The Blue0x API').
+
+### Get All Assets
+
+Get all assets in the exchange in reverse block height of creation order.
+
+**Request:**
+
+- `requestType` is `getAllAssets`
+- `firstIndex` is a zero-based index to the first asset to retrieve (optional)
+- `lastIndex` is a zero-based index to the last asset to retrieve (optional)
+- `includeCounts` is `true` if the fields beginning with `numberOf...` are to be included (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `assets` (A) is an array of asset objects (refer to [Get Asset](#get-asset 'The Blue0x API'))
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get All Assets](examples.mdx#get-all-assets) example.
+
+### Get All Open Orders
+
+Get all open bid/ask orders in reverse block height order.
+
+**Request:**
+
+- `requestType` is either `getAllOpenBidOrders` or `getAllOpenAskOrders`
+- `firstIndex` is a zero-based index to the first order to retrieve (optional)
+- `lastIndex` is a zero-based index to the last order to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `openOrders` (A) is an array of order objects (refer to [Get Order](#get-order 'The Blue0x API') for details)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get All Open Orders](examples.mdx#get-all-open-orders) example.
+
+#### Get All Open Ask Orders
+
+Refer to [Get All Open Orders](#get-all-open-orders 'The Blue0x API').
+
+#### Get All Open Bid Orders
+
+Refer to [Get All Open Orders](#get-all-open-orders 'The Blue0x API').
+
+### Get All Trades
+
+Get all trades since a given timestamp in reverse block height order.
+
+**Request:**
+
+- `requestType` is `getAllTrades`
+- `timestamp` is the timestamp (in seconds since the genesis block) to begin retrieving trades (optional, default 0)
+- `firstIndex` is a zero-based index to the first trade to retrieve (optional)
+- `lastIndex` is a zero-based index to the last trade to retrieve (optional)
+- `includeAssetInfo` is `true` if asset information is to be included in the result (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Note:** If `timestamp` is omitted or zero, and no index is given, all trades in the entire blockchain will be retrieved, which may timeout or crash your system.
+
+**Response:**
+
+- `trades` (A) is an array of trade objects (refer to [Get Trades](#get-trades 'The Blue0x API'))
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get All Trades](examples.mdx#get-all-trades) example.
+
+### Get Asset
+
+Get asset information given an asset ID.
+
+**Request:**
+
+- `requestType` is `getAsset`
+- `asset` is the asset ID
+- `includeCounts` is `true` if the fields beginning with `numberOf...` are to be included (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `account` (S) is the number of the account that issued the asset
+- `accountRS` (S) is the Reed-Solomon address of the account that issued the asset
+- `name` (S) is the asset name
+- `description` (S) is the asset description
+- `quantityQNT` (S) is the total asset quantity (in QNT) in existence
+- `asset` (N) is the asset ID
+- `decimals` (N) is the number of decimal places used by the asset
+- `numberOfAccounts` (N) is the number of accounts that own the asset
+- `numberOfTrades` (N) is the number of trades of this asset
+- `numberOfTransfers` (N) is the number of transfers of this asset
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Asset](examples.mdx#get-asset) example.
+
+### Get Asset Account Count
+
+Get the number of accounts that own an asset given the asset ID.
+
+**Request:**
+
+- `requestType` is `getAssetAccountCount`
+- `asset` is the asset ID
+- `height` is the height of the blockchain to determine the account count (optional, default is last block)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Note:** If table trimming is enabled (default), the height must be within 1440 blocks of the last block.
+
+**Response:**
+
+- `numberOfAccounts` (N) is the number of accounts that own the asset
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Asset Account Count](examples.mdx#get-asset-account-count) example.
+
+### Get Asset Accounts
+
+Get the accounts that own an asset given the asset ID in reverse quantity order.
+
+**Request:**
+
+- `requestType` is `getAssetAccounts`
+- `asset` is the asset ID
+- `height` is the height of the blockchain to determine the accounts (optional, default is last block)
+- `firstIndex` is a zero-based index to the first account to retrieve (optional)
+- `lastIndex` is a zero-based index to the last account to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Note:** If table trimming is enabled (default), the height must be within 1440 blocks of the last block.
+
+**Response:**
+
+- `accountAssets` (A) is an array of asset objects with the following fields for each asset:
+  - `quantityQNT` (S) is the quantity (in QNT) of the asset
+  - `accountRS` (S) is the Reed-Solomon address of the account that owns the asset
+  - `unconfirmedQuantityQNT` (S) is the unconfirmed quantity (in QNT) of the asset
+  - `asset` (S) is the asset ID
+  - `account` (S) is the number of the account that owns the asset
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Asset Accounts](examples.mdx#get-asset-accounts) example.
+
+### Get Asset Deletes
+
+Get asset deletions for a specific asset or account.
+
+**Request:**
+
+- `requestType` is `getAssetDeletes`
+- `asset` is the asset ID (optional if account is provided)
+- `account` is the account ID (optional if asset is provided)
+- `firstIndex` is a zero-based index to the first phased transaction to retrieve (optional)
+- `lastIndex` is a zero-based index to the last phased transaction to retrieve (optional)
+- `timestamp` is the earliest deletion (in seconds since the genesis block) to retrieve (optional)
+- `includeAssetInfo` is `true` if asset information is to be included (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `deletes` (A) is an array of asset delete objects with following properties:
+  - `quantityQNT` (S) is the number of shares that was deleted
+  - `assetDelete` (S) is the transaction ID
+  - `account` (S) is the account ID
+  - `accountRS` (S) is the account Reed Solomon address
+  - `asset` (S) is the asset ID
+  - `height` (N) is the block height of the delete
+  - `timestamp` (N) is the block timestamp of the delete
+  - `decimals` (N) is the number of decimal places used by the asset (if `includeAssetInfo` is `true`)
+  - `name` (S) is the asset name (if `includeAssetInfo` is `true`)
+
+**Example:** Refer to [Get Asset Deletes](examples.mdx#get-asset-deletes) example.
+
+### Get Asset Dividends
+
+Get the dividend payment history for a specific asset.
+
+**Request:**
+
+- `requestType` is `getAssetDividends`
+- `asset` is the asset ID
+- `firstIndex` is a zero-based index to the first dividend payment to retrieve (optional)
+- `lastIndex` is a zero-based index to the last dividend payment to retrieve (optional)
+- `timestamp` is the earliest dividend payment (in seconds since the genesis block) to retrieve (optional)
+- `adminPassword` is a string with the admin password (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `dividends` (A) is an array of dividend transactions with the following properties:
+  - `assetDividend` (S) is the dividend payment transaction ID
+  - `numberOfAccounts` (N) is the number of accounts that received a dividend
+  - `amountNQTPerQNT` (S) is the amount of BLX (in NQT) paid per quantity (in QNT) of the asset
+  - `totalDividend` (S) is the total amount of BLX (in NQT) sent in the dividend payment
+  - `dividendHeight` (N) is the block height of the dividend calculation
+  - `asset` (S) is the asset ID
+  - `height` (N) is the block height of the dividend payment
+  - `timestamp` (N) is the block timestamp of the dividend payment
+
+**Example:** Refer to [Get Asset Dividends](examples.mdx#get-asset-dividends) example.
+
+### Get Asset Ids
+
+Get the IDs of all assets in the exchange in reverse block height of creation order.
+
+**Request:**
+
+- `requestType` is `getAssetIds`
+- `firstIndex` is a zero-based index to the first asset ID to retrieve (optional)
+- `lastIndex` is a zero-based index to the last asset ID to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `assets` (A) is an array of asset IDs
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Asset Ids](examples.mdx#get-asset-ids) example.
+
+### Get Asset Transfers
+
+Get transfers associated with a given asset and/or account in reverse block height order (or in the expected order of execution for expected transfers).
+
+**Request:**
+
+- `requestType` is either `getAssetTransfers` or `getExpectedAssetTransfers`, where expected transfers are from the unconfirmed transactions pool or are phased transactions scheduled to finish in the next block
+- `asset` is the asset ID (optional)
+- `account` is the account ID (optional if `asset` provided)
+- `timestamp` is the earliest transfer (in seconds since the genesis block) to retrieve (optional, does not apply to expected transfers)
+- `firstIndex` is a zero-based index to the first transfer to retrieve (optional, does not apply to expected transfers)
+- `lastIndex` is a zero-based index to the last transfer to retrieve (optional, does not apply to expected transfers)
+- `includeAssetInfo` is `true` if the `decimals` and `name` fields are to be included (optional, does not apply to expected transfers)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `transfers` (A) is an array of transfer objects with the following fields for each transfer:
+  - `quantityQNT` (S) is the quantity (in QNT) of the asset traded
+  - `senderRS` (S) is the Reed-Solomon address of the sender
+  - `assetTransfer` (S) is the transaction ID of the asset transfer
+  - `sender` (S) is the account number of the sender
+  - `recipientRS` (S) is the Reed-Solomon address of the recipient
+  - `decimals` (N) is the number of decimal places used by the asset (if `includeAssetInfo` is `true`)
+  - `recipient` (S) is the account number of the recipient
+  - `name` (S) is the name of the asset (if `includeAssetInfo` is `true`)
+  - `asset` (S) is the asset ID
+  - `height` (N) is the height of the transfer block
+  - `timestamp` (N) is the timestamp (in seconds since the genesis block) of the transfer block, does not apply to an expected transfer
+  - `phased` (B) is `true` if the transaction is phased, `false` otherwise, applies only to an expected transfer
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Asset Transfers](examples.mdx#get-asset-transfers) example.
+
+#### Get Expected Asset Transfers
+
+Refer to [Get Asset Transfers](#get-asset-transfers 'The Blue0x API').
+
+### Get Assets
+
+Get asset information given multiple asset IDs
+
+**Request:**
+
+- `requestType` is `getAssets`
+- `assets` is one the multiple asset IDs
+- `assets` is one the multiple asset IDs
+- `includeCounts` is `true` if the fields beginning with `numberOf...` are to be included (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `assets` (A) is an array of asset objects (refer to [Get Asset](#get-asset 'The Blue0x API'))
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Assets](examples.mdx#get-assets) example.
+
+### Get Assets By Issuer
+
+Get asset information given multiple creation account IDs in reverse block height of creation order.
+
+**Request:**
+
+- `requestType` is `getAssetsByIssuer`
+- `account` is one of the multiple account IDs
+- `account` is one of the multiple account IDs
+- `firstIndex` is a zero-based index to the first asset to retrieve (optional)
+- `lastIndex` is a zero-based index to the last asset to retrieve (optional)
+- `includeCounts` is `true` if the fields beginning with `numberOf...` are to be included (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `assets` (A) is an array of asset objects (refer to [Get Asset](#get-asset 'The Blue0x API'))
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Assets By Issuer](examples.mdx#get-assets-by-issuer) example.
+
+### Get Expected Asset Deletes
+
+Gets asset deletes which are expected to be executed in the next block.
+
+**Request:**
+
+- `requestType` is either `getExpectedAssetDeletes`
+- `asset` is the asset ID (optional)
+- `account` is the account ID (optional)
+- `firstIndex` is a zero-based index to the first phased transaction to retrieve (optional)
+- `lastIndex` is a zero-based index to the last phased transaction to retrieve (optional)
+- `timestamp` is the earliest deletion (in seconds since the genesis block) to retrieve (optional)
+- `includeAssetInfo` is `true` if asset information is to be included (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `deletes` (A) is an array of expected asset delete objects with following properties:
+  - `assetDelete` (S) is the transaction ID
+  - `asset` (S) is the asset ID
+  - `account` (S) is the account ID
+  - `accountRS` (S) is the account Reed Solomon address
+  - `quantityQNT` (S) is the number of shares that will be deleted
+  - `decimals` (N) is the number of decimal places used by the asset (if `includeAssetInfo` is `true`)
+  - `name` (S) is the asset name (if `includeAssetInfo` is `true`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Expected Asset Deletes](examples.mdx#get-expected-asset-deletes) example.
+
+### Get Order
+
+Get a bid/ask order given an order ID.
+
+**Request:**
+
+- `requestType` is either `getBidOrder` or `getAskOrder`
+- `order` is the Order ID
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `account` (S) is the account number associated with the order
+- `accountRS` (S) is the Reed-Solomon address of the account
+- `asset` (S) is the ID of the asset being ordered
+- `quantityQNT` (S) is the order quantity (in QNT)
+- `priceNQT` (S) is the order price (in NQT)
+- `height` (N) is the block height of the order transaction
+- `transactionHeight` (N) is the transaction height
+- `transactionIndex` (N) is a zero-based index giving the order of the transaction in its block
+- `order` (S) is the ID of the order
+- `type` (S) is the type of order (`bid` or `ask`)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Order](examples.mdx#get-order) example.
+
+#### Get Ask Order
+
+Refer to [Get Order](#get-order 'The Blue0x API').
+
+#### Get Bid Order
+
+Refer to [Get Order](#get-order 'The Blue0x API').
+
+### Get Order Ids
+
+Get bid/ask order IDs given an asset ID, in order of decreasing bid price or increasing ask price.
+
+**Request:**
+
+- `requestType` is either `getBidOrderIds` or `getAskOrderIds`
+- `asset` is the asset ID
+- `firstIndex` is a zero-based index to the first order ID to retrieve (optional)
+- `lastIndex` is a zero-based index to the last order ID to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `bidOrderIds` or `askOrderIds` (A) is an array of order IDs
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Order Ids](examples.mdx#get-order-ids) example.
+
+#### Get Ask Order Ids
+
+Refer to [Get Order Ids](#get-order-ids 'The Blue0x API').
+
+#### Get Bid Order Ids
+
+Refer to [Get Order Ids](#get-order-ids 'The Blue0x API').
+
+### Get Orders
+
+Get bid/ask orders given an asset ID, in order of decreasing bid price or increasing ask price (if `sortByPrice` is `true` for expected orders, otherwise in the expected order of execution).
+
+**Request:**
+
+- `requestType` is one of `getBidOrders`, `getAskOrders`, `getExpectedBidOrders` or `getExpectedAskOrders`, where expected orders are from the unconfirmed transactions pool or are phased transactions scheduled to finish in the next block
+- `asset` is the asset ID
+- `sortByPrice` is `true` to sort by price (optional, applies only to expected orders, which are returned in expected order of execution by default)
+- `showExpectedCancellations` is `true` to include orders that are expected to be cancelled in the next block, based on the content of the unconfirmed transactions pool and the phased transactions expected to finish in the next block (optional, does not apply to expected orders)
+- `firstIndex` is a zero-based index to the first order to retrieve (optional, does not apply to expected orders)
+- `lastIndex` is a zero-based index to the last order to retrieve (optional, does not apply to expected orders)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `bidOrders` or `askOrders` (A) is an array of order objects (refer to [Get Order](#get-order 'The Blue0x API') for details) with the following additional field only for an expected order:
+  - `phased` (B) is `true` if the order is phased, `false` otherwise
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Orders](examples.mdx#get-orders) example.
+
+#### Get Ask Orders
+
+Refer to [Get Orders](#get-orders 'The Blue0x API').
+
+#### Get Bid Orders
+
+Refer to [Get Orders](#get-orders 'The Blue0x API').
+
+#### Get Expected Ask Orders
+
+Refer to [Get Orders](#get-orders 'The Blue0x API').
+
+#### Get Expected Bid Orders
+
+Refer to [Get Orders](#get-orders 'The Blue0x API').
+
+### Get Expected Order Cancellations
+
+Get all expected order cancellations in the order in which they are expected to be executed.
+
+**Request:**
+
+- `requestType` is `getExpectedOrderCancellations`, where expected cancellations are from the unconfirmed transactions pool or are phased transactions scheduled to finish in the next block
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `orderCancellations` (A) is an array of order cancellation objects with the following fields for each transfer:
+  - `account` (S) is the cancelling account number
+  - `accountRS` (S) is the Reed-Solomon address of the account
+  - `order` (S) is the ID of the order to be cancelled
+  - `height` (N) is the block height of the order cancellation transaction
+  - `phased` (B) is `true` if the order cancellation transaction is phased
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Expected Order Cancellations](examples.mdx#get-expected-order-cancellations) example.
+
+### Get Last Trades
+
+Get the last trade of each of multiple assets.
+
+**Request:**
+
+- `requestType` is `getLastTrades`
+- `assets` is one of multiple asset IDs
+- `assets` is one of multiple asset IDs
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `trades` (A) is an array of trade objects (refer to [Get Trades](#get-trades 'The Blue0x API') without `name` and `decimals` for details)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Last Trades](examples.mdx#get`last-trades) example.
+
+### Get Order Trades
+
+Get all trades that were executed as a result of a given `askOrder` and/or `bidOrder` in reverse block height order.
+
+**Request:**
+
+- `requestType` is `getOrderTrades`
+- `askOrder` is an ask order ID (optional)
+- `bidOrder` is a bid order ID (optional if `askOrder` provided)
+- `firstIndex` is a zero-based index to the first trade to retrieve (optional)
+- `lastIndex` is a zero-based index to the last trade to retrieve (optional)
+- `includeAssetInfo` is `true` if the `decimals` and `name` fields are to be included (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:** Refer to [Get Trades](#get-trades 'The Blue0x API').
+
+**Example:** Refer to [Get Order Trades](examples.mdx#get-order-trades) example.
+
+### Get Trades
+
+Get trades associated with a given asset and/or account in reverse block height order.
+
+**Request:**
+
+- `requestType` is `getTrades`
+- `asset` is the asset ID (optional)
+- `account` is the account ID (optional if `asset` provided)
+- `firstIndex` is a zero-based index to the first trade to retrieve (optional)
+- `lastIndex` is a zero-based index to the last trade to retrieve (optional)
+- `timestamp` is the earliest block (in seconds since the genesis block) to retrieve (optional)
+- `includeAssetInfo` is `true` if the `decimals` and `name` fields are to be included (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `trades` (A) is an array of trade objects with the following fields for each trade:
+  - `seller` (S) is the account number of the seller
+  - `quantityQNT` (S) is the quantity (in QNT) of the asset traded
+  - `bidOrder` (S) is the bid order ID
+  - `sellerRS` (S) is the Reed-Solomon address of the seller
+  - `buyer` (S) is the account number of the buyer
+  - `priceNQT` (S) is the trade price (in NQT, the ask price for a buy or the bid price for a sell)
+  - `askOrder` (S) is the ask order ID
+  - `buyerRS` (S) is the Reed-Solomon address of the buyer
+  - `decimals` (N) is the number of decimal places used by the asset
+  - `name` (S) is the name of the asset (if `includeAssetInfo` is `true`)
+  - `block` (S) is the block ID of the trade (if `includeAssetInfo` is `true`)
+  - `asset` (S) is the asset ID
+  - `askOrderHeight` (N) is the block height of the ask order
+  - `bidOrderHeight` (N) is the block height of the bid order
+  - `tradeType` (S) is the trade type (`sell` or `buy`, where `buy` implies that the bid occurred after the ask, or if in the same block, has a greater order ID)
+  - `timestamp` (N) is the timestamp (in seconds since the genesis block) of the trade block
+  - `height` (N) is the height of the trade block
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Trades](examples.mdx#get-trades) example.
+
+### Issue Asset
+
+Create an asset on the exchange. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request 'The Blue0x API') for common parameters.
+
+- `requestType` is `issueAsset`
+- `name` is the name of the asset
+- `description` is a url-encoded description of the asset in UTF-8 with a maximum length of 1000 bytes (optional)
+- `quantityQNT` is the total amount (in QNT) of the asset in existence
+- `decimals` is the number of decimal places used by the asset (optional, zero default)
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API'). The transaction ID is also the asset ID.
+
+**Example:** Refer to [Issue Asset](examples.mdx#issue-asset) example.
+
+### Place Order
+
+Place an asset order. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request 'The Blue0x API') for common parameters.
+
+- `requestType` is either `placeBidOrder` or `placeAskOrder`
+- `asset` is the asset ID of the asset being ordered
+- `quantityQNT` is the amount (in QNT) of the asset being ordered
+- `priceNQT` is the bid/ask price (in NQT)
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API'). The transaction ID is also the order ID.
+
+**Example:** Refer to [Place Order](examples.mdx#place-order) example.
+
+#### Place Ask Order
+
+Refer to [Place Order](#place-order 'The Blue0x API').
+
+#### Place Bid Order
+
+Refer to [Place Order](#place-order 'The Blue0x API').
+
+### Search Assets
+
+Get assets having a name or description that match a given query in reverse relevance order.
+
+**Request:**
+
+- `requestType` is `searchAssets`
+- `query` is a full text query on the asset fields `name` (S) and `description` (S) in the [standard Lucene syntax](https://lucene.apache.org/core/2`9`4/queryparsersyntax.html#Overview)
+- `firstIndex` is a zero-based index to the first asset to retrieve (optional)
+- `lastIndex` is a zero-based index to the last asset to retrieve (optional)
+- `includeCounts` is `true` if the fields beginning with `numberOf...` are to be included (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `assets` (A) is an array of asset objects (refer to [Get Asset](#get-asset 'The Blue0x API'))
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Search Assets](examples.mdx#search-assets) example.
+
+### Transfer Asset
+
+Transfer a quantity of an asset from one account to another. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request 'The Blue0x API') for common parameters.
+
+- `requestType` is `transferAsset`
+- `recipient` is the recipient account ID
+- `recipientPublicKey` is the public key of the recipient account (optional, enhances security of a new account)
+- `asset` is the ID of the asset being transferred
+- `quantityQNT` is the amount (in QNT) of the asset being transferred
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API'). The transaction ID is also the transfered asset ID.
+
+**Example:** Refer to [Transfer Asset](examples.mdx#transfer-asset) example.

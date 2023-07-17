@@ -1,0 +1,14 @@
+{
+  "blx": {
+    "title": "BLX Token"
+  },
+  "currencies": {
+    "title": "Blue0x Currencies"
+  },
+  "marketplace": {
+    "title": "Blue0x Marketplace"
+  },
+  "exchange": {
+    "title": "Blue0x Exchange"
+  }
+}

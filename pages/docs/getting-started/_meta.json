@@ -1,5 +1,17 @@
 {
   "installation": {
     "title": "Installation"
+  },
+  "local": {
+    "title": "Windows"
+  },
+  "local_mac": {
+    "title": "macOs"
+  },
+  "local_linux": {
+    "title": "Linux"
+  },
+  "deploy-public-node": {
+    "title": "Deploy a Public Node"
   }
 }

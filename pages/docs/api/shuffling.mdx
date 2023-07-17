@@ -1,0 +1,295 @@
+## Shuffling Operations
+
+Coin shuffling can be used to perform mixing of BLX, MS currencies (unless created as non-shuffleable), or AE assets. Any account can create a new shuffling, specifying the holding to be shuffled, the shuffle amount, number of participants required, and registration deadline.
+
+### Get Account Shufflings
+
+Retrieves info about shufflings for a specific account.
+
+**Request:**
+
+- `requestType` is `getAccountShufflings`
+- `account` is the account ID
+- `includeFinished` is `true` to include completed shufflings (optional)
+- `includeHoldingInfo` is `true` to include holding info (optional)
+- `firstIndex` is a zero-based index to the first tagged data to retrieve (optional)
+- `lastIndex` is a zero-based index to the last tagged data to retrieve (optional)
+- `adminPassword` is a string with the admin password (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+- `shufflings` (A) is an array containing the shuffling object (refer to [Get Shuffling](#get-shuffling 'The Blue0x API'))
+
+**Example:** Refer to [Get Account Shufflings](examples.mdx#get-account-shufflings) example.
+
+### Get All Shufflings
+
+Retrieves info about all shufflings.
+
+**Request:**
+
+- `requestType` is `getAllShufflings`
+- `includeFinished` is `true` to include completed shufflings (optional)
+- `includeHoldingInfo` is `true` to include holding info (optional)
+- `finishedOnly` is `true` to omit not yet finished shufflings (optional)
+- `firstIndex` is a zero-based index to the first tagged data to retrieve (optional)
+- `lastIndex` is a zero-based index to the last tagged data to retrieve (optional)
+- `adminPassword` is a string with the admin password (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+- `shufflings` (A) is an array containing the shuffling object (refer to [Get Shuffling](#get-shuffling 'The Blue0x API'))
+
+**Example:** Refer to [Get All Shufflings](examples.mdx#get-all-shufflings) example.
+
+### Get Assigned Shufflings
+
+Retrieves info about a shufflings that are currently assigned to a specific account.
+
+**Request:**
+
+- `requestType` is `getAssignedShufflings`
+- `account` is the account ID
+- `includeHoldingInfo` is `true` to include holding info (optional)
+- `firstIndex` is a zero-based index to the first tagged data to retrieve (optional)
+- `lastIndex` is a zero-based index to the last tagged data to retrieve (optional)
+- `adminPassword` is a string with the admin password (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+- `shufflings` (A) is an array containing the shuffling object (refer to [Get Shuffling](#get-shuffling 'The Blue0x API'))
+
+**Example:** Refer to [Get Assigned Shufflings](examples.mdx#get-assigned-shufflings) example.
+
+### Get Holding Shufflings
+
+Retrieves info about shufflings for a specific holding and/or stage.
+
+**Request:**
+
+- `requestType` is `getHoldingShufflings`
+- `holding` is the holding ID (optional)
+- `stage` is the stage of the shuffling (See [Get Constants](server.mdx#get-constants 'The Blue0x API') for type definitions) (optional)
+- `includeFinished` is `true` to include completed shufflings (optional)
+- `firstIndex` is a zero-based index to the first tagged data to retrieve (optional)
+- `lastIndex` is a zero-based index to the last tagged data to retrieve (optional)
+- `adminPassword` is a string with the admin password (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+- `shufflings` (A) is an array containing the shuffling object (refer to [Get Shuffling](#get-shuffling 'The Blue0x API'))
+
+**Example:** Refer to [Get Holding Shufflings](examples.mdx#get`Holding-shufflings) example.
+
+### Get Shufflers
+
+Retrieves info about active shufflers on the current node.
+
+**Request:**
+
+- `requestType` is `getShufflers`
+- `account` is account ID (optional)
+- `shufflingFullHash` is shuffling full hash (optional)
+- `secretPhrase` is secret phrase of the account doing the shuffling (required if adminPassword is not provided)
+- `adminPassword` is the admin password (required if secretPhrase is not provided)
+- `includeParticipantState` to include each shuffling participant's state (optional)
+
+**Response:**
+
+- `shufflers` (A) is an array containing all currently running shuffling processes on the node.
+  - `account` (S) is account ID
+  - `accountRS` (S) is the account Reed Solomon address
+  - `recipient` (S) is the recipient account ID to where the funds will be sent once the shuffling is completed
+  - `recipientRS` (S) is the recipient account Reed Solomon address to where the funds will be sent once the shuffling is completed
+  - `shuffling` (S) is the shuffling ID
+  - `shufflingFullHash` (S) is the shuffling full hash
+  - `participantState` (N) is the state for the participant (For more info, see shufflingParticipantStates array in [Get Constants](server.mdx#get-constants 'The Blue0x API'))
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Shufflers](examples.mdx#get-shufflers) example.
+
+### Get Shuffling
+
+Retrieves info about a shuffling.
+
+**Request:**
+
+- `requestType` is `getShuffling`
+- `shuffling` is the shuffling ID
+- `includeHoldingInfo` is `true` to include holding info (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `blocksRemaining` (N) number of blocks remaining until current stage is finished.
+- `amount` (S) the amount of `holdingType` to be shuffled
+- `shufflingStateHash` (S) state hash of the shuffling
+- `shufflingFullHash` (S) the full hash of the shuffling
+- `issuer` (S) is the issuer account ID
+- `issuerRS` (S) is the Reed-Solomon address of the issuer account
+- `assignee` (S) is the current assignee account ID
+- `assigneeRS` (S) is the Reed-Solomon address of the current assignee account
+- `shuffling` (S) is the shuffling ID
+- `holding` (S) is the asset or currency ID
+- `holdingType` (N) is the holding type (See [Get Constants](server.mdx#get-constants 'The Blue0x API') for type definitions)
+- `stage` (N) is the current stage of the shuffling (See [Get Constants](server.mdx#get-constants 'The Blue0x API') for type definitions)
+- `participantCount` (N) is the number of participants required to start the shuffling
+- `registrantCount` (N) is the number of registrered participants
+- `recipientPublicKeys` (A) is an array of recipient public keys
+- `holdingInfo` (A) is an array containing the asset or currency info (if `includeHoldingInfo` is `true` and holdingType is not Blue0x)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Shuffling](examples.mdx#get-shuffling) example.
+
+### Get Shuffling Participants
+
+Retrieves info about participants in a shuffling.
+
+**Request:**
+
+- `requestType` is `getShufflingParticipants`
+- `shuffling` is the shuffling ID
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `participants` (A)
+  - `shuffling` (S) is the shuffling ID
+  - `account` (S) is the account ID
+  - `accountRS` (S) is the account Reed Solomong address
+  - `state` (N) is the state for the participant (For more info, see shufflingParticipantStates array in [Get Constants](server.mdx#get-constants 'The Blue0x API'))
+  - `nextAccount` (S) is the account ID of the next account in turn
+  - `nextAccountRS` (S) is the account Reed Solomon address of the next account in turn
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Shuffling Participants](examples.mdx#get-shuffling-participants) example.
+
+### Shuffling Cancel
+
+Cancels a shuffling
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request 'The Blue0x API') for common parameters.
+
+- `requestType` is `shufflingCancel`
+- `shuffling` is the shuffling ID
+- `shufflingStateHash` is the state hash of the shuffling
+- `cancellingAccount` is the account ID (optional)
+
+**Response** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
+
+### Shuffling Create
+
+Creates a new shuffling.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request 'The Blue0x API') for common parameters.
+
+- `requestType` is `shufflingCreate`
+- `holding` is the holding id (optional if holdingType is 0)
+- `holdingType` is the holding type (See [Get Constants](server.mdx#get-constants 'The Blue0x API') for type definitions) (optional)
+- `amount` is the amount of the holding to shuffle
+- `participantCount` is the number of participants
+- `registrationPeriod` is the number of blocks the participants have to register until the shuffle is cancelled
+
+**Response** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
+
+**Example:** Refer to [Shuffling Create](examples.mdx#shuffling-create) example.
+
+### Shuffling Process
+
+Manually process the shuffling for a specific participant. Note that the shuffling must be in processing stage and the `secretPhrase` must match the current shuffling assignee.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request 'The Blue0x API') for common parameters.
+
+- `requestType` is `shufflingProcess`
+- `shuffling` is the shuffling ID
+- `recipientSecretPhrase` is the secret phrase of the recipient account (optional if `recipientPublicKey` is provided)
+- `recipientPublicKey` is the public key of the recipient account (optional if `recipientSecretPhrase` is provided)
+
+**Response** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
+
+**Example:** Refer to [Shuffling Process](examples.mdx#shuffling-process) example.
+
+### Shuffling Register
+
+Registers a new participant to an existing shuffling. The shuffling must be in stage registration.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request 'The Blue0x API') for common parameters.
+
+- `requestType` is `shufflingRegister`
+- `shufflingFullHash` is the full hash of the shuffling to register
+
+**Response** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
+
+**Example:** Refer to [Shuffling Register](examples.mdx#shuffling-register) example.
+
+### Shuffling Verify
+
+Sends a verification that an account's recipient public key is found within a shuffling.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request 'The Blue0x API') for common parameters.
+
+- `requestType` is `shufflingVerify`
+- `shuffling` is the shuffling ID
+- `shufflingStateHash` is the current state hash of the shuffle
+
+**Response** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
+
+**Example:** Refer to [Shuffling Verify](examples.mdx#shuffling-verify) example.
+
+### Start Shuffler
+
+Starts a automated Shuffler. Once started, the Shuffler monitors the blockchain state for transactions relevant to the specified shuffle, and automatically submits the required transactions on behalf of the user, performing shuffle processing, verification, or cancellation as needed.
+
+**Request:**
+
+- `requestType` is `startShuffler`
+- `secretPhrase` is the secret phrase of the account entering the shuffling
+- `shufflingFullHash` the full hash of the shuffling
+- `recipientSecretPhrase` the secret phrase of the recipient account (optional if `recipientPublicKey` is present)
+- `recipientPublicKey` the public key of the recipient account (optional if `recipientSecretPhrase` is present)
+
+**Response**
+
+- `shuffling` (S) is the shuffling ID
+- `shufflingFullHash` (S) is the full hash of the shuffling
+- `account` (S) is the account ID
+- `accountRS` (S) is the account Reed Solomong address
+- `recipient` (S) is the account ID of the recipient account
+- `recipientRS` (S) is the account Reed Solomon address of the recipient account
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Start Shuffler](examples.mdx#start-shuffler) example.
+
+### Stop Shuffler
+
+Stops a previously started automated Shuffler.
+
+**Request:**
+
+- `requestType` is `stopShuffler`
+- `account` is the account ID (optional if `shufflingFullHash` or `secretPhrase` or `adminPassword` is provided)
+- `shufflingFullHash` the full hash of the shuffling (optional if `account` or `adminPassword is provided)`
+- `secretPhrase` is the secret phrase of the account entering the shuffling (optional if `adminPassword` is provided)
+- `adminPassword` is the admin password (optional if `secretPhrase` is provided)
+
+**Response**
+
+- `stoppedShuffler` (B) means the specified shuffler was stopped
+- `stoppedAllShufflers` (B) means all shufflers on the node was stopped (only if `adminPassword` is provided in request)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Stop Shuffler](examples.mdx#stop-shuffler) example.

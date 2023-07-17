@@ -1,0 +1,173 @@
+## Networking Operations
+
+### Add Peer
+
+Add a peer to the list of known peers and attempt to connect to it. Password protected like the [Debug Operations](debug.mdx). POST only.
+
+**Request:**
+
+- `requestType` is `addPeer`
+- `peer` is the IP address or domain name of the peer (plus optional port)
+
+**Response:** refer to [Get Peer](#get-peer)
+
+- `isNewlyAdded` is `true` if the peer was not already known, omitted otherwise
+
+**Example:** Refer to [Add Peer](examples.mdx#add-peer) example.
+
+### Blacklist API Proxy Peer
+
+Blacklist a remote node from the UI, so it won't be used when in roaming and light client modes. POST only.
+
+**Request:**
+
+- `requestType` is `blacklistAPIProxyPeer`
+- `peer` is the IP address or domain name of the peer (plus optional port)
+- `adminPassword` is a string with the admin password (optional)
+
+**Response:**
+
+- `done` (B) is `true` if the peer is blacklisted
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Blacklist API Proxy Peer](examples.mdx#blacklist-api-proxy-peer) example.
+
+### Blacklist Peer
+
+Blacklist a peer for the default blacklisting period. Password protected like the [Debug Operations](#debug-operations). POST only.
+
+**Request:**
+
+- `requestType` is `blacklistPeer`
+- `peer` is the IP address or domain name of the peer (plus optional port)
+
+**Response:**
+
+- `done` (B) is `true` if the peer is blacklisted
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Blacklist Peer](examples.mdx#blacklist-peer) example.
+
+### Get Inbound Peers
+
+Get all peers that have sent a request to this peer in the last 30 minutes.
+
+**Request:**
+
+- `requestType` is `getInboundPeers`
+- `includePeerInfo` is `true` to include peer information, otherwise include only the address (optional)
+
+**Response:**
+
+- `peers` (A) is an array of peer addresses or peer objects (refer to [Get Peer](#get-peer) for details) depending on `includePeerInfo`
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Inbound Peers](examples.mdx#get-inbound-peers) example.
+
+### Get My Info
+
+Get hostname and address of the requesting node.
+
+**Request:**
+
+- `requestType` is `getMyInfo`
+
+**Response:**
+
+- `host` (S) is the node hostname
+- `address` (S) is the node address
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get My Info](examples.mdx#get-my-info) example.
+
+### Get Peer
+
+Get information about a given peer.
+
+**Request:**
+
+- `requestType` is `getPeer`
+- `peer` is the IP address or domain name of the peer (plus optional port)
+
+**Response:**
+
+- `hallmark` (S) is the hex string of the peer's hallmark, if it is defined
+- `downloadedVolume` (N) is the number of bytes downloaded by the peer
+- `address` (S) the IP address or DNS name of the peer
+- `weight` (N) is the peer's weight value
+- `uploadedVolume` (N) is the number of bytes uploaded by the peer
+- `version` (S) is the version of the software running on the peer
+- `platform` (S) is a string representing the peer's platform
+- `lastUpdated` (N) is the timestamp (in seconds since the genesis block) of the last peer status update
+- `blacklisted` (B) is `true` if the peer is blacklisted
+- `services` (A) is an array of strings with the services the node provides
+- `blacklistingCause` (S) is the cause of blacklisting (if `blacklisted` is `true`)
+- `announcedAddress` (S) is the name that the peer announced to the network (could be a DNS name, IP address, or any other string)
+- `application` (S) is the name of the software application
+- `state` (N) defines the state of the peer: `0 for NON-CONNECTED`, `1 for CONNECTED`, or `2 for DISCONNECTED`
+- `shareAddress` (B) is `true` if the address is allowed to be shared with other peers
+- `inbound` (B) is `true` if the peer has made a request to this node
+- `inboundWebSocket` (B) is `true` if an inbound websocket has been established from this node
+- `outboundWebSocket` (B) is `true` if an outbound websocket has been established to this node
+- `lastConnectAttempt` (B) is the timestamp (in seconds since the genesis block) of the last connection attempt to the peer
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Peer](examples.mdx#get-peer) example.
+
+### Get Peers
+
+Get a list of peer IP addresses.
+
+**Request:**
+
+- `requestType` is `getPeers`
+- `active` is `true` for active (not `NON-CONNECTED`) peers only (optional, if `true` overrides `state`)
+- `state` is the state of the peers, `NON-CONNECTED`, `CONNECTED`, or `DISCONNECTED` (optional)
+- `includePeerInfo` is `true` to include peer detail as in [Get Peer](#get-peer)
+- `service` to filter on a specific service
+
+**Note:** If neither `active` nor `state` is specified, all known peers are retrieved.
+
+**Response:**
+
+- `peers` (A) is an array of peer addresses
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Peers](examples.mdx#get-peers) example.
+
+### Set API Proxy Peer
+
+Set the remote node to use when in roaming and light client modes. POST only.
+
+**Request:**
+
+- `requestType` is `setAPIProxyPeer`
+- `peer` is the IP address or domain name of the peer (plus optional port)
+- `adminPassword` is a string with the admin password (optional)
+
+**Response:**
+
+- `downloadedVolume` (N) is the number of bytes downloaded by the peer
+- `address` (S) the IP address or DNS name of the peer
+- `weight` (N) is the peer's weight value
+- `uploadedVolume` (N) is the number of bytes uploaded by the peer
+- `version` (S) is the version of the software running on the peer
+- `platform` (S) is a string representing the peer's platform
+- `blockchainState` (S) is a string describing the state of the blockchain in the peer
+- `lastUpdated` (N) is the timestamp (in seconds since the genesis block) of the last peer status update
+- `blacklisted` (B) is `true` if the peer is blacklisted
+- `services` (A) is an array of strings with the services the node provides
+- `apiPort` (N) is the API access port of the peer
+- `apiSSLPort` (N) is the SSL API access port of the peer
+- `blacklistingCause` (S) is the cause of blacklisting (if `blacklisted` is `true`)
+- `announcedAddress` (S) is the name that the peer announced to the network (could be a DNS name, IP address, or any other string)
+- `application` (S) is the name of the software applicatio
+- `state` (N) defines the state of the peer: `0 for NON-CONNECTED`, `1 for CONNECTED`, or `2 for DISCONNECTED`
+- `shareAddress` (B) is `true` if the address is allowed to be shared with other peers
+- `inbound` (B) is `true` if the peer has made a request to this node
+- `inboundWebSocket` (B) is `true` if an inbound websocket has been established from this node
+- `outboundWebSocket` (B) is `true` if an outbound websocket has been established to this node
+- `lastConnectAttempt` (B) is the timestamp (in seconds since the genesis block) of the last connection attempt to the peer
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Set API Proxy Peer](examples.mdx#set-api-proxy-peer) example.

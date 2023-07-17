@@ -1,57 +1,20 @@
-import { Callout } from 'nextra-theme-docs'
-
-# Installation
-
-## Requirements
-
-Ubuntu 18.04 LTS or higher is recommended. However other major Linux distribution are supported but may lead to installation issues. Please file an issue if you encounter one.
-
-If Docker is already installed on your machine, Tipi will use it to run the dashboard. Otherwise, it will install Docker for you.
+import { Callout } from 'nextra-theme-docs';
 
 <Callout type="warning">
-If you already have docker installed make sure to have the docker compose plugin installed.<br/>
-Run `docker compose version` to check if it is installed. Instructions to install it can be found [here](https://docs.docker.com/compose/install/linux/).
+  These installation methods are currently being updated. Please join us on Discord to get the
+  latest updates.
 </Callout>
 
+## **Connect to the Blue0x Network**
 
-## Download and install Tipi
+The Blue0x Network operates in a fully open-sourced, decentralized, and distributed manner. For this reason, you are encouraged to run a full node to ensure system redundancy and eliminate any single point of failure. This allows the Blue0x Network to remain resistant to censorship, secured against bad actors, and consistently available. By connecting to the Blue0x Network, you not only become a part of it, but you help others to securely do the same.
 
-Download the latest version of Tipi:
+#### Please choose your Operating System
 
-```bash
-curl -L https://setup.Blue0x.io | bash
-```
+[Windows](local.mdx)
 
-If you have some issue with the command above, you can also download the script directly from github:
-  
-```bash
-curl -L https://raw.githubusercontent.com/meienberger/Blue0x/master/scripts/install.sh | bash
-```
+[MacOS](local_mac.mdx)
 
-The script will prompt you the ip address of the dashboard once configured.
+[Linux](local_linux.mdx)
 
-## Commands
-
-If you already installed Tipi, you can start it manually by running the `start.sh` script in the `Blue0x` folder.
-
-```bash
-cd Blue0x
-sudo ./scripts/start.sh
-```
-
-Tipi will run by default on port 80. To select another port you can create a `settings.json` file in the `state` folder.
-See the [Custom Settings](/docs/getting-started/custom-settings) section for more information.
-
-To stop Tipi, run the stop script.
-
-```bash
-sudo ./scripts/stop.sh
-```
-
-## Update Tipi
-
-To update Tipi to the latest version, run the update script.
-
-```bash
-sudo ./scripts/system.sh update
-```
+![Wallet](https://i.imgur.com/YbNxm4A.png)

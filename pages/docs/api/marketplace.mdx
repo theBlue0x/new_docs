@@ -1,0 +1,474 @@
+## Digital Goods Store Operations
+
+In the BLX client interface, the `Digital Goods Store (DGS)` is referred to as the `Marketplace`
+
+### DGS Delisting
+
+Delist a listed product. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request) for common parameters.
+
+- `requestType` is `dgsDelisting`
+- `goods` is the goods ID
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response).
+
+**Example:** Refer to [DGS Delisting](examples.mdx#dgs-delisting) example.
+
+### DGS Delivery
+
+Deliver a product. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request) for common parameters.
+
+- `requestType` is `dgsDelivery`
+- `purchase` is the purchase order ID
+- `discountNQT` is a discount (in NQT) off the selling price (optional, default is zero)
+- `goodsToEncrypt` is the product, a text or a hex string to be encrypted (optional if `goodsData` provided)
+- `goodsIsText` is `false` if `goodsToEncrypt` is a hex string (optional)
+- `goodsData` is AES-encrypted (using [Encrypt To](messaging.mdx#encrypt-to)) `goodsToEncrypt`, up to 1000 bytes long (required only if `secretPhrase` is omitted)
+- `goodsNonce` is the unique nonce associated with the encrypted data (required only if `secretPhrase` is omitted)
+
+**Note:** If the encrypted goods data is longer than 1000 bytes, use a prunable encrypted message to deliver the goods.
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response).
+
+**Example:** Refer to [DGS Delivery](examples.mdx#dgs-delivery) example.
+
+### DGS Feedback
+
+Give feedback about a purchased product after delivery. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request) for common parameters.
+
+- `requestType` is `dgsFeedback`
+- `purchase` is the purchase order ID
+- `message` is unencrypted (public) feedback text up to 1000 bytes
+
+**Note**: The unencrypted `message` parameter is used for public feedback.
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response).
+
+**Example:** Refer to [DGS Feedback](examples.mdx#dgs-feedback) example.
+
+### DGS Listing
+
+List a product in the DGS by creating a listing transaction. POST only.
+
+**Request:** Refer to [Create Transaction Request](#create-transaction-request) for common parameters.
+
+- `requestType` is `dgsListing`
+- `name` is the name of the product up to 100 characters in length
+- `description` is a description of the product up to 1000 characters in length
+- `tags` are up to three comma separated keywords describing the product up to 100 characters in length (optional)
+- `quantity` is the quantity of the product for sale
+- `priceNQT` is the price (in NQT) of the product
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response). The transaction ID is also the goods ID.
+
+**Example:** Refer to [DGS Listing](examples.mdx#dgs-listing) example.
+
+### DGS Price Change
+
+Change the price of a listed product. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request) for common parameters.
+
+- `requestType` is `dgsPriceChange`
+- `goods` is the goods ID of the product
+- `priceNQT` is the new price of the product
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response).
+
+**Example:** Refer to [DGS Price Change](examples.mdx#dgs-price-change) example.
+
+### DGS Purchase
+
+Purchase a product for sale. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request) for common parameters.
+
+- `requestType` is `dgsPurchase`
+- `goods` is the goods ID of the product
+- `priceNQT` is the price of the product
+- `quantity` is the quantity to be purchased
+- `deliveryDeadlineTimestamp` is the timestamp (in seconds since the genesis block) by which delivery of the product must occur
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response). The transaction ID is also the purchase order ID.
+
+**Example:** Refer to [DGS Purchase](examples.mdx#dgs-purchase) example.
+
+### DGS Quantity Change
+
+Change the quantity of a listed product. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request) for common parameters.
+
+- `requestType` is `dgsQuantityChange`
+- `goods` is the goods ID of the product
+- `deltaQuantity` is the change in the quantity of the product for sale (use negative numbers for a decrease in quantity)
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response).
+
+**Example:** Refer to [DGS Quantity Change](examples.mdx#dgs-quantity-change) example.
+
+### DGS Refund
+
+Refund a purchase. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request) for common parameters.
+
+- `requestType` is `dgsRefund`
+- `purchase` is the purchase order ID
+- `refundNQT` is the amount (in NQT) of the refund
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response).
+
+**Example:** Refer to [DGS Refund](examples.mdx#dgs-refund) example.
+
+### Get DGS Expired Purchases
+
+Get purchase orders which have expired without being delivered, given a seller ID, in reverse chronological order.
+
+**Request:**
+
+- `requestType` is `getDGSExpiredPurchases`
+- `seller` is the account ID of the product seller
+- `firstIndex` is a zero-based index to the first purchase order to retrieve (optional)
+- `lastIndex` is a zero-based index to the last purchase order to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `purchases` (A) is an array of purchase orders (refer to [Get DGS Purchase](#get-dgs-purchase) for details)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get DGS Expired Purchases](examples.mdx#get-dgs-expired-purchases) example.
+
+### Get DGS Good
+
+Get a DGS product given a goods ID.
+
+**Request:**
+
+- `requestType` is `getDGSGood`
+- `goods` is the goods ID of the product
+- `includeCounts` is `true` if the fields beginning with numberOf... are to be included (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `seller` (S) is the seller's account ID
+- `quantity` (N) is the quantity of the product remaining for sale
+- `goods` (S) is the ID of the product
+- `description` (S) is the description of the product
+- `sellerRS` (S) is the Reed-Solomon address of the seller's account
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+- `delisted` (B) is `true` if the product has been delisted, `false` otherwise
+- `parsedTags` (A) is an array of up to three tag strings, parsed from the `tags` field
+- `tags` (S) is the comma separated list of tags provided by the seller when the listing was created
+- `priceNQT` (S) is the current price of the product
+- `numberOfPublicFeedbacks` (N) is the number of public feedbacks given for the product
+- `name` (S) is the name of the product
+- `numberOfPurchases` (N) is the number of purchases of the product
+- `timestamp` (N) is the timestamp (in seconds since the genesis block) of the creation of the product listing
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+
+**Example:** Refer to [Get DGS Good](examples.mdx#get-dgs-good) example.
+
+### Get DGS Goods
+
+Get DGS products for sale in reverse chronological listing creation order unless a seller is given, then in product name order.
+
+**Request:**
+
+- `requestType` is `getDGSGoods`
+- `seller` is the account ID of the product seller (optional)
+- `firstIndex` is a zero-based index to the first product to retrieve (optional)
+- `lastIndex` is a zero-based index to the last product to retrieve (optional)
+- `inStockOnly` is `false` if out-of-stock products (zero quantity) are to be retrieved (optional)
+- `hideDelisted` is `true` if delisted products are to be omitted (optional)
+- `includeCounts` is `true` if the fields beginning with `numberOf...` are to be included (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Note:** If none of the optional parameters are specified, all in-stock products in the blockchain are retrieved at once, which may take a long time.
+
+**Response:**
+
+- `goods` (A) is an array of goods (refer to [Get DGS Good](#get-dgs-good) for details)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get DGS Goods](examples.mdx#get-dgs-goods) example.
+
+### Get DGS Goods Count
+
+Get the number of products for sale by a given seller or all sellers.
+
+**Request:**
+
+- `requestType` is `getDGSGoodsCount`
+- `seller` is the account ID of the seller (optional, default is all sellers combined)
+- `inStockOnly` is `false` if out-of-stock (zero quantity) products are to be included (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `numberOfGoods` (N) is the number of goods for sale by the `seller`
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Note:** The `numberOfGoods` field refers to the number of distinct products for sale, regardless of the quantity of each.
+
+**Example:** Refer to [Get DGS Goods Count](examples.mdx#get-dgs-goods-count) example.
+
+### Get DGS Goods Purchase Count
+
+Get the number of completed purchase orders given a goods ID.
+
+**Request:**
+
+- `requestType` is `getDGSGoodsPurchaseCount`
+- `goods` is the goods ID
+- `withPublicFeedbacksOnly` is `true` if purchase orders without public feedback are to be omitted (optional)
+- `completed` is `true` if only completed purchase orders are to be included (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `numberOfPurchases` (N) is the number of completed purchase orders
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get DGS Goods Purchase Count](examples.mdx#get-dgs-goods-purchase-count) example.
+
+### Get DGS Goods Purchases
+
+Get completed purchase orders given a goods ID and optionally a buyer ID in reverse chronological order.
+
+**Request:**
+
+- `requestType` is `getDGSGoodsPurchases`
+- `goods` is the goods ID
+- `buyer` is a buyer ID (optional)
+- `firstIndex` is a zero-based index to the first purchase order to retrieve (optional)
+- `lastIndex` is a zero-based index to the last purchase order to retrieve (optional)
+- `withPublicFeedbacksOnly` is `true` if purchase orders without public feedback are to be omitted (optional)
+- `completed` is `true` if only completed purchase orders are to be included (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `purchases` (A) is an array of purchase orders (refer to [Get DGS Purchase](#get-dgs-purchase) for details)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get DGS Goods Purchases](examples.mdx#get-dgs-goods-purchases) example.
+
+### Get DGS Pending Purchases
+
+Get pending purchase orders given a seller ID in reverse chronological order.
+
+**Request:**
+
+- `requestType` is `getDGSPendingPurchases`
+- `seller` is the account ID of the seller
+- `firstIndex` is a zero-based index to the first purchase order to retrieve (optional)
+- `lastIndex` is a zero-based index to the last purchase order to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `purchases` (A) is an array of pending purchase orders (refer to [Get DGS Purchase](#get-dgs-purchase) for details)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get DGS Pending Purchases](examples.mdx#get-dgs-pending-purchases) example.
+
+### Get DGS Purchase
+
+Get a purchase order given a purchase order ID.
+
+**Request:**
+
+- `requestType` is `getDGSPurchase`
+- `purchase` is the purchase order ID
+- `sharedKey` is the shared key used to decrypt the message (optional) (see [Get Shared Key](messaging.mdx#get-shared-key))
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `seller` (S) is the account number of the seller
+- `quantity` (N) is the quantity of the product to be purchased
+- `feedbackNotes` (A) is an array of AES-encrypted objects, each with `data` (S) and `nonce` (S) fields, in reverse chronological order, if applicable
+- `publicFeedbacks` (A) is an array of feedback strings in reverse chronological order if applicable
+- `pending` (B) is `true` if the `deliveryDeadline` has not passed, `false` otherwise
+- `purchase` (S) is the purchase order ID
+- `goods` (S) is the ID of the product
+- `sellerRS` (S) is the Reed-Solomon address of the seller
+- `buyer` (S) is the account number of the buyer
+- `priceNQT` (S) is the price (in NQT) of the product
+- `deliveryDeadlineTimestamp` (N) is the timestamp (in seconds since the genesis block) by which the product must be delivered
+- `goodsIsText` (B) is `false` if the message is a hex string, otherwise the message is text (optional)
+- `buyerRS` (S) is the Reed-Solomon address of the buyer
+- `refundNQT` (S) is the amount (in NQT) refunded, if applicable
+- `name` (S) is the name of the product
+- `goodsData` (O) is an object with the two fields `data` (S) (the encrypted product hex string) and `nonce` (S), if the product has been delivered
+- `timestamp` (N) is the timestamp (in seconds since the genesis block) of the purchase order
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get DGS Purchase](examples.mdx#get-dgs-purchase) example.
+
+### Get DGS Purchase Count
+
+Get the number of purchase orders given a seller and/or buyer ID, or all orders combined.
+
+**Request:**
+
+- `requestType` is `getDGSPurchaseCount`
+- `seller` is the account ID of the seller (optional, default is all sellers)
+- `buyer` is the account ID of the buyer (optional, default is all buyers)
+- `withPublicFeedbacksOnly` is `true` if purchase orders without public feedback are to be omitted (optional)
+- `completed` is `true` if only completed purchase orders are to be included (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `numberOfPurchases` (N) is the number of purchase orders associated with the seller and/or buyer
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get DGS Purchase Count](examples.mdx#get-dgs-purchase-count) example.
+
+### Get DGS Purchases
+
+Get purchase orders given a seller and/or buyer ID in reverse chronological order.
+
+**Request:**
+
+- `requestType` is `getDGSPurchases`
+- `seller` is the account ID of the seller (optional)
+- `buyer` is the account ID of the buyer (optional if `seller` provided)
+- `firstIndex` is a zero-based index to the purchase order to retrieve (optional)
+- `lastIndex` is a zero-based index to the purchase order to retrieve (optional)
+- `withPublicFeedbacksOnly` is `true` if purchase orders without public feedback are to be omitted (optional)
+- `completed` is `true` if only completed purchase orders are to be included (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `purchases` (A) is an array of purchase orders (refer to [Get DGS Purchase](#get-dgs-purchase) for details)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get DGS Purchases](examples.mdx#get-dgs-purchases) example.
+
+### Get DGS Tag Count
+
+Get the number of tags used by all sellers.
+
+**Request:**
+
+- `requestType` is `getDGSTagCount`
+- `inStockOnly` is `false` if tags with no associated in-stock products are to be included (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `numberOfTags` (N) is the number of tags
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get DGS Tag Count](examples.mdx#get-dgs-tag-count) example.
+
+### Get DGS Tags
+
+Get tags used by all sellers in reverse `inStockCount`, reverse `totalCount`, `tag` order.
+
+**Request:**
+
+- `requestType` is `getDGSTags`
+- `inStockOnly` is `false` if out-of-stock tags are to be retrieved (optional)
+- `firstIndex` is a zero-based index to the first tag to retrieve (optional)
+- `lastIndex` is a zero-based index to the last tag to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `tags` (A) is an array of tag objects with the following fields for each tag:
+  - `inStockCount` (N) is the number of products available for sale as tagged
+  - `tag` (S) is the tag word
+  - `totalCount` (N) is the total number of products as tagged
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Note:** The `...Count` fields refer to the number of distinct products tagged, regardless of the quantity of each.
+
+**Example:** Refer to [Get DGS Tags](examples.mdx#get-dgs-tags) example.
+
+### Get DGS Tags Like
+
+Get all tags starting with a given prefix (at least 2 characters long) in reverse `inStockCount`, reverse `totalCount`, `tag` order.
+
+**Request:**
+
+- `requestType` is `getDGSTagsLike`
+- `tagPrefix` is the prefix (at least 2 characters long) of the `tag`
+- `inStockOnly` is `false` if out-of-stock tags are to be retrieved (optional)
+- `firstIndex` is a zero-based index to the first tag to retrieve (optional)
+- `lastIndex` is a zero-based index to the last tag to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `tags` (A) is an array of tag objects with the following fields for each tag:
+  - `inStockCount` (N) is the number of products available for sale as tagged
+  - `tag` (S) is the tag word
+  - `totalCount` (N) is the total number of products as tagged
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Note:** The `...Count` fields refer to the number of distinct products tagged, regardless of the quantity of each.
+
+**Example:** Refer to [Get DGS Tags Like](examples.mdx#get-dgs-tags-like) example.
+
+### Search DGS Goods
+
+Get product listings that have a name or description that match a given query in reverse relevance order, then name order (given a seller), then reverse chronological order.
+
+**Request:**
+
+- `requestType` is `searchDGSGoods`
+- `query` is a full text query on the goods fields `name` and `description` in the [standard Lucene syntax](https://lucene.apache.org/core/2`9`4/queryparsersyntax.html#Overview) (optional)
+- `tag` is a query on the good field `tags` in the [standard Lucene syntax](https://lucene.apache.org/core/2`9`4/queryparsersyntax.html#Overview) (optional)
+- `seller` is the account ID of the product seller (optional)
+- `firstIndex` is a zero-based index to the first product to retrieve (optional)
+- `lastIndex` is a zero-based index to the last product to retrieve (optional)
+- `inStockOnly` is `false` if out-of-stock products (zero quantity) are to be retrieved (optional)
+- `hideDelisted` is `true` if delisted products are to be omitted (optional)
+- `includeCounts` is `true` if the fields beginning with `numberOf...` are to be included (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `goods` (A) is an array of goods objects (refer to [Get DGS Good](#get-dgs-good) for details)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Search DGS Goods](examples.mdx#search-dgs-goods) example.

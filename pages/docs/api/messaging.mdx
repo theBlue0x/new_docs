@@ -1,0 +1,250 @@
+## Arbitrary Message System Operations
+
+### Decrypt From
+
+Decrypt an AES-encrypted message.
+
+**Request:**
+
+- `requestType` is `decryptFrom`
+- `secretPhrase` is the secret passphrase of the recipient
+- `account` is the account ID of the recipient
+- `data` is AES-encrypted data
+- `nonce` is the unique nonce associated with the encrypted data
+- `decryptedMessageIsText` is `false` if the decrypted message is a hex string, otherwise the decrypted message is text (optional)
+- `uncompressDecryptedMessage` is `false` to prevent gzip uncompression after decryption (optional)
+
+**Response:**
+
+- `decryptedMessage` (S) is the decrypted message
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Decrypt From](examples.mdx#decrypt-from) example.
+
+### Download Prunable Message
+
+Download prunable message attachments directly as binary data. An optional `secretPhrase` parameter is supported, to allow decryption and downloading of the encrypted part of the message instead of the plain text part.
+
+**Request:**
+
+- `requestType` is `downloadPrunableMessage`
+- `transaction` is the transaction ID
+- `secretPhrase` is the secret passphrase used to decrypt the encrypted part of the message (optional)
+- `sharedKey` is the shared key used to decrypt the message (optional) (see [Get Shared Key](#get-shared-key 'The Blue0x API'))
+- `retrieve` is `true` to retrieve the message from achival node if needed (optional)
+- `requireBlock` is theblock ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:** The prunable data as a binary file.
+
+**Example:** Refer to [Download Prunable Message](examples.mdx#download-prunable-message) example.
+
+### Encrypt To
+
+Encrypt a message using AES without sending it.
+
+**Request:**
+
+- `requestType` is `encryptTo`
+- `secretPhrase` is the secret passphrase of the sender
+- `recipient` is the account ID of the recipient
+- `messageToEncrypt` is either UTF-8 text or a string of hex digits to be compressed and converted into a 1000 byte maximum bytecode then encrypted using AES
+- `messageToEncryptIsText` is `false` if the message to encrypt is a hex string, otherwise the message to encrypt is text (optional)
+- `compressMessageToEncrypt` is `false` to prevent gzip compression before encryption (optional)
+
+**Response:**
+
+- `data` (S) is the AES-encrypted data
+- `nonce` (S) is a 32-byte pseudorandom nonce
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Encrypt To](examples.mdx#encrypt-to) example.
+
+### Get All Prunable Messages
+
+Get all available prunable messages in reverse block timestamp order.
+
+**Request:**
+
+- `requestType` is `getAllPrunableMessages`
+- `timestamp` is the earliest message (in seconds since the genesis block) to retrieve (optional)
+- `firstIndex` is a zero-based index to the first prunable message to retrieve (optional)
+- `lastIndex` is a zero-based index to the last prunable message to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `prunableMessages` (A) is an array of prunable messages (refer to [Get Prunable Message](#get-prunable-message 'The Blue0x API'))
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millsec)
+
+**Example:** Refer to [Get All Prunable Messages](examples.mdx#get-all-prunable-messages) example.
+
+### Get Prunable Message
+
+Get the prunable message given a transaction ID, optionally decrypting it if encrypted and if a secretPhrase is provided, if it is still available.
+
+**Request:**
+
+- `requestType` is `getPrunableMessage`
+- `transaction` is the transaction ID
+- `secretPhrase` is the secret phrase needed for decryption (optional)
+- `sharedKey` is the shared key used to decrypt the message (optional) (see [Get Shared Key](#get-shared-key 'The Blue0x API'))
+- `retrieve` is `true` to retrieve pruned data from other nodes if not available (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `sender` (S) is the sender account number
+- `senderRS` (S) is the Reed-Solomon address of the sender account
+- `recipient` (S) is the recipient account number
+- `recipientRS` (S) is the Reed-Solomon address of the recipient account
+- `message` (S) is the plain message text
+- `messageIsText` (B) is `true` if the plain message is text, `false` if it is a hex string
+- `encryptedMessage` (O) is the encrypted message object, containing `data` (S) and `nonce` (S) fields
+- `encryptedMessageIsText` (B) is `true` if the encrypted message is text, `false` if it is a hex string
+- `decryptedMessage` (S) is the decrypted and decompressed (if necessary) encrypted message, if applicable and if `secretPhrase` is provided
+- `isCompressed` (B) is `true` if the encrypted message was compressed before encryption, if applicable
+- `transaction` (S) is the transaction ID
+- `transactionTimestamp` (N) is the transaction timestamp (in seconds since the genesis block)
+- `blockTimestamp` (N) is the block timestamp (in seconds since the genesis block)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millsec)
+
+**Example:** Refer to [Get Prunable Message](examples.mdx#get-prunable-message) example.
+
+### Get Prunable Messages
+
+Get all still-available prunable messages given an account id, optionally limiting to only those with another account as recipient or sender, in reverse chronological order.
+
+**Request:**
+
+- `requestType` is `getPrunableMessages`
+- `account` is the account ID
+- `otherAccount` is another account ID, either sender or recipient, to limit the response
+- `secretPhrase` is the secret phrase needed for decryption (optional)
+- `timestamp` is the earliest prunable message (in seconds since the genesis block) to retrieve (optional)
+- `firstIndex` is a zero-based index to the first prunable message to retrieve (optional)
+- `lastIndex` is a zero-based index to the last prunable message to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `prunableMessages` (A) is an array of prunable message objects (refer to [Get Prunable Message](#get-prunable-message 'The Blue0x API') for details)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millsec)
+
+**Example:** Refer to [Get Prunable Messages](examples.mdx#get-prunable-messages) example.
+
+### Get Shared Key
+
+Get the one-time shared key used for encryption of messages.
+
+**Request:**
+
+- `requestType` is `getSharedKey`
+- `account` is the recipient account ID
+- `secretPhrase` is the secret phrase of the sender
+- `nonce` is the 32-byte pseudorandom nonce
+
+**Response:**
+
+- `sharedKey` (S) is shared key as a hexadecimal string
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Shared Key](examples.mdx#get-shared-key) example.
+
+### Read Message
+
+Get a message given a transaction ID.
+
+**Request:**
+
+- `requestType` is `readMessage`
+- `transaction` is the transaction ID of the message
+- `secretPhrase` is the secret passphrase of the account that received the message (optional)
+- `sharedKey` is the shared key used to decrypt the message (optional) (see [Get Shared Key](#get-shared-key 'The Blue0x API'))
+- `retrieve` is `true` to retrieve pruned data from archival nodes (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `messageIsPrunable` (B) is `true` if there is a plain message and it is prunable, `false` if it is not prunable
+- `message` (S) is the plain message, if applicable
+- `encryptedMessageIsPrunable` (B) is `true` if there is an encrypted message and it is prunable, `false` if it is not prunable
+- `decryptedMessage` (S) is the decrypted message, if applicable and only if the provided `secretPhrase` belongs to either the sender or receiver of the transaction
+- `decryptedMessageToSelf` (S) is the decrypted message sent to self, if applicable and only if the provided `secretPhrase` belongs to the sender of transaction
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Read Message](examples.mdx#read-message) example.
+
+### Send Message
+
+Create an Arbitrary Message transaction. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request 'The Blue0x API') for common parameters.
+
+- `requestType` is `sendMessage`
+- `recipient` is the account ID of the recipient (optional)
+- `recipientPublicKey` is the public key of the receiving account (optional, enhances security of a new account)
+- `message` is either UTF-8 text or a string of hex digits (perhaps previously encoded using an arbitrary algorithm) to be converted into a bytecode with a maximum length of one kilobyte, 42 kilobytes if prunable (optional)
+- `messageIsText` is `false` if the message is a hex string, otherwise the message is text (optional)
+- `messageIsPrunable` is `true` if the message is prunable (optional)
+- `messageToEncrypt` is either UTF-8 text or a string of hex digits to be compressed (unless `compressMessageToEncrypt` is `false`) and converted into a bytecode with a maximum length of one kilobyte, 42 kilobytes if prunable, then encrypted using AES (optional)
+- `messageToEncryptIsText` is `false` if the message to encrypt is a hex string, otherwise the message to encrypt is text (optional)
+- `encryptedMessageData` is already encrypted data which overrides `messageToEncrypt` if provided (optional)
+- `encryptedMessageNonce` is a unique 32-byte number which cannot be reused (optional unless `encryptedMessageData` is provided)
+- `encryptedMessageIsPrunable` is `true` if the encrypted message is prunable (optional)
+- `compressMessageToEncrypt` is `false` to prevent gzip compression before encryption (optional)
+- `messageToEncryptToSelf` is either UTF-8 text or a string of hex digits to be compressed (unless `compressMessageToEncryptToSelf` is false) and converted into a one kilobyte maximum bytecode then encrypted with AES, then sent to the sending account (optional)
+- `messageToEncryptToSelfIsText` is `false` if the message to self-encrypt is a hex string, otherwise the message to encrypt is text (optional)
+- `encryptToSelfMessageData` is already encrypted data which overrides messageToEncryptToSelf if provided (optional)
+- `encryptToSelfMessageNonce` is a unique 32-byte number which cannot be reused (optional unless encryptToSelfMessageData is provided)
+- `compressMessageToEncryptToSelf` is `false` to prevent gzip compression before encryption (optional)
+
+**Note:** Any combination (including none or all) of the three options plain `message`, `messageToEncrypt`, and `messageToEncryptToSelf` will be included in the transaction. However, one and only one prunable message may be included in a single transaction if there is not already a message of the same type (either plain or encrypted).
+
+**Note:** The `encryptedMessageData-encryptedMessageNonce` pair or the `encryptToSelfMessageData-encryptToSelfMessageNonce` pair can be the output of [Encrypt To](#encrypt-to 'The Blue0x API')
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
+
+**Example:** Refer to [Send Message](examples.mdx#send-message) example.
+
+### Verify Prunable Message
+
+Verify that a prunable message obtained from any source, when hashed, matches the hash of the original prunable message.
+
+**Request:** Refer to [Send Message](#send-message 'The Blue0x API') for more details about the following request parameters.
+
+- `requestType` is `verifyPrunableMessage`
+- `message` is the plain message, if applicable (optional)
+- `messageIsText` is `false` if the provided plain `message` is a hex string (optional)
+- `encryptedMessageData` is the data part of the encrypted data-nonce pair (optional if `message` provided)
+- `encryptedMessageNonce` is the nonce part of the encrypted data-nonce pair (required if `encryptedMessageData` provided)
+- `messageToEncryptIsText` is `false` if the encrypted message was a hex string before encryption (optional)
+- `compressMessageToEncrypt` is `false` if the encrypted message was not compressed before encryption (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Note:** The hash is computed from the message itself plus its associated flag(s) `isText` and `isCompressed` (encrypted only); therefore the flag(s) must be provided for verification if different from the default(s). The original `encryptedMessageData-encryptedMessageNonce` pair used to compute the original hash must be provided again to recompute the hash for verification of a prunable encrypted message.
+
+**Response:**
+
+- `version.PrunablePlainMessage` or `version.PrunableEncryptedMessage` (N) is `1`, the version number
+- `verify` (B) is `true` if the original hash matches the hash computed from the provided values
+- `message` (S) or `encryptedMessage` (O) is the prunable plain message or the prunable encrypted message object containing the fields:
+  - `data` (S)
+  - `nonce` (B)
+  - `isText` (B)
+  - `isCompressed` (B)
+- `messageIsText` (B) is `true` if the plain message is text, `false` if it is a hex string, if applicable
+- `messageHash` or `encryptedMessageHash` (S) is the hash
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millsec)
+
+**Example:** Refer to [Verify Prunable Message](examples.mdx#verify-prunable-message) example.

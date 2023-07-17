@@ -1,0 +1,76 @@
+## Forging Operations
+
+### Start / Stop / Get Forging
+
+Start or stop forging with an account, or check to see if an account is forging. POST only.
+
+**Request:**
+
+- `requestType` is either `startForging`, `stopForging` or `getForging`
+- `secretPhrase` is the secret passphrase of the account (optional for `stopForging` and `getForging` if password protected like the [Debug Operations](debug.mdx))
+
+**Response:**
+
+- `deadline` (N) is the estimated time (in seconds since the last block) until the account will forge a block (`startForging` and `getForging` only)
+- `hitTime` (N) is the estimated time (in seconds since the genesis block) when the account will forge a block (`startForging` and `getForging` only)
+- `remaining` (N) is the deadline less the elapsed time since the last block (`getForging` only)
+- `foundAndStopped` (B) is `true` if forging was stopped, `false` if forging was already stopped (`stopForging` only)
+- `account` (S) is the account number (`getForging` only)
+- `accountRS` (S) is the Reed-Solomon address of the account (`getForging` only)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Note:** A `getForging` request returns `errorCode` 5 if the account is not forging. If the account has a zero `effectiveBalance`, forging can be started but `deadline`, `remainingTime` and `hitTime` will be set to zero.
+
+**Example:** Refer to [Start / Stop / Get Forging](examples#start--stop--get-forging) example.
+
+#### Get Forging
+
+Refer to [Start / Stop / Get Forging](#start--stop--get-forging).
+
+#### Start Forging
+
+Refer to [Start / Stop / Get Forging](#start--stop--get-forging).
+
+#### Stop Forging
+
+Refer to [Start / Stop / Get Forging](#start--stop--get-forging).
+
+### Lease Balance
+
+Lease the entire guaranteed balance of Blue0x to another account, after 1440 confirmations. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request) for common parameters.
+
+- `requestType` is `leaseBalance`
+- `period` is the lease period (in number of blocks, 1440 minimum)
+- `recipient` is the lessee (recipient) account
+- `recipientPublicKey` is the public key of the lessee (recipient) account (optional, enhances security of a new account)
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response).
+
+**Example:** Refer to [Lease Balance](examples.mdx#lease-balance) example.
+
+### Get Next Block Generators
+
+Returns the next block generators ordered by hit time. The list of currently active forgers is first initialized using the block generators with at least 2 blocks generated within the previous 10,000 blocks, excluding accounts without a public key. The list is updated as new blocks are processed. The results are not 100% correct since previously active generators may no longer be running and new generators won't be known until they generate a block.
+
+**Request:**
+
+- `requestType` is `getNextBlockGenerators`
+- `limit` (N) is the number of next block generators to display.
+
+**Response:**
+
+- `activeCount` (N) is the number of active forging accounts
+- `lastBlock` (S) is the last block ID on the blockchain
+- `generators` (A) is an array containing the number of next block generators requested
+  - `effectiveBalanceNXT` (N) is the balance (in BLX) of the account available for forging: the unleased guaranteedBalance of this account plus the leased guaranteedBalance of all lessors to this account
+  - `accountRS` (S) is the Reed-Solomon address of the account
+  - `deadline` (N) is the estimated time (in seconds since the last block) until the account will forge a block
+  - `account` (S) is the account number
+  - `hitTime` (N) is the estimated time (in seconds since the genesis block) when the account will forge a block
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+- `timestamp` (N) is the timestamp (in seconds since the genesis block) when the request was executed
+- `height` (N) is the height of the blockchain
+
+**Example:** Refer to [Get Next Block Generators](examples.mdx#get-next-block-generators) example.

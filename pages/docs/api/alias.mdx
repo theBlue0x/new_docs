@@ -1,0 +1,138 @@
+## Alias Operations
+
+### Buy / Sell Alias
+
+Buy or sell an alias. POST only.
+
+**Request:** Refer to [Create Transaction Request](createtransaction.mdx#create-transaction-request) for common parameters.
+
+- `requestType` is either `buyAlias` or `sellAlias`
+- `alias` is the ID of the alias (optional)
+- `aliasName` is the alias name (optional if `alias` provided)
+- `priceNQT` is the asking price (in NQT) of the alias (`sellAlias` only)
+- `amountNQT` is the amount (in NQT) offered for an alias for sale (`buyAlias` only)
+- `recipient` is the account ID of the recipient (only required for `sellAlias` and only if there is a designated recipient)
+- `recipientPublicKey` is the public key of the recipient account (only applicable if `recipient` provided; optional, enhances security of a new account)
+
+**Note**: An alias can be transferred rather than sold by setting `priceNQT to zero. A pending sale can be canceled by selling again to self for a price of zero.
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response).
+
+**Example:** Refer to [Buy / Sell Alias](examples.mdx#buysell-alias) example.
+
+### Set Alias
+
+Create and/or assign an alias. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request) for common parameters.
+
+- `requestType` is `setAlias`
+- `aliasName` is the alias name
+- `aliasURI` is the alias URI (e.g. [https://www.google.com/](https://www.google.com/))
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response). The transaction ID is also the alias ID.
+
+**Example:** Refer to [Set Alias](examples.mdx#set-alias) example.
+
+### Delete Alias
+
+Delete an alias given an alias ID or name. POST only.
+
+**Request:** Refer to [Create Transaction Request](create_transaction.mdx#create-transaction-request) for common parameters.
+
+- `requestType` is `deleteAlias`
+- `alias` is the alias ID (optional)
+- `aliasName` is the alias name to be deleted (optional if `alias` provided)
+
+**Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response).
+
+**Example:** Refer to [Delete Alias](examples.mdx#delete-alias) example.
+
+### Get Alias
+
+Get information about a given alias
+
+**Request:**
+
+- `requestType` is `getAlias`
+- `alias` is the alias ID (optional)
+- `aliasName` is the name of the alias (optional if `alias` provided)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `timestamp` (N) is the time (in seconds since the genesis block) when the alias was created or last transferred
+- `aliasName` (S) is the name of the alias
+- `account` (S) is the number of the account that owns the alias
+- `accountRS` (S) is the Reed-Solomon address of the account that owns the alias
+- `aliasURI` (S) is what the alias points to, in URI format
+- `alias`(S) is the alias ID
+- `priceNQT` (S) is the asking price (in NQT) of the alias if it is for sale
+- `buyer` (S) is the account number of the buyer if the alias is for sale and a buyer is specified
+- `lastBlock` (S) is the last block ID on the blockchain (applies if requireBlock is provided but not requireLastBlock)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Alias](examples.mdx#get-alias) example.
+
+### Get Alias Count
+
+Get the number of aliases owned by an account given the account ID.
+
+**Request:**
+
+- `requestType` is `getAliasCount`
+- `account` is the account ID
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `numberOfAliases` (N) is the number of aliases owned by the account
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Alias Count](examples.mdx#get-alias-count) example.
+
+### Get Aliases
+
+Get information on aliases owned by a given account in alias name order.
+
+**Request:**
+
+- `requestType` is `getAliases`
+- `account` is the ID of the account that owns the aliases
+- `timestamp` is the earliest creation time (in seconds since the genesis block) of the aliases (optional)
+- `firstIndex` is a zero-based index to the first alias to retrieve (optional)
+- `lastIndex` is a zero-based index to the last alias to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `aliases` (A) is an array of alias objects (refer to [Get Alias](#get-alias) for details)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Aliases](examples.mdx#get-aliases) example.
+
+### Get Aliases Like
+
+Get all aliases starting with a given prefix in alias name order.
+
+**Request:**
+
+- `requestType` is `getAliasesLike`
+- `aliasPrefix` is the prefix (at least 2 characters long) of the aliasName
+- `firstIndex` is a zero-based index to the first alias to retrieve (optional)
+- `lastIndex` is a zero-based index to the last alias to retrieve (optional)
+- `requireBlock` is the block ID of a block that must be present in the blockchain during execution (optional)
+- `requireLastBlock` is the block ID of a block that must be last in the blockchain during execution (optional)
+
+**Response:**
+
+- `aliases` (A) is an array of alias objects (refer to [Get Alias](#get-alias) for details)
+- `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
+- `requestProcessingTime` (N) is the API request processing time (in millisec)
+
+**Example:** Refer to [Get Aliases Like](examples.mdx#get-aliases-like) example.
