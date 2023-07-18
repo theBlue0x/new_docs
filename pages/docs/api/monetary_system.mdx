@@ -20,7 +20,7 @@ Determine if a currency can be deleted.
 
 **Note:** a currency can be deleted only when all units of the currency are held by `account`. A reservable currency that has not yet been issued can be deleted by the issuer. A mintable currency that has not completed minting cannot be deleted by a non-issuer.
 
-**Example:** Refer to [Can Delete Currency](examples.mdx#can-delete-currency) example.
+**Example:** Refer to [Can Delete Currency](examples2.mdx#can-delete-currency) example.
 
 ### Currency Buy / Sell
 
@@ -37,7 +37,7 @@ Make an exchange request to buy or sell an exchangeable currency. POST only.
 
 **Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response).
 
-**Example:** Refer to [Currency Buy / Sell](examples.mdx#currency-buy--sell) example.
+**Example:** Refer to [Currency Buy / Sell](examples2.mdx#currency-buy--sell) example.
 
 #### Currency Buy
 
@@ -63,7 +63,7 @@ Submit a valid computed nonce to the blockchain in return for newly minted curre
 
 **Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
 
-**Example:** Refer to [Currency Mint](examples.mdx#currency-mint) example.
+**Example:** Refer to [Currency Mint](examples2.mdx#currency-mint) example.
 
 ### Currency Reserve Claim
 
@@ -79,7 +79,7 @@ Claim currency reserve. POST only.
 
 **Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
 
-**Example:** Refer to [Currency Reserve Claim](examples.mdx#currency-reserve-claim) example.
+**Example:** Refer to [Currency Reserve Claim](examples2.mdx#currency-reserve-claim) example.
 
 ### Currency Reserve Increase
 
@@ -95,7 +95,7 @@ Increase the currency reserve of an unissued reservable currency. POST only.
 
 **Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
 
-**Example:** Refer to [Currency Reserve Increase](examples.mdx#currency-reserve-increase) example.
+**Example:** Refer to [Currency Reserve Increase](examples2.mdx#currency-reserve-increase) example.
 
 ### Delete Currency
 
@@ -108,7 +108,7 @@ Delete a deletable currency (refer to [Can Delete Currency](#can-delete-currency
 
 **Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
 
-**Example:** Refer to [Delete Currency](examples.mdx#delete-currency) example.
+**Example:** Refer to [Delete Currency](examples2.mdx#delete-currency) example.
 
 ### Get Account Currencies
 
@@ -140,7 +140,7 @@ Get the currencies issued by a given account.
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Account Currencies](examples.mdx#get-account-currencies) example.
+**Example:** Refer to [Get Account Currencies](examples2.mdx#get-account-currencies) example.
 
 ### Get Account Currency Count
 
@@ -160,7 +160,7 @@ Get the number of currencies issued by a given account.
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Account Currency Count](examples.mdx#get-account-currency-count) example.
+**Example:** Refer to [Get Account Currency Count](examples2.mdx#get-account-currency-count) example.
 
 ### Get Account Exchange Requests
 
@@ -196,7 +196,7 @@ Get the exchange requests associated with a given account and/or currency in rev
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Account Exchange Requests](examples.mdx#get-account-exchange-requests) example.
+**Example:** Refer to [Get Account Exchange Requests](examples2.mdx#get-account-exchange-requests) example.
 
 #### Get Expected Exchange Requests
 
@@ -236,7 +236,7 @@ Get a funding monitor.
   - `interval` (N) is the interval
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Funding Monitor](examples.mdx#get-funding-monitor) example.
+**Example:** Refer to [Get Funding Monitor](examples2.mdx#get-funding-monitor) example.
 
 ### Get All Currencies
 
@@ -257,7 +257,7 @@ Get all currencies in reverse creation order.
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get All Currencies](examples.mdx#get-all-currencies) example.
+**Example:** Refer to [Get All Currencies](examples2.mdx#get-all-currencies) example.
 
 ### Get All Exchanges
 
@@ -279,7 +279,7 @@ Get all currency exchanges in reverse chronological order.
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get All Exchanges](examples.mdx#get-all-exchanges) example.
+**Example:** Refer to [Get All Exchanges](examples2.mdx#get-all-exchanges) example.
 
 ### Get Available To Buy
 
@@ -300,7 +300,7 @@ Calculates the rate required in order to completely fill an exchange request.
 - `rateNQT` (S) is the rate for the currency units
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Available To Buy](examples.mdx#get-available-to-buy) example.
+**Example:** Refer to [Get Available To Buy](examples2.mdx#get-available-to-buy) example.
 
 #### Get Available To Sell
 
@@ -329,7 +329,7 @@ Get currency buy or sell offers given a currency ID and/or an account ID in orde
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Buy / Sell Offers](examples.mdx#get-buy--sell-offers) example.
+**Example:** Refer to [Get Buy / Sell Offers](examples2.mdx#get-buy--sell-offers) example.
 
 #### Get Buy Offers
 
@@ -366,7 +366,7 @@ Get currencies given multiple currency IDs.
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Currencies](examples.mdx#get-currencies) example.
+**Example:** Refer to [Get Currencies](examples2.mdx#get-currencies) example.
 
 ### Get Currencies By Issuer
 
@@ -389,7 +389,7 @@ Get currencies issued by multiple accounts in reverse creation order.
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Currencies By Issuer](examples.mdx#get-currencies-by-issuer) example.
+**Example:** Refer to [Get Currencies By Issuer](examples2.mdx#get-currencies-by-issuer) example.
 
 ### Get Currency
 
@@ -437,7 +437,7 @@ Get the details of a currency.
 - `algorithm` (N) is the algorithm number for a mintable currency: 2 for SHA256, 3 for SHA3, 5 for Scrypt, 25 for Keccak25
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 
-**Example:** Refer to [Get Currency](examples.mdx#get-currency) example.
+**Example:** Refer to [Get Currency](examples2.mdx#get-currency) example.
 
 ### Get Currency Account Count
 
@@ -457,7 +457,7 @@ Get the number of accounts that hold a given currency.
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Currency Account Count](examples.mdx#get-currency-account-count) example.
+**Example:** Refer to [Get Currency Account Count](examples2.mdx#get-currency-account-count) example.
 
 ### Get Currency Accounts
 
@@ -484,7 +484,7 @@ Get the accounts that hold a given currency in reverse units order.
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Currency Accounts](examples.mdx#get-currency-accounts) example.
+**Example:** Refer to [Get Currency Accounts](examples2.mdx#get-currency-accounts) example.
 
 ### Get Currency Founders
 
@@ -510,7 +510,7 @@ Get a reservable currency's founders.
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Currency Founders](examples.mdx#get-currency-founders) example.
+**Example:** Refer to [Get Currency Founders](examples2.mdx#get-currency-founders) example.
 
 ### Get Currency Ids
 
@@ -530,7 +530,7 @@ Get all currency IDs in reverse chronological creation order.
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Currency Ids](examples.mdx#get-currency-ids) example.
+**Example:** Refer to [Get Currency Ids](examples2.mdx#get-currency-ids) example.
 
 ### Get Currency Transfers
 
@@ -573,7 +573,7 @@ Get currency transfers given a currency ID and/or an account ID in reverse block
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Currency Transfers](examples.mdx#get-currency-transfers) example.
+**Example:** Refer to [Get Currency Transfers](examples2.mdx#get-currency-transfers) example.
 
 #### Get Expected Currency Transfers
 
@@ -620,7 +620,7 @@ Get currency exchanges given a currency and/or an account in reverse chronologic
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Exchanges](examples.mdx#get-exchanges) example.
+**Example:** Refer to [Get Exchanges](examples2.mdx#get-exchanges) example.
 
 ### Get Exchanges By Exchange Request
 
@@ -640,7 +640,7 @@ Get currency exchanges given an exchange request transaction ID in reverse chron
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Exchanges By Exchange Request](examples.mdx#get-exchanges-by-exchange-request) example.
+**Example:** Refer to [Get Exchanges By Exchange Request](examples2.mdx#get-exchanges-by-exchange-request) example.
 
 ### Get Exchanges By Offer
 
@@ -662,7 +662,7 @@ Get currency exchanges given a currency offer ID in reverse chronological order.
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Exchanges By Offer](examples.mdx#get-exchanges-by-offer) example.
+**Example:** Refer to [Get Exchanges By Offer](examples2.mdx#get-exchanges-by-offer) example.
 
 ### Get Last Exchanges
 
@@ -681,7 +681,7 @@ Get the last exchange of each of multiple currencies.
 - `exchanges` (A) is an array of exchange objects (refer to [Get Exchanges](#get-exchanges 'The Blue0x API') without `name`, `decimals`, `code`, `issuanceHeight`, `type`, `issuerAccountRS` and `issuerAccount` for details)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Last Exchanges](examples.mdx#get-last-exchanges) example.
+**Example:** Refer to [Get Last Exchanges](examples2.mdx#get-last-exchanges) example.
 
 ### Get Minting Target
 
@@ -709,7 +709,7 @@ Get the current minting target of a mintable currency.
 
 **Note:** If a `nonce` is found such that its hash is less than the target, it can be submitted to the blockchain along with `counter` + 1 using [Currency Mint](#currency-mint 'The Blue0x API'), which results in `units` NQT being credited to the minting account. `difficulty` is inversely related to the target, and so increases exponentially as `maxSupply` is approached because the target is defined as (2exp\-1)/`units`, where exp decreases linearly from 256-`minDifficulty` to 256-`maxDifficulty`. (Refer to [Issue Currency](#issue-currency 'The Blue0x API') for `maxSupply`, `minDifficulty` and `maxDifficulty`.)
 
-**Example:** Refer to [Get Minting Target](examples.mdx#get-minting-target) example.
+**Example:** Refer to [Get Minting Target](examples2.mdx#get-minting-target) example.
 
 ### Get Offer
 
@@ -737,7 +737,7 @@ Get offer details given an offer ID.
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Offer](examples.mdx#get-offer) example.
+**Example:** Refer to [Get Offer](examples2.mdx#get-offer) example.
 
 ### Issue Currency
 
@@ -765,7 +765,7 @@ Issue a new currency or re-issue an existing currency with different properties.
 
 **Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API'). The transaction ID is also the currency ID.
 
-**Example:** Refer to [Issue Currency](examples.mdx#issue-currency) example.
+**Example:** Refer to [Issue Currency](examples2.mdx#issue-currency) example.
 
 ### Publish Exchange Offer
 
@@ -787,7 +787,7 @@ Publish an exchange offer for an exchangeable currency. POST only.
 
 **Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API'). The transaction ID is also the offer ID.
 
-**Example:** Refer to [Publish Exchange Offer](examples.mdx#publish-exchange-offer) example.
+**Example:** Refer to [Publish Exchange Offer](examples2.mdx#publish-exchange-offer) example.
 
 ### Search Currencies
 
@@ -809,7 +809,7 @@ Get currencies having a code that matches a given query in reverse relevance ord
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Search Currencies](examples.mdx#search-currencies) example.
+**Example:** Refer to [Search Currencies](examples2.mdx#search-currencies) example.
 
 ### Transfer Currency
 
@@ -824,4 +824,4 @@ Transfer currency to a given recipient. POST only.
 
 **Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
 
-**Example:** Refer to [Transfer Currency](examples.mdx#transfer-currency) example.
+**Example:** Refer to [Transfer Currency](examples2.mdx#transfer-currency) example.

@@ -17,7 +17,7 @@ Broadcast a transaction to the network. POST only.
 - `fullHash` (S) is the full hash of the signed transaction
 - `transaction` (S) is the transaction ID
 
-**Example:** Refer to [Broadcast Transaction](examples.mdx#broadcast-transaction) example.
+**Example:** Refer to [Broadcast Transaction](examples2.mdx#broadcast-transaction) example.
 
 ### Calculate Full Hash
 
@@ -35,7 +35,7 @@ Calculate the full hash of a transaction.
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 - `fullHash` (S) is the full hash of the signed transaction
 
-**Example:** Refer to [Calculate Full Hash](examples.mdx#calculate-full`Hash) example.
+**Example:** Refer to [Calculate Full Hash](examples2.mdx#calculate-full`Hash) example.
 
 ### Get Expected Transactions
 
@@ -54,7 +54,7 @@ Returns the non-phased unconfirmed transactions expected to be included in the n
 - `expectedTransactions` (A) is an array of expected transactions (refer to [Get Transaction](#get-transaction 'The Blue0x API') for details)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Expected Transactions](examples.mdx#get-expected-transactions) example.
+**Example:** Refer to [Get Expected Transactions](examples2.mdx#get-expected-transactions) example.
 
 ### Get Referencing Transactions
 
@@ -74,7 +74,7 @@ Gets the transactions referencing a given transaction id.
 - `transactions` (A) is an array of transactions (refer to [Get Transaction](#get-transaction 'The Blue0x API') for details)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Referencing Transactions](examples.mdx#get-referencing-transactions) example.
+**Example:** Refer to [Get Referencing Transactions](examples2.mdx#get-referencing-transactions) example.
 
 ### Get Transaction
 
@@ -125,7 +125,7 @@ Get a transaction object given a transaction ID.
 
 **Note:** The `block`, `blockTimestamp` and `confirmations` fields are omitted for unconfirmed transactions. Double-spending transactions are not retrieved.
 
-**Example:** Refer to [Get Transaction](examples.mdx#get-transaction) example.
+**Example:** Refer to [Get Transaction](examples2.mdx#get-transaction) example.
 
 ### Get Transaction Bytes
 
@@ -147,7 +147,7 @@ Get the bytecode of a transaction.
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Transaction Bytes](examples.mdx#get-transaction-bytes) example.
+**Example:** Refer to [Get Transaction Bytes](examples2.mdx#get-transaction-bytes) example.
 
 ### Parse Transaction
 
@@ -165,7 +165,7 @@ Get a transaction object given a (signed or unsigned) transaction bytecode, or r
 
 - `verify` (B) is `true` if the signature is verified, `false` otherwise
 
-**Example:** Refer to [Parse Transaction](examples.mdx#parse-transaction) example.
+**Example:** Refer to [Parse Transaction](examples2.mdx#parse-transaction) example.
 
 ### Retrieve Pruned Transaction
 
@@ -178,7 +178,7 @@ Force retrieval of the prunable data for a given transaction, even if past the c
 
 **Response:** Refer to [Get Transaction](#get-transaction 'The Blue0x API') for fields.
 
-**Example:** Refer to [Retrieve Pruned Transaction](examples.mdx#retrieve-pruned-transaction) example.
+**Example:** Refer to [Retrieve Pruned Transaction](examples2.mdx#retrieve-pruned-transaction) example.
 
 ### Send Transaction
 
@@ -198,7 +198,7 @@ It broadcasts a transaction to the network without validating it, without re-bro
 - `fullHash` (S) is the full hash of the signed transaction
 - `transaction` (S) is the transaction ID
 
-**Example:** Refer to [Send Transaction](examples.mdx#send-transaction) example.
+**Example:** Refer to [Send Transaction](examples2.mdx#send-transaction) example.
 
 ### Sign Transaction
 
@@ -227,4 +227,4 @@ Calculates the full hash, signature hash, and transaction ID of an unsigned tran
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Sign Transaction](examples.mdx#sign-transaction) example.
+**Example:** Refer to [Sign Transaction](examples2.mdx#sign-transaction) example.

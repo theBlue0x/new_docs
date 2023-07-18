@@ -34,7 +34,7 @@ export default function Home() {
                 We Are the Bank.
               </span>
             </h1>
-            <p className="mt-6 max-w-2xl text-xl font-medium leading-tight text-gray-400">
+            <p className="mt-6 max-w-2xl text-lg font-medium leading-tight text-gray-400">
               Open-sourced. Decentralized. Secure.
               <br />
               <br />

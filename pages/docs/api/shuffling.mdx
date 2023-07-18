@@ -23,7 +23,7 @@ Retrieves info about shufflings for a specific account.
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 - `shufflings` (A) is an array containing the shuffling object (refer to [Get Shuffling](#get-shuffling 'The Blue0x API'))
 
-**Example:** Refer to [Get Account Shufflings](examples.mdx#get-account-shufflings) example.
+**Example:** Refer to [Get Account Shufflings](examples2.mdx#get-account-shufflings) example.
 
 ### Get All Shufflings
 
@@ -46,7 +46,7 @@ Retrieves info about all shufflings.
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 - `shufflings` (A) is an array containing the shuffling object (refer to [Get Shuffling](#get-shuffling 'The Blue0x API'))
 
-**Example:** Refer to [Get All Shufflings](examples.mdx#get-all-shufflings) example.
+**Example:** Refer to [Get All Shufflings](examples2.mdx#get-all-shufflings) example.
 
 ### Get Assigned Shufflings
 
@@ -68,7 +68,7 @@ Retrieves info about a shufflings that are currently assigned to a specific acco
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 - `shufflings` (A) is an array containing the shuffling object (refer to [Get Shuffling](#get-shuffling 'The Blue0x API'))
 
-**Example:** Refer to [Get Assigned Shufflings](examples.mdx#get-assigned-shufflings) example.
+**Example:** Refer to [Get Assigned Shufflings](examples2.mdx#get-assigned-shufflings) example.
 
 ### Get Holding Shufflings
 
@@ -91,7 +91,7 @@ Retrieves info about shufflings for a specific holding and/or stage.
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 - `shufflings` (A) is an array containing the shuffling object (refer to [Get Shuffling](#get-shuffling 'The Blue0x API'))
 
-**Example:** Refer to [Get Holding Shufflings](examples.mdx#get`Holding-shufflings) example.
+**Example:** Refer to [Get Holding Shufflings](examples2.mdx#get`Holding-shufflings) example.
 
 ### Get Shufflers
 
@@ -118,7 +118,7 @@ Retrieves info about active shufflers on the current node.
   - `participantState` (N) is the state for the participant (For more info, see shufflingParticipantStates array in [Get Constants](server.mdx#get-constants 'The Blue0x API'))
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Shufflers](examples.mdx#get-shufflers) example.
+**Example:** Refer to [Get Shufflers](examples2.mdx#get-shufflers) example.
 
 ### Get Shuffling
 
@@ -152,7 +152,7 @@ Retrieves info about a shuffling.
 - `holdingInfo` (A) is an array containing the asset or currency info (if `includeHoldingInfo` is `true` and holdingType is not Blue0x)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Shuffling](examples.mdx#get-shuffling) example.
+**Example:** Refer to [Get Shuffling](examples2.mdx#get-shuffling) example.
 
 ### Get Shuffling Participants
 
@@ -176,7 +176,7 @@ Retrieves info about participants in a shuffling.
   - `nextAccountRS` (S) is the account Reed Solomon address of the next account in turn
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Shuffling Participants](examples.mdx#get-shuffling-participants) example.
+**Example:** Refer to [Get Shuffling Participants](examples2.mdx#get-shuffling-participants) example.
 
 ### Shuffling Cancel
 
@@ -206,7 +206,7 @@ Creates a new shuffling.
 
 **Response** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
 
-**Example:** Refer to [Shuffling Create](examples.mdx#shuffling-create) example.
+**Example:** Refer to [Shuffling Create](examples2.mdx#shuffling-create) example.
 
 ### Shuffling Process
 
@@ -221,7 +221,7 @@ Manually process the shuffling for a specific participant. Note that the shuffli
 
 **Response** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
 
-**Example:** Refer to [Shuffling Process](examples.mdx#shuffling-process) example.
+**Example:** Refer to [Shuffling Process](examples2.mdx#shuffling-process) example.
 
 ### Shuffling Register
 
@@ -234,7 +234,7 @@ Registers a new participant to an existing shuffling. The shuffling must be in s
 
 **Response** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
 
-**Example:** Refer to [Shuffling Register](examples.mdx#shuffling-register) example.
+**Example:** Refer to [Shuffling Register](examples2.mdx#shuffling-register) example.
 
 ### Shuffling Verify
 
@@ -248,7 +248,7 @@ Sends a verification that an account's recipient public key is found within a sh
 
 **Response** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
 
-**Example:** Refer to [Shuffling Verify](examples.mdx#shuffling-verify) example.
+**Example:** Refer to [Shuffling Verify](examples2.mdx#shuffling-verify) example.
 
 ### Start Shuffler
 
@@ -272,7 +272,7 @@ Starts a automated Shuffler. Once started, the Shuffler monitors the blockchain 
 - `recipientRS` (S) is the account Reed Solomon address of the recipient account
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Start Shuffler](examples.mdx#start-shuffler) example.
+**Example:** Refer to [Start Shuffler](examples2.mdx#start-shuffler) example.
 
 ### Stop Shuffler
 
@@ -292,4 +292,4 @@ Stops a previously started automated Shuffler.
 - `stoppedAllShufflers` (B) means all shufflers on the node was stopped (only if `adminPassword` is provided in request)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Stop Shuffler](examples.mdx#stop-shuffler) example.
+**Example:** Refer to [Stop Shuffler](examples2.mdx#stop-shuffler) example.

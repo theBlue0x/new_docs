@@ -16,7 +16,7 @@ Download tagged data as a file if it is still available.
 
 **Response:** The downloaded data file named `nxt`, unless there is an error in the request.
 
-**Example:** Refer to [Download Tagged Data](examples.mdx#download-tagged-data) example.
+**Example:** Refer to [Download Tagged Data](examples2.mdx#download-tagged-data) example.
 
 ### Extend Tagged Data
 
@@ -42,7 +42,7 @@ Extend the expiration time of already uploaded tagged data. POST only.
 
 **Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
 
-**Example:** Refer to [Extend Tagged Data](examples.mdx#extend-tagged-data) example.
+**Example:** Refer to [Extend Tagged Data](examples2.mdx#extend-tagged-data) example.
 
 ### Get Account Tagged Data
 
@@ -64,7 +64,7 @@ Get all available tagged data uploaded by a given account in reverse chronologic
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Account Tagged Data](examples.mdx#get-account-tagged-data) example.
+**Example:** Refer to [Get Account Tagged Data](examples2.mdx#get-account-tagged-data) example.
 
 ### Get All Tagged Data
 
@@ -85,7 +85,7 @@ Get all available tagged data in reverse chronological order.
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get All Tagged Data](examples.mdx#get-all-tagged-data) example.
+**Example:** Refer to [Get All Tagged Data](examples2.mdx#get-all-tagged-data) example.
 
 ### Get Channel Tagged Data
 
@@ -108,7 +108,7 @@ Get available tagged data by channel, optionally filtered by account, in reverse
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Channel Tagged Data](examples.mdx#get-channel-tagged-data) example.
+**Example:** Refer to [Get Channel Tagged Data](examples2.mdx#get-channel-tagged-data) example.
 
 ### Get Data Tag Count
 
@@ -126,7 +126,7 @@ Get the total number of distinct available data tags.
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Data Tag Count](examples.mdx#get-data-tag-count) example.
+**Example:** Refer to [Get Data Tag Count](examples2.mdx#get-data-tag-count) example.
 
 ### Get Data Tags
 
@@ -148,7 +148,7 @@ Get the distinct tags of all available tagged data, with the number of uses of e
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Data Tags](examples.mdx#get-data-tags) example.
+**Example:** Refer to [Get Data Tags](examples2.mdx#get-data-tags) example.
 
 ### Get Data Tags Like
 
@@ -171,7 +171,7 @@ Prefix search of available data tags, return in alphabetical order.
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Data Tags Like](examples.mdx#get-data-tags-like) example.
+**Example:** Refer to [Get Data Tags Like](examples2.mdx#get-data-tags-like) example.
 
 ### Get Tagged Data
 
@@ -208,7 +208,7 @@ Get available tagged data given a transaction ID.
 
 **Note:** Refer to [Upload Tagged Data](#upload-tagged-data 'The Blue0x API') for details about the `data` and metadata (`filename`, `name`, `description`, `tags`, `type`, `channel` and `isText`) fields.
 
-**Example:** Refer to [Get Tagged Data](examples.mdx#get-tagged-data) example.
+**Example:** Refer to [Get Tagged Data](examples2.mdx#get-tagged-data) example.
 
 ### Get Tagged Data Extend Transactions
 
@@ -225,7 +225,7 @@ Retrieves all tagged data extend transactions for a given tagged data upload tra
 - `extendTransactions` (A) is an array of transactions
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Tagged Data Extend Transactions](examples.mdx#get-tagged-data-extend-transactions) example.
+**Example:** Refer to [Get Tagged Data Extend Transactions](examples2.mdx#get-tagged-data-extend-transactions) example.
 
 ### Search Tagged Data
 
@@ -250,7 +250,7 @@ Full text search on available tagged data name, description and tags; optionally
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Search Tagged Data](examples.mdx#search-tagged-data) example.
+**Example:** Refer to [Search Tagged Data](examples2.mdx#search-tagged-data) example.
 
 ### Upload Tagged Data
 
@@ -273,7 +273,7 @@ Upload and broadcast new tagged data. POST only.
 
 **Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
 
-**Example:** Refer to [Upload Tagged Data](examples.mdx#upload-tagged-data) example.
+**Example:** Refer to [Upload Tagged Data](examples2.mdx#upload-tagged-data) example.
 
 ### Verify Tagged Data
 
@@ -307,4 +307,4 @@ Verify expired tagged data downloaded from another node, against the hash in the
 
 **Note:** This call returns an error if there is a hash mismatch.
 
-**Example:** Refer to [Verify Tagged Data](examples.mdx#verify-tagged-data) example.
+**Example:** Refer to [Verify Tagged Data](examples2.mdx#verify-tagged-data) example.

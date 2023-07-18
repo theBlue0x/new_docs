@@ -1,0 +1,4728 @@
+## Monetary System Operations
+
+### Can Delete Currency
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=canDeleteCurrency&
+  account=BLX-2HCZ-6GCJ-2XGV-EDRPH&
+  currency=4923907272718555444
+
+```
+
+**Response:**
+
+```json
+{
+  "canDelete": true,
+  "requestProcessingTime": 1
+}
+```
+
+### Currency Buy / Sell
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=currencyBuy&
+  currency=6520756875632314476&
+  rateNQT=1500000000&
+  units=200&
+  secretPhrase=IWontTellYou&
+  feeNQT=100000000&
+  deadline=60
+
+```
+
+**Response:**
+
+```json
+{
+  "signatureHash": "0471907734d4aae7fc708131726f8660a68e66fe873fa17cab4f0cb3f879243f",
+  "unsignedTransactionBytes": "051607cb08023c0010f09c34f225d425306e5be55a49469081...",
+  "transactionJSON": {
+    "senderPublicKey": "10f09c34f225d425306e5be55a4946908156072afbead4d574a512d7e086ef5c",
+    "signature": "dda6c065344827bfdecfee179b22dfee1d5280fa5da5431b012d9ea045a0d80b9d4...",
+    "feeNQT": "100000000",
+    "type": 5,
+    "fullHash": "d388798c9ecaf2cd28578cfcb8fb7e8f07d308e36e2a5674bb1c7766595b8435",
+    "version": 1,
+    "ecBlockId": "10096636210021430702",
+    "signatureHash": "0471907734d4aae7fc708131726f8660a68e66fe873fa17cab4f0cb3f879243f",
+    "attachment": {
+      "currency": "6520756875632314476",
+      "version.ExchangeSell": 1,
+      "units": "200",
+      "rateNQT": "1500000000"
+    },
+    "senderRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+    "subtype": 6,
+    "amountNQT": "0",
+    "sender": "15295723609781267838",
+    "ecBlockHeight": 162266,
+    "deadline": 60,
+    "transaction": "14840146504449624275",
+    "timestamp": 34130695,
+    "height": 2147483647
+  },
+  "broadcasted": true,
+  "requestProcessingTime": 331,
+  "transactionBytes": "051607cb08023c0010f09c34f225d425306e5be55a49469081560...",
+  "fullHash": "d388798c9ecaf2cd28578cfcb8fb7e8f07d308e36e2a5674bb1c7766595b8435",
+  "transaction": "14840146504449624275"
+}
+```
+
+### Currency Mint
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=currencyMint&
+  currency=9207767346829573996&
+  nonce=-6757092571753666960&
+  units=1&
+  counter=26&
+  secretPhrase=IWontTellYou&
+  feeNQT=100000000&
+  deadline=60
+
+```
+
+**Response:**
+
+```json
+{
+  "signatureHash": "f0e9f3b040890043fbc2d1b235377eb566805419f459184bc9290051bacdf80f",
+  "unsignedTransactionBytes": "0517655a0c023c0010f09c34f225d425306e5be55a49469081...",
+  "transactionJSON": {
+    "senderPublicKey": "10f09c34f225d425306e5be55a4946908156072afbead4d574a512d7e086ef5c",
+    "signature": "e961f58250dd256bb5f0628df342beb6ce042765d7cdad8d7598495759d7ec00ad8...",
+    "feeNQT": "100000000",
+    "type": 5,
+    "fullHash": "05cbe451cdece14bab56c5684d30cd7eb62e45a86136071e90ae26981d4c1fc3",
+    "version": 1,
+    "ecBlockId": "12526333689713738846",
+    "signatureHash": "f0e9f3b040890043fbc2d1b235377eb566805419f459184bc9290051bacdf80f",
+    "attachment": {
+      "currency": "9207767346829573996",
+      "units": "1",
+      "counter": "26",
+      "version.CurrencyMinting": 1,
+      "nonce": "-6757092571753666960"
+    },
+    "senderRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+    "subtype": 7,
+    "amountNQT": "0",
+    "sender": "15295723609781267838",
+    "ecBlockHeight": 160721,
+    "deadline": 60,
+    "transaction": "5467911789190892293",
+    "timestamp": 34364005,
+    "height": 2147483647
+  },
+  "broadcasted": true,
+  "requestProcessingTime": 815,
+  "transactionBytes": "0517655a0c023c0010f09c34f225d425306e5be55a49469081560...",
+  "fullHash": "05cbe451cdece14bab56c5684d30cd7eb62e45a86136071e90ae26981d4c1fc3",
+  "transaction": "5467911789190892293"
+}
+```
+
+### Currency Reserve Claim
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=currencyReserveClaim&
+  currency=15992040603642022742&
+  units=36
+
+```
+
+**Response:**
+
+```json
+{
+  "signatureHash": "6daef8c9b8653a9b78b64e400c2ab64ea201e9888b8bc54ec6c9a28814b0a69e",
+  "unsignedTransactionBytes": "0512a7830b023c00169cf83994b0e8c48a152ddc50606d58bd...",
+  "transactionJSON": {
+    "senderPublicKey": "169cf83994b0e8c48a152ddc50606d58bd4b2b85ec2f5bbbaae93d838443df7f",
+    "signature": "5ab6605aca7a958b10e5f0198660eccd01bff1418f2bf172105ba39e9c911d09709...",
+    "feeNQT": "100000000",
+    "type": 5,
+    "fullHash": "f32e02362dce767c6f4b069f793f2cd8c6b89bad04847c8abe98d8998cede94f",
+    "version": 1,
+    "ecBlockId": "14980969893438059909",
+    "signatureHash": "6daef8c9b8653a9b78b64e400c2ab64ea201e9888b8bc54ec6c9a28814b0a69e",
+    "attachment": {
+      "version.ReserveClaim": 1,
+      "currency": "15992040603642022742",
+      "units": "36"
+    },
+    "senderRS": "BLX-BMUV-8QQR-47VK-CR7F3",
+    "subtype": 2,
+    "amountNQT": "0",
+    "sender": "11580081983047651163",
+    "ecBlockHeight": 160064,
+    "deadline": 60,
+    "transaction": "8968582401529884403",
+    "timestamp": 34309031,
+    "height": 2147483647
+  },
+  "broadcasted": true,
+  "requestProcessingTime": 7,
+  "transactionBytes": "0512a7830b023c00169cf83994b0e8c48a152ddc50606d58bd4b2...",
+  "fullHash": "f32e02362dce767c6f4b069f793f2cd8c6b89bad04847c8abe98d8998cede94f",
+  "transaction": "8968582401529884403"
+}
+```
+
+### Currency Reserve Increase
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=currencyReserveIncrease&
+  currency=11847174313362984527
+  amountPerUnitNQT=40000000
+
+```
+
+**Response:**
+
+```json
+{
+  "signatureHash": "0ba69ec678e0d4c4f94ee576d9520bf13a1c88b87e46c79d937b8f998a4a1f54",
+  "unsignedTransactionBytes": "05115c930b023c00169cf83994b0e8c48a152ddc50606d58bd...",
+  "transactionJSON": {
+    "senderPublicKey": "169cf83994b0e8c48a152ddc50606d58bd4b2b85ec2f5bbbaae93d838443df7f",
+    "signature": "01ab2e01e8543321bb93baef1cdfd24335b2f98f4898c0203ebb372f6ea2140f609...",
+    "feeNQT": "100000000",
+    "type": 5,
+    "fullHash": "0e583d097aa7832ef97f49bf1c43fe6fa26592cd7b60cd1c652b1139719c9404",
+    "version": 1,
+    "ecBlockId": "3894856940593871962",
+    "signatureHash": "0ba69ec678e0d4c4f94ee576d9520bf13a1c88b87e46c79d937b8f998a4a1f54",
+    "attachment": {
+      "amountPerUnitNQT": "40000000",
+      "currency": "11847174313362984527",
+      "version.ReserveIncrease": 1
+    },
+    "senderRS": "BLX-BMUV-8QQR-47VK-CR7F3",
+    "subtype": 1,
+    "amountNQT": "0",
+    "sender": "11580081983047651163",
+    "ecBlockHeight": 160118,
+    "deadline": 60,
+    "transaction": "3351706690276644878",
+    "timestamp": 34313052,
+    "height": 2147483647
+  },
+  "broadcasted": true,
+  "requestProcessingTime": 7,
+  "transactionBytes": "05115c930b023c00169cf83994b0e8c48a152ddc50606d58bd4b2...",
+  "fullHash": "0e583d097aa7832ef97f49bf1c43fe6fa26592cd7b60cd1c652b1139719c9404",
+  "transaction": "3351706690276644878"
+}
+```
+
+### Delete Currency
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=deleteCurrency&
+  currency=7103310507724273660&
+  secretPhrase=IWontTellYou&
+  feeNQT=100000000&
+  deadline=60
+
+```
+
+**Response:**
+
+```json
+{
+  "signatureHash": "3f2b029337263728f4d4fed1f774252b06706159659e6ba9116b2d74b67a8435",
+  "unsignedTransactionBytes": "05189d7208023c0010f09c34f225d425306e5be55a49469081...",
+  "transactionJSON": {
+    "senderPublicKey": "10f09c34f225d425306e5be55a4946908156072afbead4d574a512d7e086ef5c",
+    "signature": "09c7be5b0742191f3777cc850f9478af21bd42225aec5e0793b57cd188767a0be6f...",
+    "feeNQT": "100000000",
+    "type": 5,
+    "fullHash": "a877379e3f3713e2f8baaa777c9a48af23d7da74e00301f12a4051dcf747243f",
+    "version": 1,
+    "ecBlockId": "2688066685599408512",
+    "signatureHash": "3f2b029337263728f4d4fed1f774252b06706159659e6ba9116b2d74b67a8435",
+    "attachment": {
+      "version.CurrencyDeletion": 1,
+      "currency": "7103310507724273660"
+    },
+    "senderRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+    "subtype": 8,
+    "amountNQT": "0",
+    "sender": "15295723609781267838",
+    "ecBlockHeight": 162004,
+    "deadline": 60,
+    "transaction": "16290425023506118568",
+    "timestamp": 34108061,
+    "height": 2147483647
+  },
+  "broadcasted": true,
+  "requestProcessingTime": 112,
+  "transactionBytes": "05189d7208023c0010f09c34f225d425306e5be55a49469081...",
+  "fullHash": "a877379e3f3713e2f8baaa777c9a48af23d7da74e00301f12a4051dcf747243f",
+  "transaction": "16290425023506118568"
+}
+```
+
+### Get Account Currencies
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getAccountCurrencies&
+  account=BLX-4VDY-LNVT-LMAY-FMCKA
+
+```
+
+**Response:**
+
+```json
+{
+  "accountCurrencies": [
+    {
+      "issuerAccountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "code": "MYSTX",
+      "unconfirmedUnits": "10000",
+      "decimals": 2,
+      "name": "MystcoinX",
+      "currency": "6520756875632314476",
+      "units": "10000",
+      "issuanceHeight": 0,
+      "type": 1,
+      "issuerAccount": "15295723609781267838"
+    }
+  ],
+  "requestProcessingTime": 1
+}
+```
+
+### Get Account Currency Count
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getAccountCurrencyCount&
+  account=BLX-4VDY-LNVT-LMAY-FMCKA
+
+```
+
+**Response:**
+
+```json
+{
+  "numberOfCurrencies": 1,
+  "requestProcessingTime": 1
+}
+```
+
+### Get Account Exchange Requests
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getAccountExchangeRequests&
+  account=BLX-4VDY-LNVT-LMAY-FMCKA&
+  currency=6520756875632314476
+
+```
+
+**Response:**
+
+```json
+{
+  "exchangeRequests": [
+    {
+      "issuerAccountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "code": "MYSTX",
+      "subtype": 6,
+      "decimals": 2,
+      "name": "MystcoinX",
+      "units": "200",
+      "issuanceHeight": 0,
+      "type": 1,
+      "transaction": "14840146504449624275",
+      "timestamp": 34130695,
+      "rateNQT": "1500000000",
+      "issuerAccount": "15295723609781267838"
+    }
+  ],
+  "requestProcessingTime": 1
+}
+```
+
+### Get Funding Monitor
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+ requestType=getFundingMonitor&
+ property=funding&
+ secretPhrase=IWontTellYou&
+ includeMonitoredAccounts:true
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 0,
+  "monitors": [
+    {
+      "holding": "0",
+      "amount": "1000000000",
+      "monitoredAccounts": [
+        {
+          "amount": "1000000000",
+          "accountRS": "BLX-5MYN-AP7M-NKMH-CRQJZ",
+          "threshold": "15000000000",
+          "interval": 10,
+          "account": "12664921794733526996"
+        },
+        {
+          "amount": "1000000000",
+          "accountRS": "BLX-G885-AKDX-5G2B-BLUCG",
+          "threshold": "15000000000",
+          "interval": 10,
+          "account": "10892890577210644675"
+        }
+      ],
+      "holdingType": 0,
+      "accountRS": "BLX-7A48-47JL-T7LD-D5FS3",
+      "property": "funding",
+      "threshold": "15000000000",
+      "interval": 10,
+      "account": "12745647715474645062"
+    }
+  ]
+}
+```
+
+### Get All Currencies
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getAllCurrencies&
+  firstIndex=2&
+  lastIndex=2
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 3,
+  "currencies": [
+    {
+      "initialSupply": "10000",
+      "currentReservePerUnitNQT": "0",
+      "types": ["EXCHANGEABLE"],
+      "code": "MYSTX",
+      "creationHeight": 162067,
+      "minDifficulty": 0,
+      "numberOfTransfers": 0,
+      "description": "Exchangeable",
+      "minReservePerUnitNQT": "0",
+      "currentSupply": "10000",
+      "issuanceHeight": 0,
+      "type": 1,
+      "reserveSupply": "0",
+      "maxDifficulty": 0,
+      "accountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "decimals": 2,
+      "name": "MystcoinX",
+      "numberOfExchanges": 12,
+      "currency": "6520756875632314476",
+      "maxSupply": "10000",
+      "account": "15295723609781267838",
+      "algorithm": 0
+    }
+  ]
+}
+```
+
+### Get All Exchanges
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getAllExchanges&
+  firstIndex=7&
+  lastIndex=7
+
+```
+
+**Response:**
+
+```json
+{
+  "exchanges": [
+    {
+      "issuerAccountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "seller": "15295723609781267838",
+      "code": "MYSTX",
+      "sellerRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "units": "5000",
+      "issuanceHeight": 0,
+      "type": 1,
+      "rateNQT": "10000000",
+      "buyer": "11580081983047651163",
+      "offer": "17204924627068821879",
+      "buyerRS": "BLX-BMUV-8QQR-47VK-CR7F3",
+      "decimals": 2,
+      "name": "MystcoinX",
+      "currency": "6520756875632314476",
+      "block": "4816799421151726903",
+      "transaction": "2086609620693258113",
+      "timestamp": 34206117,
+      "height": 163202,
+      "issuerAccount": "15295723609781267838"
+    }
+  ],
+  "requestProcessingTime": 1
+}
+```
+
+### Get Available To Buy
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getAvailableToBuy&
+  currency=4855695375693311301&
+  units=1
+
+```
+
+**Response:**
+
+```json
+{
+  "amountNQT": "1087",
+  "units": "1",
+  "requestProcessingTime": 0,
+  "rateNQT": "1087"
+}
+```
+
+### Get Buy / Sell Offers
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getSellOffers&
+  currency=6520756875632314476
+
+```
+
+**Response:**
+
+```json
+{
+  "offers": [
+    {
+      "offer": "4813417617929273983",
+      "expirationHeight": 163125,
+      "accountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "limit": "1000",
+      "currency": "6520756875632314476",
+      "supply": "500",
+      "account": "15295723609781267838",
+      "height": 163110,
+      "rateNQT": "20000000"
+    }
+  ],
+  "requestProcessingTime": 1
+}
+```
+
+### Get Currencies
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getCurrencies&
+  currencies=6520756875632314476
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 3,
+  "currencies": [
+    {
+      "initialSupply": "10000",
+      "currentReservePerUnitNQT": "0",
+      "types": ["EXCHANGEABLE"],
+      "code": "MYSTX",
+      "creationHeight": 162067,
+      "minDifficulty": 0,
+      "numberOfTransfers": 0,
+      "description": "Exchangeable",
+      "minReservePerUnitNQT": "0",
+      "currentSupply": "10000",
+      "issuanceHeight": 0,
+      "type": 1,
+      "reserveSupply": "0",
+      "maxDifficulty": 0,
+      "accountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "decimals": 2,
+      "name": "MystcoinX",
+      "numberOfExchanges": 12,
+      "currency": "6520756875632314476",
+      "maxSupply": "10000",
+      "account": "15295723609781267838",
+      "algorithm": 0
+    }
+  ]
+}
+```
+
+### Get Currencies By Issuer
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getCurrenciesByIssuer&
+  account=BLX-4VDY-LNVT-LMAY-FMCKA
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 334,
+  "currencies": [
+    [
+      {
+        "initialSupply": "10000",
+        "currentReservePerUnitNQT": "0",
+        "types": ["EXCHANGEABLE"],
+        "code": "MYSTX",
+        "creationHeight": 162067,
+        "minDifficulty": 0,
+        "numberOfTransfers": 0,
+        "description": "Exchangeable",
+        "minReservePerUnitNQT": "0",
+        "currentSupply": "10000",
+        "issuanceHeight": 0,
+        "type": 1,
+        "reserveSupply": "0",
+        "maxDifficulty": 0,
+        "accountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+        "decimals": 2,
+        "name": "MystcoinX",
+        "numberOfExchanges": 12,
+        "currency": "6520756875632314476",
+        "maxSupply": "10000",
+        "account": "15295723609781267838",
+        "algorithm": 0
+      }
+    ]
+  ]
+}
+```
+
+### Get Currency
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getCurrency&
+  code=MYSTX
+
+```
+
+**Response:**
+
+```json
+{
+  "initialSupply": "10000",
+  "currentReservePerUnitNQT": "0",
+  "types": ["EXCHANGEABLE"],
+  "code": "MYSTX",
+  "creationHeight": 162067,
+  "minDifficulty": 0,
+  "numberOfTransfers": 0,
+  "description": "Exchangeable",
+  "minReservePerUnitNQT": "0",
+  "currentSupply": "10000",
+  "issuanceHeight": 0,
+  "requestProcessingTime": 0,
+  "type": 1,
+  "reserveSupply": "0",
+  "maxDifficulty": 0,
+  "accountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+  "decimals": 2,
+  "name": "MystcoinX",
+  "numberOfExchanges": 0,
+  "currency": "6520756875632314476",
+  "maxSupply": "10000",
+  "account": "15295723609781267838",
+  "algorithm": 0
+}
+```
+
+### Get Currency Account Count
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getCurrencyAccountCount&
+  currency=6520756875632314476
+
+```
+
+**Response:**
+
+```json
+{
+  "numberOfAccounts": 2,
+  "requestProcessingTime": 1
+}
+```
+
+### Get Currency Accounts
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getCurrencyAccounts&
+  currency=6520756875632314476
+
+```
+
+**Response:**
+
+```json
+{
+  "accountCurrencies": [
+    {
+      "unconfirmedUnits": "9000",
+      "accountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "currency": "6520756875632314476",
+      "units": "9000",
+      "account": "15295723609781267838"
+    },
+    {
+      "unconfirmedUnits": "1000",
+      "accountRS": "BLX-BMUV-8QQR-47VK-CR7F3",
+      "currency": "6520756875632314476",
+      "units": "1000",
+      "account": "11580081983047651163"
+    }
+  ],
+  "requestProcessingTime": 1
+}
+```
+
+### Get Currency Founders
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getCurrencyFounders&
+  currency=16165836410580103964
+
+```
+
+**Response:**
+
+```json
+{
+  "founders": [
+    {
+      "accountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "amountPerUnitNQT": "100000000",
+      "currency": "16165836410580103964",
+      "account": "15295723609781267838"
+    }
+  ],
+  "requestProcessingTime": 1
+}
+```
+
+### Get Currency Ids
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getCurrencyIds&
+  lastIndex=2
+
+```
+
+**Response:**
+
+```json
+{
+  "currencyIds": ["3543596621551215845", "6520756875632314476", "10304209318415949524"],
+  "requestProcessingTime": 2
+}
+```
+
+### Get Currency Transfers
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getCurrencyTransfers&
+  currency=9387514940677621191
+
+```
+
+**Response:**
+
+```json
+{
+  "transfers": [
+    {
+      "issuerAccountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "code": "MYSTX",
+      "units": "10",
+      "issuanceHeight": 0,
+      "type": 1,
+      "transfer": "12208608533071682262",
+      "senderRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "sender": "15295723609781267838",
+      "recipientRS": "BLX-BMUV-8QQR-47VK-CR7F3",
+      "decimals": 2,
+      "recipient": "11580081983047651163",
+      "name": "MystcoinX",
+      "currency": "9387514940677621191",
+      "issuerAccount": "15295723609781267838",
+      "height": 159732,
+      "timestamp": 34280949
+    }
+  ],
+  "requestProcessingTime": 0
+}
+```
+
+### Get Exchanges
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getExchanges&
+  currency=6520756875632314476
+
+```
+
+**Response:**
+
+```json
+{
+  "exchanges": [
+    {
+      "issuerAccountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "seller": "15295723609781267838",
+      "code": "MYSTX",
+      "sellerRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "units": "1",
+      "issuanceHeight": 0,
+      "type": 1,
+      "rateNQT": "1500000000",
+      "buyer": "11580081983047651163",
+      "offer": "7762792906174207279",
+      "buyerRS": "BLX-BMUV-8QQR-47VK-CR7F3",
+      "decimals": 2,
+      "name": "MystcoinX",
+      "currency": "6520756875632314476",
+      "block": "2329341955641682831",
+      "transaction": "12589829502215822061",
+      "timestamp": 34137058,
+      "height": 162356,
+      "issuerAccount": "15295723609781267838"
+    }
+  ],
+  "requestProcessingTime": 0
+}
+```
+
+### Get Exchanges By Exchange Request
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getExchangesByExchangeRequest&
+  transaction=12589829502215822061
+
+```
+
+**Response:**
+
+```json
+{
+  "exchanges": [
+    {
+      "issuerAccountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "seller": "15295723609781267838",
+      "code": "MYSTX",
+      "sellerRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "units": "1",
+      "issuanceHeight": 0,
+      "type": 1,
+      "rateNQT": "1500000000",
+      "buyer": "11580081983047651163",
+      "offer": "7762792906174207279",
+      "buyerRS": "BLX-BMUV-8QQR-47VK-CR7F3",
+      "decimals": 2,
+      "name": "MystcoinX",
+      "currency": "6520756875632314476",
+      "block": "2329341955641682831",
+      "transaction": "12589829502215822061",
+      "timestamp": 34137058,
+      "height": 162356,
+      "issuerAccount": "15295723609781267838"
+    }
+  ],
+  "requestProcessingTime": 1
+}
+```
+
+### Get Exchanges By Offer
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getExchangesByOffer&
+  offer=7762792906174207279
+
+```
+
+**Response:**
+
+```json
+{
+  "exchanges": [
+    {
+      "issuerAccountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "seller": "15295723609781267838",
+      "code": "MYSTX",
+      "sellerRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "units": "1",
+      "issuanceHeight": 0,
+      "type": 1,
+      "rateNQT": "1500000000",
+      "buyer": "11580081983047651163",
+      "offer": "7762792906174207279",
+      "buyerRS": "BLX-BMUV-8QQR-47VK-CR7F3",
+      "decimals": 2,
+      "name": "MystcoinX",
+      "currency": "6520756875632314476",
+      "block": "2329341955641682831",
+      "transaction": "12589829502215822061",
+      "timestamp": 34137058,
+      "height": 162356,
+      "issuerAccount": "15295723609781267838"
+    }
+  ],
+  "requestProcessingTime": 1
+}
+```
+
+### Get Last Exchanges
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getLastExchanges&
+  currencies=12366259387060174981
+
+```
+
+**Response:**
+
+```json
+{
+  "exchanges": [
+    {
+      "offer": "1659323201112235372",
+      "seller": "15295723609781267838",
+      "buyerRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "sellerRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "currency": "12366259387060174981",
+      "block": "15911141024340031754",
+      "units": "2",
+      "transaction": "13926698078551037914",
+      "timestamp": 35547397,
+      "rateNQT": "100000000",
+      "buyer": "15295723609781267838",
+      "height": 167709
+    }
+  ],
+  "requestProcessingTime": 0
+}
+```
+
+### Get Minting Target
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getMintingTarget&
+  currency=9207767346829573996&
+  account=BLX-4VDY-LNVT-LMAY-FMCKA&
+  units=1
+
+```
+
+**Response:**
+
+```json
+{
+  "difficulty": "1024",
+  "targetBytes": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff3f00",
+  "currency": "9207767346829573996",
+  "counter": 0,
+  "requestProcessingTime": 1
+}
+```
+
+### Get Offer
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getOffer&
+  offer=4813417617929273983
+
+```
+
+**Response:**
+
+```json
+{
+  "sellOffer": {
+    "offer": "4813417617929273983",
+    "expirationHeight": 163125,
+    "accountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+    "limit": "1000",
+    "currency": "6520756875632314476",
+    "supply": "500",
+    "account": "15295723609781267838",
+    "height": 163110,
+    "rateNQT": "20000000"
+  },
+  "buyOffer": {
+    "offer": "4813417617929273983",
+    "expirationHeight": 163125,
+    "accountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+    "limit": "1000",
+    "currency": "6520756875632314476",
+    "supply": "500",
+    "account": "15295723609781267838",
+    "height": 163110,
+    "rateNQT": "10000000"
+  },
+  "requestProcessingTime": 0
+}
+```
+
+### Issue Currency
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=issueCurrency&
+  name=MystcoinX&
+  code=MYSTX&
+  description=Exchangeable
+  type=1&
+  initialSupply=10000&
+  maxSupply=10000&
+  decimals=2&
+  secretPhrase=IWontTellYou&
+  feeNQT=4000000000&
+  deadline=60
+
+```
+
+**Response:**
+
+```json
+{
+  "signatureHash": "c5ec66dd60bcc13fc0fe2cb617b4d7a05e7ef6360aacc591c911969785361491",
+  "unsignedTransactionBytes": "05100f8308023c0010f09c34f225d425306e5be55a49469081...",
+  "transactionJSON": {
+    "senderPublicKey": "10f09c34f225d425306e5be55a4946908156072afbead4d574a512d7e086ef5c",
+    "signature": "da27e4bead869d0e96fb9370f0afcd0c49eb17b7da503705384239d9abaec209733...",
+    "feeNQT": "4000000000",
+    "type": 5,
+    "fullHash": "6c08c076d4617e5a4be6f027c9b3e47ddb0e92fab87032d631546051dbdbfe8c",
+    "version": 1,
+    "ecBlockId": "2004481009157728964",
+    "signatureHash": "c5ec66dd60bcc13fc0fe2cb617b4d7a05e7ef6360aacc591c911969785361491",
+    "attachment": {
+      "initialSupply": "10000",
+      "code": "MYSTX",
+      "minDifficulty": 0,
+      "ruleset": 0,
+      "description": "Exchangeable",
+      "minReservePerUnitNQT": "0",
+      "issuanceHeight": 0,
+      "type": 1,
+      "reserveSupply": "0",
+      "version.CurrencyIssuance": 1,
+      "maxDifficulty": 0,
+      "decimals": 2,
+      "name": "MystcoinX",
+      "maxSupply": "10000",
+      "algorithm": 0
+    },
+    "senderRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+    "subtype": 0,
+    "amountNQT": "0",
+    "sender": "15295723609781267838",
+    "ecBlockHeight": 162060,
+    "deadline": 60,
+    "transaction": "6520756875632314476",
+    "timestamp": 34112271,
+    "height": 2147483647
+  },
+  "broadcasted": true,
+  "requestProcessingTime": 53,
+  "transactionBytes": "05100f8308023c0010f09c34f225d425306e5be55a49469081560...",
+  "fullHash": "6c08c076d4617e5a4be6f027c9b3e47ddb0e92fab87032d631546051dbdbfe8c",
+  "transaction": "6520756875632314476"
+}
+```
+
+### Publish Exchange Offer
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=publishExchangeOffer&
+  currency=6520756875632314476&
+  buyRateNQT=10000000&
+  sellRateNQT=20000000&
+  totalBuyLimit=1000&
+  totalSellLimit=1000&
+  initialBuySupply=500&
+  initialSellSupply=500&
+  expirationHeight=163080&
+  secretPhrase=IWontTellYou&
+  feeNQT=100000000&
+  deadline=60
+
+```
+
+**Response:**
+
+```json
+{
+  "signatureHash": "6fd60fcbc6e7022f12adad82a76c0534d2f79a569b9857b02328bf7573cf93f8",
+  "unsignedTransactionBytes": "0514d7c409023c0010f09c34f225d425306e5be55a49469081...",
+  "transactionJSON": {
+    "senderPublicKey": "10f09c34f225d425306e5be55a4946908156072afbead4d574a512d7e086ef5c",
+    "signature": "b204a7d9622ac6b99936447a4314fac1c2f0c67e45f4021f4b1949755c081802a34...",
+    "feeNQT": "100000000",
+    "type": 5,
+    "fullHash": "fccb2c6200a04bbce82b9e623051b8d8ed9d519dbb0a12ec5a354c842da9a664",
+    "version": 1,
+    "ecBlockId": "6813726597245349906",
+    "signatureHash": "6fd60fcbc6e7022f12adad82a76c0534d2f79a569b9857b02328bf7573cf93f8",
+    "attachment": {
+      "totalSellLimit": "1000",
+      "buyRateNQT": "10000000",
+      "initialSellSupply": "500",
+      "totalBuyLimit": "1000",
+      "expirationHeight": 163080,
+      "sellRateNQT": "20000000",
+      "version.PublishExchangeOffer": 1,
+      "currency": "6520756875632314476",
+      "initialBuySupply": "500"
+    },
+    "senderRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+    "subtype": 4,
+    "amountNQT": "0",
+    "sender": "15295723609781267838",
+    "ecBlockHeight": 163049,
+    "deadline": 60,
+    "transaction": "13568114225891298300",
+    "timestamp": 34194647,
+    "height": 2147483647
+  },
+  "broadcasted": true,
+  "requestProcessingTime": 54,
+  "transactionBytes": "0514d7c409023c0010f09c34f225d425306e5be55a4946908156072...",
+  "transaction": "13568114225891298300"
+}
+```
+
+### Search Currencies
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=searchCurrencies&
+  query=MYST?
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 5,
+  "currencies": [
+    {
+      "initialSupply": "10000",
+      "currentReservePerUnitNQT": "0",
+      "types": ["EXCHANGEABLE"],
+      "code": "MYSTX",
+      "creationHeight": 159726,
+      "minDifficulty": 0,
+      "numberOfTransfers": 3,
+      "description": "Exchangeable",
+      "minReservePerUnitNQT": "0",
+      "currentSupply": "10000",
+      "issuanceHeight": 0,
+      "type": 1,
+      "reserveSupply": "0",
+      "maxDifficulty": 0,
+      "accountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "decimals": 2,
+      "name": "MystcoinX",
+      "numberOfExchanges": 0,
+      "currency": "9387514940677621191",
+      "maxSupply": "10000",
+      "account": "15295723609781267838",
+      "algorithm": 0
+    }
+  ]
+}
+```
+
+### Transfer Currency
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=transferCurrency&
+  recipient=BLX-BMUV-8QQR-47VK-CR7F3&
+  currency=9387514940677621191&
+  units=10&
+  secretPhrase=IWontTellYou&
+  feeNQT=100000000&
+  deadline=60
+
+```
+
+**Response:**
+
+```json
+{
+  "signatureHash": "eda8f238d164074170ddb8163d7d71f08062f1f1a51712f05670a670e64e5eff",
+  "unsignedTransactionBytes": "0513ad150b023c0010f09c34f225d425306e5be55a49469081...",
+  "transactionJSON": {
+    "senderPublicKey": "10f09c34f225d425306e5be55a4946908156072afbead4d574a512d7e086ef5c",
+    "signature": "7629cba6e776685c9e134f8d96c54a5bcad6915c433f833b1ca792c69e75ee0ac6f...",
+    "feeNQT": "100000000",
+    "type": 5,
+    "fullHash": "d65a8adfc6b06da98ce50bb36d52305a8c9300b8defbeed9f2582628d9e258f0",
+    "version": 1,
+    "ecBlockId": "13770841487927223834",
+    "signatureHash": "eda8f238d164074170ddb8163d7d71f08062f1f1a51712f05670a670e64e5eff",
+    "attachment": {
+      "currency": "9387514940677621191",
+      "version.CurrencyTransfer": 1,
+      "units": "10"
+    },
+    "senderRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+    "subtype": 3,
+    "amountNQT": "0",
+    "sender": "15295723609781267838",
+    "recipientRS": "BLX-BMUV-8QQR-47VK-CR7F3",
+    "recipient": "11580081983047651163",
+    "ecBlockHeight": 159721,
+    "deadline": 60,
+    "transaction": "12208608533071682262",
+    "timestamp": 34280877,
+    "height": 2147483647
+  },
+  "broadcasted": true,
+  "requestProcessingTime": 8,
+  "transactionBytes": "0513ad150b023c0010f09c34f225d425306e5be55a49469081560...",
+  "fullHash": "d65a8adfc6b06da98ce50bb36d52305a8c9300b8defbeed9f2582628d9e258f0",
+  "transaction": "12208608533071682262"
+}
+```
+
+## Networking Operations
+
+### Add Peer
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=addPeer&
+  peer=nxt9.webice.ru
+
+```
+
+**Response:**
+
+```json
+{
+  "hallmark": "4a8fd0f2af5f511e041ad7bee1625ae3a711ddcc056c60cf7ab3523e2c99092f0e006e...",
+  "downloadedVolume": 155414,
+  "address": "23.95.51.154",
+  "weight": 19829,
+  "uploadedVolume": 63532,
+  "requestProcessingTime": 478,
+  "version": "1.4.8",
+  "platform": "webice.ru",
+  "lastUpdated": 37014605,
+  "blacklisted": false,
+  "announcedAddress": "nxt9.webice.ru",
+  "application": "NRS",
+  "state": 1,
+  "shareAddress": true
+}
+```
+
+### Blacklist API Proxy Peer
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=blacklistAPIProxyPeer&
+  peer=52.0.72.67
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 24,
+  "done": true
+}
+```
+
+### Blacklist Peer
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=blacklistPeer&
+  peer=nxt9.webice.ru
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 0,
+  "done": true
+}
+```
+
+### Get Inbound Peers
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getInboundPeers
+
+```
+
+**Response:**
+
+```json
+{
+  "peers": [],
+  "requestProcessingTime": 1
+}
+```
+
+### Get My Info
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getMyInfo
+
+```
+
+**Response:**
+
+```json
+{
+  "address": "127.0.0.1",
+  "host": "127.0.0.1",
+  "requestProcessingTime": 1
+}
+```
+
+### Get Peer
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getPeer&
+  peer=nxtx.ru
+
+```
+
+**Response:**
+
+```json
+{
+  "hallmark": "5f107c33097fc8241f55b9eb23615fe80ed3f87c87dc8c23ed6a08ab9273417a07006...",
+  "downloadedVolume": 352,
+  "address": "188.226.174.169",
+  "inbound": false,
+  "weight": 53,
+  "uploadedVolume": 2165,
+  "requestProcessingTime": 30,
+  "version": "1.5.11",
+  "platform": "VPS",
+  "inboundWebSocket": false,
+  "lastUpdated": 48540348,
+  "blacklisted": false,
+  "announcedAddress": "nxtx.ru",
+  "application": "NRS",
+  "port": 7874,
+  "outboundWebSocket": true,
+  "lastConnectAttempt": 48540348,
+  "state": 1,
+  "shareAddress": true
+}
+```
+
+### Get Peers
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getPeers&
+  state=DISCONNECTED
+
+```
+
+**Response:**
+
+```json
+{
+  "peers": ["198.50.146.93", "213.46.57.77"],
+  "requestProcessingTime": 1
+}
+```
+
+### Set API Proxy Peer
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=setAPIProxyPeer&
+  peer=163.172.154.74
+
+```
+
+**Response:**
+
+```json
+{
+  "downloadedVolume": 6176,
+  "address": "104.223.53.14",
+  "inbound": false,
+  "blockchainState": "UP`TO`DATE",
+  "weight": 0,
+  "uploadedVolume": 323,
+  "services": ["HALLMARK", "PRUNABLE", "API", "API`SSL", "CORS"],
+  "requestProcessingTime": 77,
+  "version": "1.11.5",
+  "platform": "BLX-TGFQ-U33C-C37U-CMKWF",
+  "inboundWebSocket": false,
+  "apiSSLPort": 7878,
+  "lastUpdated": 112610887,
+  "blacklisted": false,
+  "announcedAddress": "104.223.53.14",
+  "apiPort": 2022,
+  "application": "NRS",
+  "port": 7874,
+  "outboundWebSocket": true,
+  "lastConnectAttempt": 112610887,
+  "state": 1,
+  "shareAddress": true
+}
+```
+
+## Phasing Operations
+
+### Approve Transaction
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=approveTransaction&
+  transactionFullHash=5016cc59b0665675f00513e8c647288e0a668a78c4964c84d0de8f768b89060a&
+  revealedSecretText=secret&
+  secretPhrase=secretPhrase&
+  feeNQT=100000000&
+  deadline=60
+
+```
+
+**Response:**
+
+```json
+{
+  "signatureHash": "db429ccecd7d13b54b43cf9db7656cef6df6152c60e626b393000ed00a652c95",
+  "transactionJSON": {
+    "senderPublicKey": "10f09c34f225d425306e5be55a4946908156072afbead4d574a512d7e086ef5c",
+    "signature": "380e1a94e40d58e9382aa742ca998373e27c5d30890d91a74d83bfead849e507e93c51...",
+    "feeNQT": "100000000",
+    "type": 1,
+    "fullHash": "2bb80af156e70067f509df9ad5a88b687040cff4a8c778c69aef77863d3d15ef",
+    "version": 1,
+    "phased": false,
+    "ecBlockId": "704052112466096836",
+    "signatureHash": "db429ccecd7d13b54b43cf9db7656cef6df6152c60e626b393000ed00a652c95",
+    "attachment": {
+      "transactionFullHashes": ["5016cc59b0665675f00513e8c647288e0a668a78c4964c84d0de8f768b89060a"],
+      "version.PhasingVoteCasting": 1,
+      "revealedSecret": "736563726574"
+    },
+    "senderRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+    "subtype": 9,
+    "amountNQT": "0",
+    "sender": "15295723609781267838",
+    "ecBlockHeight": 262493,
+    "deadline": 60,
+    "transaction": "7422186546503792683",
+    "timestamp": 43965004,
+    "height": 2147483647
+  },
+  "unsignedTransactionBytes": "01194cda9e023c0010f09c34f225d425306e5be55a494690...",
+  "broadcasted": true,
+  "requestProcessingTime": 20,
+  "transactionBytes": "01194cda9e023c0010f09c34f225d425306e5be55a4946908156072a...",
+  "fullHash": "2bb80af156e70067f509df9ad5a88b687040cff4a8c778c69aef77863d3d15ef",
+  "transaction": "7422186546503792683"
+}
+```
+
+### Create Phasing Poll
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=sendMoney&
+  recipient=BLX-BMUV-8QQR-47VK-CR7F3&
+  secretPhrase=secretPhrase&
+  feeNQT=200000000&
+  deadline=60&
+  phased=true&
+  phasingFinishHeight=261550&
+  phasingVotingModel=0&
+  phasingQuorum=2
+
+```
+
+**Response:**
+
+```json
+{
+  "signatureHash": "df6c2dfcaf17f83256cfe388f408e091c08f208a060d54d1fbdb407ffdca121c",
+  "transactionJSON": {
+    "senderPublicKey": "10f09c34f225d425306e5be55a4946908156072afbead4d574a512d7e086ef5c",
+    "signature": "418a5453329d6c8d29b1b49dff30653a7f1e66992cece404d8ae997413deaa015b749a...",
+    "feeNQT": "200000000",
+    "type": 0,
+    "fullHash": "6fd876512477ef4fab089ec2ffa084d6db75ba3cd0cef2541675515470dca374",
+    "version": 1,
+    "phased": true,
+    "ecBlockId": "17522485785088843392",
+    "signatureHash": "df6c2dfcaf17f83256cfe388f408e091c08f208a060d54d1fbdb407ffdca121c",
+    "attachment": {
+      "phasingFinishHeight": 261550,
+      "phasingHolding": "0",
+      "phasingQuorum": "2",
+      "version.Phasing": 1,
+      "phasingMinBalance": "0",
+      "phasingMinBalanceModel": 0,
+      "version.OrdinaryPayment": 0,
+      "phasingVotingModel": 0
+    },
+    "senderRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+    "subtype": 0,
+    "amountNQT": "2000000000",
+    "sender": "15295723609781267838",
+    "recipientRS": "BLX-BMUV-8QQR-47VK-CR7F3",
+    "recipient": "11580081983047651163",
+    "ecBlockHeight": 261454,
+    "deadline": 60,
+    "transaction": "5759953446299424879",
+    "timestamp": 43874749,
+    "height": 2147483647
+  },
+  "unsignedTransactionBytes": "0010bd799d023c0010f09c34f225d425306e5be55a494690...",
+  "broadcasted": true,
+  "requestProcessingTime": 760,
+  "transactionBytes": "0010bd799d023c0010f09c34f225d425306e5be55a4946908156072a...",
+  "fullHash": "6fd876512477ef4fab089ec2ffa084d6db75ba3cd0cef2541675515470dca374",
+  "transaction": "5759953446299424879"
+}
+```
+
+### Get Account Phased Transaction Count
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getAccountPhasedTransactionCount&
+  account=15295723609781267838
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 1,
+  "numberOfPhasedTransactions": 3
+}
+```
+
+### Get Account Phased Transactions
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getAccountPhasedTransactions&
+  account=15295723609781267838&
+  lastIndex=0
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 2,
+  "transactions": [
+    {
+      "signature": "803d3fad7076bfe3f48a8ced40bb7075539858bf2b9d23b7653671a7204e6108234d...",
+      "transactionIndex": 0,
+      "type": 0,
+      "phased": true,
+      "ecBlockId": "14167949999961480077",
+      "signatureHash": "693b18675d813dcc2de1a889fd919d0c4a0eaa679df0b0f8b0ec703bc2e278d4",
+      "attachment": {
+        "phasingFinishHeight": 262450,
+        "phasingHolding": "17091401215301664836",
+        "phasingQuorum": "500",
+        "version.Phasing": 1,
+        "phasingMinBalance": "100",
+        "phasingMinBalanceModel": 2,
+        "version.OrdinaryPayment": 0,
+        "phasingVotingModel": 2
+      },
+      "senderRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "subtype": 0,
+      "amountNQT": "500000000",
+      "recipientRS": "BLX-BMUV-8QQR-47VK-CR7F3",
+      "block": "11015494088798322289",
+      "blockTimestamp": 43952022,
+      "deadline": 60,
+      "timestamp": 43957682,
+      "height": 262418,
+      "senderPublicKey": "10f09c34f225d425306e5be55a4946908156072afbead4d574a512d7e086ef5c",
+      "feeNQT": "2100000000",
+      "confirmations": 27,
+      "fullHash": "e57462c46447f8bd7a0bafd9ab65bde8743ca6c13213185271d7ea6c48118861",
+      "version": 1,
+      "sender": "15295723609781267838",
+      "recipient": "11580081983047651163",
+      "ecBlockHeight": 262409,
+      "transaction": "13688769565509711077"
+    }
+  ]
+}
+```
+
+### Get Asset Phased Transactions
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getAssetPhasedTransactions&
+  asset=17091401215301664836
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 2,
+  "transactions": [
+    {
+      "signature": "803d3fad7076bfe3f48a8ced40bb7075539858bf2b9d23b7653671a7204e6108234d...",
+      "transactionIndex": 0,
+      "type": 0,
+      "phased": true,
+      "ecBlockId": "14167949999961480077",
+      "signatureHash": "693b18675d813dcc2de1a889fd919d0c4a0eaa679df0b0f8b0ec703bc2e278d4",
+      "attachment": {
+        "phasingFinishHeight": 262450,
+        "phasingHolding": "",
+        "phasingQuorum": "500",
+        "version.Phasing": 1,
+        "phasingMinBalance": "100",
+        "phasingMinBalanceModel": 2,
+        "version.OrdinaryPayment": 0,
+        "phasingVotingModel": 2
+      },
+      "senderRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "subtype": 0,
+      "amountNQT": "500000000",
+      "recipientRS": "BLX-BMUV-8QQR-47VK-CR7F3",
+      "block": "11015494088798322289",
+      "blockTimestamp": 43952022,
+      "deadline": 60,
+      "timestamp": 43957682,
+      "height": 262418,
+      "senderPublicKey": "10f09c34f225d425306e5be55a4946908156072afbead4d574a512d7e086ef5c",
+      "feeNQT": "2100000000",
+      "confirmations": 27,
+      "fullHash": "e57462c46447f8bd7a0bafd9ab65bde8743ca6c13213185271d7ea6c48118861",
+      "version": 1,
+      "sender": "15295723609781267838",
+      "recipient": "11580081983047651163",
+      "ecBlockHeight": 262409,
+      "transaction": "13688769565509711077"
+    }
+  ]
+}
+```
+
+### Get Currency Phased Transactions
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getCurrencyPhasedTransactions&
+  currency=12366259387060174981
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 2,
+  "transactions": [
+    {
+      "signature": "ec467483307c73c08e7e9195eeddf23ce129ce30d703881cca505cbb0569c2009...",
+      "transactionIndex": 0,
+      "type": 0,
+      "phased": true,
+      "ecBlockId": "7353294686633135686",
+      "signatureHash": "12cc1d54a453c3d1231b991a54f3323db6a51c00387ca5480db268164d5b7cfa",
+      "attachment": {
+        "phasingFinishHeight": 263500,
+        "phasingHolding": "12366259387060174981",
+        "phasingQuorum": "100",
+        "version.Phasing": 1,
+        "phasingMinBalance": "10",
+        "phasingMinBalanceModel": 3,
+        "version.OrdinaryPayment": 0,
+        "phasingVotingModel": 3
+      },
+      "senderRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "subtype": 0,
+      "amountNQT": "800000000",
+      "recipientRS": "BLX-BMUV-8QQR-47VK-CR7F3",
+      "block": "699750272975612223",
+      "blockTimestamp": 44042909,
+      "deadline": 60,
+      "timestamp": 44042827,
+      "height": 263430,
+      "senderPublicKey": "10f09c34f225d425306e5be55a4946908156072afbead4d574a512d7e086ef5c",
+      "feeNQT": "4100000000",
+      "confirmations": 2,
+      "fullHash": "5799d135aacf48a317c813fea405c317e7ab90888afb701b92c17914744f244f",
+      "version": 1,
+      "sender": "15295723609781267838",
+      "recipient": "11580081983047651163",
+      "ecBlockHeight": 263424,
+      "transaction": "11765882356459739479"
+    }
+  ]
+}
+```
+
+### Get Linked Phased Transactions
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getLinkedPhasedTransactions&
+  linkedFullHash=083eba49bb481c38752a14493f0d40b3c60635935f13dd1fb33f6831fb997079
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 1,
+  "transactions": [
+    {
+      "signature": "d20a8bb84dcb335182ddc81ceaa1c5464881137d32eb195805ad460c9fcdba0...",
+      "transactionIndex": 0,
+      "type": 0,
+      "phased": true,
+      "ecBlockId": "4351283327032663440",
+      "signatureHash": "77dfa3ff467a3b253530ad1b7a227633fa21fa064efe1df8206690bafb06f42c",
+      "attachment": {
+        "phasingFinishHeight": 770000,
+        "version.Message": 1,
+        "phasingHolding": "0",
+        "phasingQuorum": "1",
+        "version.Phasing": 1,
+        "messageIsText": true,
+        "phasingLinkedFullHashes": [
+          "083eba49bb481c38752a14493f0d40b3c60635935f13dd1fb33f6831fb997079"
+        ],
+        "phasingMinBalance": "0",
+        "message": "Hello",
+        "phasingMinBalanceModel": 0,
+        "version.OrdinaryPayment": 0,
+        "phasingVotingModel": 4
+      },
+      "senderRS": "BLX-7A48-47JL-T7LD-D5FS3",
+      "subtype": 0,
+      "amountNQT": "500000000",
+      "recipientRS": "BLX-5MYN-AP7M-NKMH-CRQJZ",
+      "block": "13425992991123879393",
+      "blockTimestamp": 80870662,
+      "deadline": 1440,
+      "timestamp": 80870626,
+      "height": 768864,
+      "senderPublicKey": "373522bcd8904f4707472e590cbb67976d40e7af39650ea11cb2be...",
+      "feeNQT": "300000000",
+      "confirmations": 11,
+      "fullHash": "a1d845b3daf08493a2b299639b71422a41fcf923e1b68a4533d2bd0e22ad694d",
+      "version": 1,
+      "sender": "12745647715474645062",
+      "recipient": "12664921794733526996",
+      "ecBlockHeight": 768850,
+      "transaction": "10629885842602449057"
+    }
+  ]
+}
+```
+
+### Get Phasing Poll
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getPhasingPoll&
+  transaction=15402897900571339064
+
+```
+
+**Response:**
+
+```json
+{
+  "votingModel": 0,
+  "quorum": "2",
+  "transactionFullHash": "38292a530816c2d5693bf5d0afb20847a3c4d2f37c3665fd294a7d2fdc278d56",
+  "finished": true,
+  "whitelist": [
+    {
+      "whitelistedRS": "BLX-BMUV-8QQR-47VK-CR7F3",
+      "whitelisted": "11580081983047651163"
+    },
+    {
+      "whitelistedRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "whitelisted": "15295723609781267838"
+    }
+  ],
+  "requestProcessingTime": 1,
+  "result": "2",
+  "approved": true,
+  "minBalance": "0",
+  "accountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+  "finishHeight": 259600,
+  "minBalanceModel": 0,
+  "transaction": "15402897900571339064",
+  "account": "15295723609781267838",
+  "hashedSecret": ""
+}
+```
+
+### Get Phasing Poll Vote
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getPhasingPollVote&
+  transaction=12580288379938056583&
+  account=15295723609781267838
+
+```
+
+**Response:**
+
+```json
+{
+  "voterRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+  "voter": "15295723609781267838",
+  "requestProcessingTime": 1,
+  "transaction": "9761138556025135837"
+}
+```
+
+### Get Phasing Poll Votes
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getPhasingPollVotes&
+  account=12580288379938056583
+
+```
+
+**Response:**
+
+```json
+{
+  "votes": [
+    {
+      "voterRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "voter": "15295723609781267838",
+      "transaction": "9761138556025135837"
+    }
+  ],
+  "requestProcessingTime": 2
+}
+```
+
+### Get Phasing Polls
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getPhasingPolls&
+  transaction=12580288379938056583&
+  transaction=13688769565509711077&
+  countVotes=true
+
+```
+
+**Response:**
+
+```json
+{
+  "polls": [
+    {
+      "votingModel": 1,
+      "quorum": "100000000000",
+      "transactionFullHash": "87a92edaa02996aeaf59a619ca513563775870c2b8ca490b61b02535745cdd34",
+      "finished": true,
+      "whitelist": [],
+      "result": "186700000000",
+      "approved": true,
+      "minBalance": "10000000000",
+      "accountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "finishHeight": 262450,
+      "minBalanceModel": 1,
+      "transaction": "12580288379938056583",
+      "account": "15295723609781267838",
+      "hashedSecret": ""
+    },
+    {
+      "votingModel": 2,
+      "quorum": "500",
+      "transactionFullHash": "e57462c46447f8bd7a0bafd9ab65bde8743ca6c13213185271d7ea6c48118861",
+      "finished": true,
+      "whitelist": [],
+      "result": "500",
+      "holding": "17091401215301664836",
+      "approved": true,
+      "minBalance": "100",
+      "accountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "finishHeight": 262450,
+      "minBalanceModel": 2,
+      "transaction": "13688769565509711077",
+      "account": "15295723609781267838",
+      "hashedSecret": ""
+    }
+  ],
+  "requestProcessingTime": 1
+}
+```
+
+### Get Voter Phased Transactions
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getVoterPhasedTransactions&
+  account=15295723609781267838
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 1,
+  "transactions": [
+    {
+      "signature": "e527fce6591049b61d232ebbf4171319ae4e208f34d8a055ffb09f07dec7d9033527...",
+      "transactionIndex": 0,
+      "type": 0,
+      "phased": true,
+      "ecBlockId": "13625660527605830055",
+      "signatureHash": "2a3cc644b1cb48130a172de92a418d48522b45a25a36d4d48c2347f032e430ab",
+      "attachment": {
+        "phasingFinishHeight": 263850,
+        "phasingHolding": "0",
+        "phasingQuorum": "2",
+        "version.Phasing": 1,
+        "phasingWhitelist": ["11580081983047651163", "15295723609781267838"],
+        "phasingMinBalance": "0",
+        "phasingMinBalanceModel": 0,
+        "version.OrdinaryPayment": 0,
+        "phasingVotingModel": 0
+      },
+      "senderRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "subtype": 0,
+      "amountNQT": "1100000000",
+      "recipientRS": "BLX-BMUV-8QQR-47VK-CR7F3",
+      "block": "16550954176569210781",
+      "blockTimestamp": 44074579,
+      "deadline": 1440,
+      "timestamp": 44074556,
+      "height": 263813,
+      "senderPublicKey": "10f09c34f225d425306e5be55a4946908156072afbead4d574a512d7e086ef5c",
+      "feeNQT": "200000000",
+      "confirmations": 0,
+      "fullHash": "b54a7e14c910e0750af0b29c0328347e27411dbe5d158d5d358ee2165b781968",
+      "version": 1,
+      "sender": "15295723609781267838",
+      "recipient": "11580081983047651163",
+      "ecBlockHeight": 263804,
+      "transaction": "8493807353039047349"
+    }
+  ]
+}
+```
+
+## Server Information Operations
+
+### Event Register
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=eventRegister
+
+```
+
+**Response:**
+
+```json
+{
+  "registered": true,
+  "requestProcessingTime": 5780
+}
+```
+
+### Event Wait
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=eventWait
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 0,
+  "events": [
+    {
+      "name": "Block.BLOCK`PUSHED",
+      "ids": ["11748297033830700369"]
+    },
+    {
+      "name": "Transaction.REMOVED`UNCONFIRMED`TRANSACTIONS",
+      "ids": []
+    },
+    {
+      "name": "Peer.ADDED`ACTIVE`PEER",
+      "ids": ["178.150.207.53"]
+    }
+  ]
+}
+```
+
+### Get Blockchain Status
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getBlockchainStatus
+
+```
+
+**Response:**
+
+```json
+{
+  "currentMinRollbackHeight": 445745,
+  "numberOfBlocks": 446546,
+  "isTestnet": false,
+  "includeExpiredPrunable": false,
+  "requestProcessingTime": 1,
+  "version": "1.5.11",
+  "maxRollback": 800,
+  "lastBlock": "2164693711802180410",
+  "application": "NRS",
+  "isScanning": false,
+  "isDownloading": false,
+  "cumulativeDifficulty": "17966254519242206",
+  "lastBlockchainFeederHeight": 446597,
+  "maxPrunableLifetime": 1209600,
+  "time": 48539846,
+  "lastBlockchainFeeder": "84.253.125.186"
+}
+```
+
+### Get Plugins
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getPlugins
+
+```
+
+**Response:**
+
+```json
+{
+  "plugins": ["hello`world"],
+  "requestProcessingTime": 9
+}
+```
+
+### Get State
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getState
+
+```
+
+**Response:**
+
+```json
+{
+  "numberOfPolls": 19,
+  "numberOfTransfers": 124216,
+  "maxMemory": 900726784,
+  "numberOfOffers": 90,
+  "isDownloading": false,
+  "cumulativeDifficulty": "17966254519242206",
+  "numberOfCurrencies": 1833,
+  "freeMemory": 36399744,
+  "peerPort": 7874,
+  "availableProcessors": 4,
+  "numberOfTaggedData": 1,
+  "numberOfActiveAccountLeases": 216,
+  "currentMinRollbackHeight": 445745,
+  "requestProcessingTime": 125533,
+  "version": "1.5.11",
+  "numberOfAliases": 142415,
+  "numberOfActivePeers": 10,
+  "maxPrunableLifetime": 1209600,
+  "numberOfExchanges": 1750,
+  "numberOfPurchases": 770,
+  "numberOfAskOrders": 3536,
+  "lastBlockchainFeeder": "84.253.125.186",
+  "numberOfPeers": 289,
+  "numberOfGoods": 990,
+  "numberOfUnlockedAccounts": 0,
+  "includeExpiredPrunable": false,
+  "numberOfOrders": 4781,
+  "numberOfTransactions": 1325666,
+  "maxRollback": 800,
+  "isScanning": false,
+  "numberOfAssets": 539,
+  "numberOfPrunableMessages": 45,
+  "numberOfVotes": 106,
+  "numberOfAccounts": 111301,
+  "numberOfDataTags": 3,
+  "needsAdminPassword": false,
+  "numberOfBlocks": 446546,
+  "isTestnet": false,
+  "numberOfCurrencyTransfers": 719,
+  "numberOfPhasedTransactions": 5,
+  "numberOfAccountLeases": 231,
+  "numberOfBidOrders": 1245,
+  "lastBlock": "2164693711802180410",
+  "totalMemory": 235929600,
+  "application": "NRS",
+  "lastBlockchainFeederHeight": 446597,
+  "numberOfTrades": 102458,
+  "numberOfTags": 723,
+  "isOffline": false,
+  "time": 48539770
+}
+```
+
+### Get Time
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getTime
+
+```
+
+**Response:**
+
+```json
+{
+  "time": 31184078,
+  "requestProcessingTime": 1
+}
+```
+
+## Shuffling Operations
+
+### Get Account Shufflings
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+ getAccountShufflings&
+ account=BLX-UZNP-6LBA-YQ38-3TEY8
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 91,
+  "shufflings": [
+    {
+      "blocksRemaining": 4372,
+      "amount": "25000000000000",
+      "shufflingStateHash": "be12c737ad86e551621f57ebddaaaa61e66cf0a206fabfe40538304ff674c7a7",
+      "issuer": "11802441287912491934",
+      "holding": "0",
+      "stage": 0,
+      "holdingType": 0,
+      "participantCount": 7,
+      "assigneeRS": "BLX-UZNP-6LBA-YQ38-3TEY8",
+      "shuffling": "5901270965262160574",
+      "registrantCount": 2,
+      "assignee": "1403321141259239061",
+      "issuerRS": "BLX-V4WY-U928-GRN8-CKPL9",
+      "shufflingFullHash": "be12c737ad86e551621f57ebddaaaa61e66cf0a206fabfe40538304ff674c7a7"
+    }
+  ]
+}
+```
+
+### Get All Shufflings
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+ requestType=getAllShufflings
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 81,
+  "shufflings": [
+    {
+      "blocksRemaining": 226,
+      "amount": "5000000000000",
+      "shufflingStateHash": "9be2ed518e46d921df9f9f6425cc16a399f72a7833c58dbeb2a261e04620c392",
+      "issuer": "16667202175165271068",
+      "holding": "0",
+      "stage": 0,
+      "holdingType": 0,
+      "participantCount": 5,
+      "assigneeRS": "BLX-V4WY-U928-GRN8-CKPL9",
+      "shuffling": "2439058250271679131",
+      "registrantCount": 3,
+      "assignee": "11802441287912491934",
+      "issuerRS": "BLX-J52W-4BF7-L4J9-GEGMG",
+      "shufflingFullHash": "9be2ed518e46d921df9f9f6425cc16a399f72a7833c58dbeb2a261e04620c392"
+    }
+  ]
+}
+```
+
+### Get Assigned Shufflings
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+ requestType=getAssignedShufflings&
+ account=BLX-V4WY-U928-GRN8-CKPL9
+
+```
+
+**Response:**
+
+```json
+{
+  "blocksRemaining": 20,
+  "amount": "5000000000000",
+  "shufflingStateHash": "9be2ed518e46d921df9f9f6425cc1...",
+  "requestProcessingTime": 3,
+  "issuer": "16667202175165271068",
+  "holding": "0",
+  "stage": 1,
+  "holdingType": 0,
+  "participantCount": 5,
+  "assigneeRS": "BLX-V4WY-U928-GRN8-CKPL9",
+  "shuffling": "2439058250271679131",
+  "registrantCount": 5,
+  "assignee": "11802441287912491934",
+  "issuerRS": "BLX-J52W-4BF7-L4J9-GEGMG",
+  "shufflingFullHash": "9be2ed518e46d921df9f9f6425cc16a399..."
+}
+```
+
+### Get Holding Shufflings
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+ requestType=getHoldingShufflings&
+ holding=15344649963748848799&
+ includeFinished=true
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 4,
+  "shufflings": [
+    {
+      "holding": "15344649963748848799",
+      "blocksRemaining": 0,
+      "amount": "1000",
+      "stage": 4,
+      "shufflingStateHash": "57ed7cc02fa5b1f289d2a345314be5ec557ad093a5fd3070a16aba952d30656f",
+      "holdingType": 1,
+      "participantCount": 5,
+      "shuffling": "144176732027925694",
+      "registrantCount": 1,
+      "issuer": "17417706268123203912",
+      "issuerRS": "BLX-A4CA-L7JT-ZYGU-HZ2G5",
+      "shufflingFullHash": "beb46651f937000259819298872f1721170a4c2e1af7f7900cb2ca01188fd942"
+    }
+  ]
+}
+```
+
+### Get Shufflers
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+ requestType=getShufflers&
+ adminPassword=IWontTellYou
+
+```
+
+**Response:**
+
+```json
+{
+  "shufflers": [
+    {
+      "accountRS": "BLX-7A48-47JL-T7LD-D5FS3",
+      "recipientRS": "BLX-H42E-48UL-FM7A-AVEC2",
+      "recipient": "9235083011255928844",
+      "shuffling": "9534657251385467319",
+      "account": "12745647715474645062",
+      "shufflingFullHash": "b7e1eedb40e851849cb77a53075ce74aa..."
+    }
+  ],
+  "requestProcessingTime": 0
+}
+```
+
+### Get Shuffling
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+ requestType=getShuffling&
+ shuffling=3347171811359602131
+
+```
+
+**Response:**
+
+```json
+{
+  "blocksRemaining": 956,
+  "amount": "100000000000",
+  "shufflingStateHash": "d3354a42078b732e16561b67a37d699d0410c564a4d18568319170665bf5dd9b",
+  "requestProcessingTime": 2,
+  "issuer": "10740484011813680725",
+  "holding": "0",
+  "stage": 0,
+  "holdingType": 0,
+  "participantCount": 5,
+  "assigneeRS": "BLX-V4WY-U928-GRN8-CKPL9",
+  "shuffling": "3347171811359602131",
+  "registrantCount": 2,
+  "assignee": "11802441287912491934",
+  "issuerRS": "BLX-PFLP-BQHY-NG4J-BXG5C",
+  "shufflingFullHash": "d3354a42078b732e16561b67a37d699d0410c564a4d18568319170665bf5dd9b"
+}
+```
+
+### Get Shuffling Participants
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+ requestType=getShufflingParticipants&
+ shuffling=16292433427943984172
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 5,
+  "participants": [
+    {
+      "nextAccountRS": "BLX-KTTY-WRE6-2B5Y-4CYWR",
+      "accountRS": "BLX-3ZXY-KWR5-LR8V-2PYAT",
+      "shuffling": "16292433427943984172",
+      "state": 2,
+      "nextAccount": "3167098051496568638",
+      "account": "910806360590974910"
+    },
+    {
+      "nextAccountRS": "BLX-L8VW-NRUG-LZ6Q-62WWW",
+      "accountRS": "BLX-KTTY-WRE6-2B5Y-4CYWR",
+      "shuffling": "16292433427943984172",
+      "state": 2,
+      "nextAccount": "5653003407546981244",
+      "account": "3167098051496568638"
+    },
+    {
+      "nextAccountRS": "BLX-XC7L-35JW-FZCL-24NUT",
+      "accountRS": "BLX-L8VW-NRUG-LZ6Q-62WWW",
+      "shuffling": "16292433427943984172",
+      "state": 2,
+      "nextAccount": "930699247665195186",
+      "account": "5653003407546981244"
+    },
+    {
+      "nextAccountRS": "BLX-2222-2222-2222-22222",
+      "accountRS": "BLX-XC7L-35JW-FZCL-24NUT",
+      "shuffling": "16292433427943984172",
+      "state": 2,
+      "nextAccount": "0",
+      "account": "930699247665195186"
+    }
+  ]
+}
+```
+
+### Shuffling Create
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+ requestType=shufflingCreate&
+ amount=10000000000000&
+ participantCount=7&
+ registrationPeriod=9757&
+ secretPhrase=IWontTellYou&
+ feeNQT=100000000&
+ deadline=1440
+
+```
+
+**Response:**
+
+```json
+{
+  "senderPublicKey": "ffcafb6de1ec93db5fe0475a6e2efd82faa3cb89a47a7d96f5579b0deadd5c10",
+  "signature": "36b410b83abb4e373bf77c715c8ef3b06ba6c872e621e3f5f412dc1424eb6a0710ed8...",
+  "feeNQT": "100000000",
+  "transactionIndex": 0,
+  "requestProcessingTime": 5,
+  "type": 7,
+  "confirmations": 9906,
+  "fullHash": "2d10f4e18f808aa8d0de06d5cddcd77828eb6e7548f62e48de83f58fdf0629d5",
+  "version": 1,
+  "phased": false,
+  "ecBlockId": "13021232786632787054",
+  "signatureHash": "18956d76e3ed20937027373615e5fb49f11d1ac86eed279176856b59644899f5",
+  "attachment": {
+    "holding": "0",
+    "amount": "10000000000000",
+    "registrationPeriod": 9757,
+    "holdingType": 0,
+    "participantCount": 7,
+    "version.ShufflingCreation": 1
+  },
+  "senderRS": "BLX-V4WY-U928-GRN8-CKPL9",
+  "subtype": 0,
+  "amountNQT": "0",
+  "sender": "11802441287912491934",
+  "ecBlockHeight": 817230,
+  "block": "435349863926964285",
+  "blockTimestamp": 80029572,
+  "deadline": 1440,
+  "transaction": "12144660700617510957",
+  "timestamp": 80029541,
+  "height": 817245
+}
+```
+
+### Shuffling Process
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+ requestType=shufflingProcess&
+ shuffling=12144660700617510957&
+ recipientSecretPhrase=IWontTellYou&
+ secretPhrase=IWontTellYou&
+ feeNQT=100000000&
+ deadline=1440
+
+```
+
+**Response:**
+
+```json
+{
+  "senderPublicKey": "ffcafb6de1ec93db5fe0475a6e2efd82faa3cb89a47a7d96f5579b0deadd5c10",
+  "signature": "fb6112d759cedfefe14a7bdbe19b2fac73d334566f05fc20d7d79933879b140...",
+  "feeNQT": "1000000000",
+  "transactionIndex": 1,
+  "type": 7,
+  "confirmations": 251,
+  "fullHash": "0d0855396fa1a60c8b50507069abdb5a7c6af3fdb49f12766c8630ec66309642",
+  "version": 1,
+  "phased": false,
+  "ecBlockId": "17529486445813261105",
+  "signatureHash": "a7c1d67e2ff01dd8e3cf72869428a708a6ad087bb6247e628fb1964456eea66b",
+  "attachment": {
+    "shuffling": "12144660700617510957",
+    "shufflingStateHash": "e98b2810531c6e807e5e89bb2537025bc7b4fb72e79ab675deb6fec2b8ec6d78",
+    "data": ["438e2560cd958a173dc3b7adc3eb3c02a69ea5..."],
+    "version.ShufflingProcessing": 1,
+    "hash": "2e3cecabbf59a47d55399649be89d1bcd1b56264dca32cb269f88b30cbe2c262"
+  },
+  "senderRS": "BLX-V4WY-U928-GRN8-CKPL9",
+  "subtype": 2,
+  "amountNQT": "0",
+  "sender": "11802441287912491934",
+  "ecBlockHeight": 826902,
+  "block": "15948287569415806210",
+  "blockTimestamp": 80611249,
+  "deadline": 1440,
+  "transaction": "911593473664419853",
+  "timestamp": 80611213,
+  "height": 826917
+}
+```
+
+### Shuffling Verify
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+ requestType=shufflingVerify&
+ shuffling=12144660700617510957&
+ shufflingStateHash=90832470918374087102938470198234&
+ recipientSecretPhrase=IWontTellYou&
+ secretPhrase=IWontTellYou&
+ feeNQT=100000000&
+ deadline=1440
+
+```
+
+**Response:**
+
+```json
+{
+  "senderPublicKey": "f050f86b050c1de933d8094c9a05a346b2319912313a04b822bba15d6d256505",
+  "signature": "a23968d9cf5313e745fa4b50102f7f6d664c1b574d8ff2fbcc721cb967a42a0225f1e...",
+  "feeNQT": "100000000",
+  "transactionIndex": 3,
+  "requestProcessingTime": 3,
+  "type": 7,
+  "confirmations": 287,
+  "fullHash": "296a76a1601da4a06c6524df5791553b5d305cb266f71afb6e9d7aa0149c04ff",
+  "version": 1,
+  "phased": false,
+  "ecBlockId": "3207126357685519085",
+  "signatureHash": "7b69ba9ffb10d725b693abb53157f274cbf42f2435e919821cda67f889f44e96",
+  "attachment": {
+    "version.ShufflingVerification": 1,
+    "shuffling": "12144660700617510957",
+    "shufflingStateHash": "fbc8b99c99c4e09203f1237771e38c7ee484c18a72572c3d1adae04da858fe92"
+  },
+  "senderRS": "BLX-KHDF-9KSG-2UCY-BUQZ4",
+  "subtype": 4,
+  "amountNQT": "0",
+  "sender": "10484056935692287341",
+  "ecBlockHeight": 826914,
+  "block": "1046003298185760668",
+  "blockTimestamp": 80612146,
+  "deadline": 1440,
+  "transaction": "11575409243111975465",
+  "timestamp": 80611663,
+  "height": 826925
+}
+```
+
+### Shuffling Register
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+ requestType=shufflingRegister&
+ shufflingFullHash=2d10f4e18f808aa8d0de06d5cddcd77828eb6e7548f62e48de83f58fdf0629d5&
+ secretPhrase=IWontTellYou&
+ feeNQT=100000000&
+ deadline=1440
+
+```
+
+**Response:**
+
+```json
+{
+  "senderPublicKey": "6351706ab8ea5c94243e6b0bff3be05f2e1b9accc83004af3e655a8fbc104735",
+  "signature": "23bb57aee566ba2c27fe8c83ea4e88821f9f23c820371a39b5d49dbd327...",
+  "feeNQT": "100000000",
+  "transactionIndex": 1,
+  "requestProcessingTime": 3,
+  "type": 7,
+  "confirmations": 9924,
+  "fullHash": "467e60696e598fe5c075446897ff636886bf7c0e9...",
+  "version": 1,
+  "phased": false,
+  "ecBlockId": "4928509411801335816",
+  "signatureHash": "b0e945000b9010814f5399d9006a21939089db5616...",
+  "attachment": {
+    "version.ShufflingRegistration": 1,
+    "shufflingFullHash": "2d10f4e18f808aa8d0de06d5cddcd77828eb6e7..."
+  },
+  "senderRS": "BLX-D78H-8QHV-DEP2-5TAGA",
+  "subtype": 1,
+  "amountNQT": "0",
+  "sender": "3763066681748198607",
+  "ecBlockHeight": 817256,
+  "block": "12642960475175742738",
+  "blockTimestamp": 80031214,
+  "deadline": 1440,
+  "transaction": "16541538287104327238",
+  "timestamp": 80031109,
+  "height": 817265
+}
+```
+
+### Start Shuffler
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+ requestType=startShuffler&
+ shufflingFullHash=2d10f4e18f808aa8d0de06d5cddcd77828eb6e7548f62e48de83f58fdf0629d5&
+ secretPhrase=IWontTellYou&
+ recipientSecretPhrase=IWontTellYou
+
+```
+
+**Response:**
+
+```json
+{
+  "shuffling": "12144660700617510957",
+  "shufflingFullHash": "2d10f4e18f808aa8d0de06d5cddcd77828eb6e7548f62e48de83f58fdf0629d5",
+  "account": "11802441287912491934",
+  "accountRS": "BLX-V4WY-U928-GRN8-CKPL9",
+  "recipient": "3763066681748198607",
+  "recipientRS": "BLX-D78H-8QHV-DEP2-5TAGA",
+  "requestProcessingTime": 7
+}
+```
+
+### Stop Shuffler
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+ requestType=stopShuffler&
+ shufflingFullHash=2d10f4e18f808aa8d0de06d5cddcd77828eb6e7548f62e48de83f58fdf0629d5&
+ secretPhrase=IWontTellYou
+
+```
+
+**Response:**
+
+```json
+{
+  "stoppedShuffler": true,
+  "requestProcessingTime": 7
+}
+```
+
+## Tagged Data Operations
+
+### Download Tagged Data
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=downloadTaggedData&
+  transaction=9169681701986886056
+
+```
+
+**Response:**
+
+Downloaded file named `nxt` with contents:
+
+d4f167249340d6d746f49441b8ccdb1bd3521feb
+
+### Extend Tagged Data
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=extendTaggedData&
+  transaction=9086193976300572942&
+  secretPhrase=secretPhrase&
+  feeNQT=100000000&
+  deadline=60
+
+```
+
+**Response:**
+
+```json
+{
+  "signatureHash": "96cee31072bcdc82c85710c78e86d42aa8eac34e90960d97dcb87e9212534cc4",
+  "transactionJSON": {
+    "senderPublicKey": "10f09c34f225d425306e5be55a4946908156072afbead4d574a512d7e086ef5c",
+    "signature": "1be49ba648dcb242620d34762243399053837a32e5c2f0a392b27e70fcf823073f0...",
+    "feeNQT": "100000000",
+    "type": 6,
+    "fullHash": "77c6dcbf770f2ce04ca8ed14ba52cdff8f7e35515bc0a8440079acd156700fb6",
+    "version": 1,
+    "phased": false,
+    "ecBlockId": "9233989544625577248",
+    "signatureHash": "96cee31072bcdc82c85710c78e86d42aa8eac34e90960d97dcb87e9212534cc4",
+    "attachment": {
+      "version.TaggedDataExtend": 1,
+      "filename": "",
+      "data": "d4f167249340d6d746f49441b8ccdb1bd3521feb",
+      "name": "Stargate SG1 full series",
+      "channel": "torrent",
+      "description": "Hash of the torrent.",
+      "type": "",
+      "taggedData": "9086193976300572942",
+      "isText": true,
+      "tags": "video, scifi, torrent"
+    },
+    "senderRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+    "subtype": 1,
+    "amountNQT": "0",
+    "sender": "15295723609781267838",
+    "ecBlockHeight": 304612,
+    "deadline": 60,
+    "transaction": "16153302970465568375",
+    "timestamp": 47672016,
+    "height": 2147483647
+  },
+  "unsignedTransactionBytes": "0611d06ad7023c0010f09c34f225d425306e5be55a494...",
+  "broadcasted": true,
+  "requestProcessingTime": 28,
+  "transactionBytes": "0611d06ad7023c0010f09c34f225d425306e5be55a49469081560...",
+  "fullHash": "77c6dcbf770f2ce04ca8ed14ba52cdff8f7e35515bc0a8440079acd156700fb6",
+  "transaction": "16153302970465568375"
+}
+```
+
+### Get Account Tagged Data
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getAccountTaggedData&
+  account=BLX-4VDY-LNVT-LMAY-FMCKA&
+  lastIndex=0
+
+```
+
+**Response:**
+
+```json
+{
+  "data": [
+    {
+      "data": "d4f167249340d6d746f49441b8ccdb1bd3521feb",
+      "channel": "torrent",
+      "description": "Hash of the torrent.",
+      "type": "",
+      "parsedTags": ["video", "scifi", "torrent"],
+      "transactionTimestamp": 47843875,
+      "tags": "video, scifi, torrent",
+      "filename": "",
+      "accountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "name": "Stargate SG1 full series",
+      "blockTimestamp": 47672045,
+      "transaction": "9086193976300572942",
+      "account": "15295723609781267838",
+      "isText": true
+    }
+  ],
+  "requestProcessingTime": 2
+}
+```
+
+### Get All Tagged Data
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getAllTaggedData&
+  lastIndex=0
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 1,
+  "data": [
+    {
+      "data": "d4f167249340d6d746f49441b8ccdb1bd3521feb",
+      "channel": "torrent",
+      "description": "Hash of the torrent.",
+      "type": "",
+      "parsedTags": ["video", "scifi", "torrent"],
+      "transactionTimestamp": 47843875,
+      "tags": "video, scifi, torrent",
+      "filename": "",
+      "accountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "name": "Stargate SG1 full series",
+      "blockTimestamp": 47672045,
+      "transaction": "9086193976300572942",
+      "account": "15295723609781267838",
+      "isText": true
+    }
+  ]
+}
+```
+
+### Get Channel Tagged Data
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getChannelTaggedData&
+  channel=torrent&
+  lastIndex=0
+
+```
+
+**Response:**
+
+```json
+{
+  "data": [
+    {
+      "data": "d4f167249340d6d746f49441b8ccdb1bd3521feb",
+      "channel": "torrent",
+      "description": "Hash of the torrent.",
+      "type": "",
+      "parsedTags": ["video", "scifi", "torrent"],
+      "transactionTimestamp": 47843875,
+      "tags": "video, scifi, torrent",
+      "filename": "",
+      "accountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "name": "Stargate SG1 full series",
+      "blockTimestamp": 47672045,
+      "transaction": "9086193976300572942",
+      "account": "15295723609781267838",
+      "isText": true
+    }
+  ],
+  "requestProcessingTime": 1
+}
+```
+
+### Get Data Tag Count
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getDataTagCount
+
+```
+
+**Response:**
+
+```json
+{
+  "numberOfDataTags": 3,
+  "requestProcessingTime": 2
+}
+```
+
+### Get Data Tags
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getDataTags
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 5,
+  "tags": [
+    {
+      "count": 2,
+      "tag": "video"
+    },
+    {
+      "count": 1,
+      "tag": "scifi"
+    },
+    {
+      "count": 1,
+      "tag": "torrent"
+    }
+  ]
+}
+```
+
+### Get Data Tags Like
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getDataTagsLike&
+  tagPrefix=sci
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 9,
+  "tags": [
+    {
+      "count": 1,
+      "tag": "scifi"
+    }
+  ]
+}
+```
+
+### Get Tagged Data
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getTaggedData&
+  transaction=9086193976300572942
+
+```
+
+**Response:**
+
+```json
+{
+  "data": "d4f167249340d6d746f49441b8ccdb1bd3521feb",
+  "channel": "torrent",
+  "description": "Hash of the torrent.",
+  "requestProcessingTime": 3,
+  "type": "",
+  "parsedTags": ["video", "scifi", "torrent"],
+  "transactionTimestamp": 47843875,
+  "tags": "video, scifi, torrent",
+  "filename": "",
+  "accountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+  "name": "Stargate SG1 full series",
+  "blockTimestamp": 47672045,
+  "transaction": "9086193976300572942",
+  "account": "15295723609781267838",
+  "isText": true
+}
+```
+
+### Get Tagged Data Extend Transactions
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getTaggedDataExtendTransactions&
+  transaction=4344513120863790923
+
+```
+
+**Response:**
+
+```json
+{
+  "extendTransactions": [
+    {
+      "senderPublicKey": "631110059365218234cc28fb6c91019f4563cf910471a9e43221795f40ab6e3a",
+      "signature": "e4fe406198843207f5255e2c98119b3130b9810812934e0406a4de97a3443b0b205c907284c2e2cfd2534e8dcc17f08afb707db338e557d02673a2e6b0010186",
+      "feeNQT": "150000000",
+      "transactionIndex": 0,
+      "type": 6,
+      "confirmations": 31778,
+      "fullHash": "86e8bc8c891e1556dfb9114a0ba9c4e119e6df6ba241016a1e9a85223dea42f8",
+      "version": 1,
+      "phased": false,
+      "ecBlockId": "14132969248050944989",
+      "signatureHash": "2ed7b6a5d579a66596409b2619375fa0edd54ace2e7d10f0bdbc0a7126f1776c",
+      "senderRS": "BLX-G885-AKDX-5G2B-BLUCG",
+      "subtype": 1,
+      "amountNQT": "0",
+      "sender": "10892890577210644675",
+      "ecBlockHeight": 725746,
+      "block": "18314376737060578519",
+      "blockTimestamp": 78357439,
+      "deadline": 1440,
+      "transaction": "6202897637893269638",
+      "timestamp": 78357424,
+      "height": 725756
+    }
+  ],
+  "requestProcessingTime": 1
+}
+```
+
+### Search Tagged Data
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=searchTaggedData&
+  query=SG?&
+  lastIndex=0
+
+```
+
+**Response:**
+
+```json
+{
+  "data": [
+    {
+      "data": "d4f167249340d6d746f49441b8ccdb1bd3521feb",
+      "channel": "torrent",
+      "description": "Hash of the torrent.",
+      "type": "",
+      "parsedTags": ["video", "scifi", "torrent"],
+      "transactionTimestamp": 47843875,
+      "tags": "video, scifi, torrent",
+      "filename": "",
+      "accountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+      "name": "Stargate SG1 full series",
+      "blockTimestamp": 47672045,
+      "transaction": "9086193976300572942",
+      "account": "15295723609781267838",
+      "isText": true
+    }
+  ],
+  "requestProcessingTime": 22
+}
+```
+
+### Upload Tagged Data
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=uploadTaggedData&
+  data=d4f167249340d6d746f49441b8ccdb1bd3521feb&
+  name=Stargate SG1 full series&
+  description=Hash of the torrent.&
+  tags=video, scifi, torrent&
+  channel=torrent&
+  secretPhrase=secretPhrase&
+  feeNQT=100000000&
+  deadline=60
+
+```
+
+**Response:**
+
+```json
+{
+  "signatureHash": "953a1023c84939a6e31da0db913ed2829b318d59663daddce63bdf2193af912e",
+  "transactionJSON": {
+    "senderPublicKey": "10f09c34f225d425306e5be55a4946908156072afbead4d574a512d7e086ef5c",
+    "signature": "17da947a7dc30a6d722a53f064d817c559f8f9c1387290048793d81b49dbf5082a0...",
+    "feeNQT": "100000000",
+    "type": 6,
+    "fullHash": "0e91b0dd47a5187e26ea5b54f1917e3b879ee3cf096eb597ce22c6833863cdb2",
+    "version": 1,
+    "phased": false,
+    "ecBlockId": "7868019187120003959",
+    "signatureHash": "953a1023c84939a6e31da0db913ed2829b318d59663daddce63bdf2193af912e",
+    "attachment": {
+      "filename": "",
+      "data": "d4f167249340d6d746f49441b8ccdb1bd3521feb",
+      "name": "Stargate SG1 full series",
+      "channel": "torrent",
+      "description": "Hash of the torrent.",
+      "type": "",
+      "version.TaggedDataUpload": 1,
+      "isText": true,
+      "hash": "06fbac5b5358c00f5a2f19789b06220dca4e242a851b70072633a06ae8e6fb46",
+      "tags": "video, scifi, torrent"
+    },
+    "senderRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+    "subtype": 0,
+    "amountNQT": "0",
+    "sender": "15295723609781267838",
+    "ecBlockHeight": 304598,
+    "deadline": 60,
+    "transaction": "9086193976300572942",
+    "timestamp": 47671075,
+    "height": 2147483647
+  },
+  "unsignedTransactionBytes": "06102367d7023c0010f09c34f225d425306e5be55a494...",
+  "broadcasted": true,
+  "requestProcessingTime": 284,
+  "transactionBytes": "06102367d7023c0010f09c34f225d425306e5be55a49469081560...",
+  "fullHash": "0e91b0dd47a5187e26ea5b54f1917e3b879ee3cf096eb597ce22c6833863cdb2",
+  "transaction": "9086193976300572942"
+}
+```
+
+### Verify Tagged Data
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=verifyTaggedData&
+  transaction=9086193976300572942&
+  data=d4f167249340d6d746f49441b8ccdb1bd3521feb&
+  name=Stargate SG1 full series&
+  description=Hash of the torrent.&
+  tags=video, scifi, torrent&
+  channel=torrent
+
+```
+
+**Response:**
+
+```json
+{
+  "verify": true,
+  "requestProcessingTime": 7,
+  "version.TaggedDataUpload": 1,
+  "hash": "06fbac5b5358c00f5a2f19789b06220dca4e242a851b70072633a06ae8e6fb46"
+}
+```
+
+## Token Operations
+
+### Decode File Token
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=decodeFileToken&
+  file=test.txt&
+  token=u8q9ps0gdoo2bl158p4llpar583ld0cgejat9qnrgrgde4l5uscgan7fu25hi...
+
+```
+
+**Response:**
+
+```json
+{
+  "valid": true,
+  "accountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+  "requestProcessingTime": 3,
+  "account": "15295723609781267838",
+  "timestamp": 49748229
+}
+```
+
+### Decode Token
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=decodeToken&
+  website=test&
+  token=u8q9ps0gdoo2bl158p4llpar583ld0cgejat9qnrgrgde4l5ut8bgn...
+
+```
+
+**Response:**
+
+```json
+{
+  "valid": true,
+  "accountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+  "requestProcessingTime": 2,
+  "account": "15295723609781267838",
+  "timestamp": 49762488
+}
+```
+
+### Generate File Token
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=generateFileToken&
+  secretPhrase=secretPhrase&
+  file=test.txt
+
+```
+
+**Response:**
+
+```json
+{
+  "valid": true,
+  "accountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+  "requestProcessingTime": 4,
+  "account": "15295723609781267838",
+  "timestamp": 49748229,
+  "token": "u8q9ps0gdoo2bl158p4llpar583ld0cgejat9qnrgrgde4l5uscgan7fu25hi..."
+}
+```
+
+### Generate Token
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=generateToken&
+  secretPhrase=secretPhrase&
+  website=test
+
+```
+
+**Response:**
+
+```json
+{
+  "valid": true,
+  "accountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+  "requestProcessingTime": 4,
+  "account": "15295723609781267838",
+  "timestamp": 49762488,
+  "token": "u8q9ps0gdoo2bl158p4llpar583ld0cgejat9qnrgrgde4l5ut8bgn..."
+}
+```
+
+## Transaction Operations
+
+### Broadcast Transaction
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=broadcastTransaction&
+  transactionBytes=001046aac6013c0057fb6f3a958e320bb49c4e81b4c2cf28b9f25d086c143...
+
+```
+
+**Response:**
+
+```json
+
+{
+ "requestProcessingTime": 4,
+ "fullHash": "3a304584f20cf3d2cbbdd9698ff9a166427005ab98fbe9ca4ad6253651ee81f1",
+ "transaction": "15200507403046301754"
+}
+
+**Note**: If the transaction has already been broadcast, the following INFO notice appears in the console output and log file: `Transaction 15200507403046301754 already in blockchain (or unconfirmed pool), will not broadcast again`.
+```
+
+### Calculate Full Hash
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=calculateFullHash&
+  unsignedTransactionBytes=001046aac6013c0057fb6f3a958e320bb49c4e81b4c2cf28b9f2...&
+  signatureHash=b35eae7d2f01639810d37694138aa0a86fbbf8a9bf58c2be4f2a5b8f0f30b3f7
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 1,
+  "fullHash": "3a304584f20cf3d2cbbdd9698ff9a166427005ab98fbe9ca4ad6253651ee81f1"
+}
+```
+
+### Get Expected Transactions
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getExpectedTransactions&
+  account=BLX-X5A4-FTMJ-J97M-F3ANH
+
+```
+
+**Response:**
+
+```json
+{
+  "expectedTransactions": [
+    {
+      "senderPublicKey": "aaf2ffc347dae1442f218c17ff9ae1e917ab32af0af779360737f6faf7a4023e",
+      "signature": "58720e3cb6cd4a9ad1dcb0bede55952e624b02a125aa0ac5934d7312cf87660147b495...",
+      "feeNQT": "100000000",
+      "type": 2,
+      "fullHash": "79df9c85bc30f4a72c5d1899ce57b6533f321e1412f433fc3975cd4142a3c781",
+      "version": 1,
+      "phased": false,
+      "ecBlockId": "17663518922057624367",
+      "signatureHash": "687701be20bfb0935b3165ae31c08b685a173be660a9720ed0319ec17cc646eb",
+      "attachment": {
+        "quantityQNT": "5",
+        "priceNQT": "908000000",
+        "asset": "8122396658538927693",
+        "version.BidOrderPlacement": 1
+      },
+      "senderRS": "BLX-X5A4-FTMJ-J97M-F3ANH",
+      "subtype": 3,
+      "amountNQT": "0",
+      "sender": "15551212561974070530",
+      "ecBlockHeight": 820879,
+      "deadline": 1440,
+      "transaction": "12102351684905000825",
+      "timestamp": 80248727,
+      "height": 2147483647
+    }
+  ],
+  "requestProcessingTime": 1
+}
+```
+
+### Get Referencing Transactions
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getReferencingTransactions&
+  transaction=9132239833429154693
+
+```
+
+**Response:**
+
+```json
+
+{
+ "requestProcessingTime": 1,
+ "transactions": [
+  {
+   "senderPublicKey": "36bb17bc15678804a95ed895d524bb361aa5dfc4e78a800901aefff783f48010",
+   "signature": "f39849eee16cd534f86915e22bd41d91fd6e965278242c957422196454deb705aa4...",
+   "feeNQT": "100000000",
+   "transactionIndex": 0,
+   "type": 1,
+   "confirmations": 216565,
+   "fullHash": "c96b60bafc581891be88eae695f773677fe3cf7322cc149831d70de046041ea7",
+   "version": 1,
+   "phased": false,
+   "ecBlockId": "1861841686166492176",
+   "referencedTransactionFullHash": "859b376bbe3bbc7ebd5520d0d3fd20256f921e4c6bc3e...",
+   "signatureHash": "0ed3aaabc682d4b5242b69930c0f659b62776b92bc2eecc40e37c895c5260eb4",
+   "attachment": {
+    "version.Message": 1,
+    "messageIsText": true,
+    "message": "],\\"type\\":\\"payment\\",\\"oracles\\":[{\\"name\\":\\"nayru\\"}]}",
+    "version.ArbitraryMessage": 0
+   },
+   "senderRS": "BLX-DRGK-5CLR-35AZ-84R5R",
+   "subtype": 0,
+   "amountNQT": "0",
+   "sender": "7750380612824194513",
+   "ecBlockHeight": 614622,
+   "block": "13844289828761736561",
+   "blockTimestamp": 67496993,
+   "deadline": 1440,
+   "transaction": "10455204377422490569",
+   "timestamp": 67496806,
+   "height": 614629
+  }
+ ]
+}
+```
+
+### Get Transaction
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getTransaction&
+  transaction=15200507403046301754
+
+```
+
+**Response:**
+
+```json
+{
+  "senderPublicKey": "57fb6f3a958e320bb49c4e81b4c2cf28b9f25d086c143b473beec228f79ff93c",
+  "signature": "5f0378b7390ff5a815eadd1354de533eef682f139362b153576e2207320a6...",
+  "feeNQT": "100000000",
+  "transactionIndex": 2,
+  "requestProcessingTime": 2842,
+  "type": 0,
+  "confirmations": 849,
+  "fullHash": "3a304584f20cf3d2cbbdd9698ff9a166427005ab98fbe9ca4ad6253651ee81f1",
+  "version": 1,
+  "ecBlockId": "17321329645912574173",
+  "signatureHash": "b35eae7d2f01639810d37694138aa0a86fbbf8a9bf58c2be4f2a5b8f0f30b3f7",
+  "senderRS": "BLX-L6FM-89WK-VK8P-FCRBB",
+  "subtype": 0,
+  "amountNQT": "100000000",
+  "sender": "15323192282528158131",
+  "recipientRS": "BLX-4VNQ-RWZC-4WWQ-GVM8S",
+  "recipient": "17013046603665206934",
+  "ecBlockHeight": 275727,
+  "block": "8455642159445842600",
+  "blockTimestamp": 29797208,
+  "deadline": 60,
+  "transaction": "15200507403046301754",
+  "timestamp": 29796934,
+  "height": 275730
+}
+```
+
+### Get Transaction Bytes
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getTransactionBytes&
+  transaction=15200507403046301754
+
+```
+
+**Response:**
+
+```json
+{
+  "unsignedTransactionBytes": "001046aac6013c0057fb6f3a958e320bb49c4e81b4c2cf28b9f25d086c143b473...",
+  "requestProcessingTime": 66,
+  "confirmations": 1019,
+  "transactionBytes": "001046aac6013c0057fb6f3a958e320bb49c4e81b4c2cf28b9f25d086c143b473..."
+}
+```
+
+### Parse Transaction
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=parseTransaction&
+  transactionBytes=001046aac6013c0057fb6f3a958e320bb49c4e81b4c2cf28b9f25d086c143...
+
+```
+
+**Response:**
+
+```json
+{
+  "senderPublicKey": "57fb6f3a958e320bb49c4e81b4c2cf28b9f25d086c143b473beec228f79ff93c",
+  "signature": "5f0378b7390ff5a815eadd1354de533eef682f139362b153576e2207320a6...",
+  "feeNQT": "100000000",
+  "requestProcessingTime": 2,
+  "type": 0,
+  "fullHash": "3a304584f20cf3d2cbbdd9698ff9a166427005ab98fbe9ca4ad6253651ee81f1",
+  "version": 1,
+  "ecBlockId": "17321329645912574173",
+  "signatureHash": "b35eae7d2f01639810d37694138aa0a86fbbf8a9bf58c2be4f2a5b8f0f30b3f7",
+  "senderRS": "BLX-L6FM-89WK-VK8P-FCRBB",
+  "subtype": 0,
+  "amountNQT": "100000000",
+  "sender": "15323192282528158131",
+  "recipientRS": "BLX-4VNQ-RWZC-4WWQ-GVM8S",
+  "recipient": "17013046603665206934",
+  "ecBlockHeight": 275727,
+  "verify": true,
+  "deadline": 60,
+  "transaction": "15200507403046301754",
+  "timestamp": 29796934,
+  "height": 2147483647
+}
+```
+
+### Retrieve Pruned Transaction
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=retrievePrunedTransaction&
+  transaction=9343032000583494722
+
+```
+
+**Response:**
+
+```json
+{
+  "senderPublicKey": "7c94b068c95edcaf6ad588cda8784c7c27421ac334be092a6b487885f40f4f0c",
+  "signature": "a4b4b7829b90ae0aa6c6654d364d23b335c64383bacc0e518b5aa1f2746de706121d308ae11244bf0933eddaed170c958bb9520700d63a7ed9ab30eb766717ca",
+  "feeNQT": "320000000",
+  "transactionIndex": 0,
+  "requestProcessingTime": 0,
+  "type": 6,
+  "confirmations": 41543,
+  "fullHash": "42ece25f1a1ea9815a7e6856635c323810efd2a38686bd57b7241fce28841da0",
+  "version": 1,
+  "phased": false,
+  "ecBlockId": "11517076094591827523",
+  "signatureHash": "5202c62fafb4b990313f03cf8882c2bad73c7888790794bb8c46a186abfc34ca",
+  "attachment": {
+    "filename": "7dba799bc6d4439191f89a88a9e50dad.jpg",
+    "data": "ffd8ffe000104a46494600010100000100010000ffdb00430003050805050404050a07070...",
+    "name": "Darkwing Duck",
+    "channel": "Darkwing Duck",
+    "description": "Darkwing Duck",
+    "type": "image/jpeg",
+    "version.TaggedDataUpload": 1,
+    "isText": false,
+    "hash": "5fb2f476f2556d15e4d419c6ff10bdbd05a7c5284242eba67c4de1adaee185a2",
+    "tags": "Darkwing Duck"
+  },
+  "senderRS": "BLX-K8HZ-VMMS-ZX8E-EY5JR",
+  "subtype": 0,
+  "amountNQT": "0",
+  "sender": "14681874272470211071",
+  "ecBlockHeight": 788531,
+  "block": "17859315470736709713",
+  "blockTimestamp": 78307385,
+  "deadline": 1440,
+  "transaction": "9343032000583494722",
+  "timestamp": 78307322,
+  "height": 788546
+}
+```
+
+### Send Transaction
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=sendTransaction&
+  transactionBytes=00109e61b606a0052bdd59320496b133052f58c82e8...
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 2,
+  "fullHash": "799ad836f9c65e2985978123f145130b867bab9a86f6fdabae8e8c8f25c087dc",
+  "transaction": "2981038777035168377"
+}
+```
+
+### Sign Transaction
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=signTransaction&
+  unsignedTransactionBytes=00100cfb3c03a00510f09c34f225d425306e5be55a494690...&
+  secretPhrase=SecretPhrase
+
+```
+
+**Response:**
+
+```json
+{
+  "signatureHash": "3f4830bf28f105d5075f5e084c36e4582a156e713abfe0bc6ee51cbf8b20f2d2",
+  "transactionJSON": {
+    "senderPublicKey": "10f09c34f225d425306e5be55a4946908156072afbead4d574a512d7e086ef5c",
+    "signature": "24513e93029688100c5a04183ffddc49812fd7a137a15fb3a2545aa9a2bcb5004a3...",
+    "feeNQT": "100000000",
+    "type": 0,
+    "fullHash": "c34af8f1509e3be79c4562e24125ff2a8f026871fdd1a0366ad315bf8fab76b9",
+    "version": 1,
+    "phased": false,
+    "ecBlockId": "15869644242181198665",
+    "signatureHash": "3f4830bf28f105d5075f5e084c36e4582a156e713abfe0bc6ee51cbf8b20f2d2",
+    "attachment": {
+      "version.OrdinaryPayment": 0
+    },
+    "senderRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+    "subtype": 0,
+    "amountNQT": "1000000000",
+    "sender": "15295723609781267838",
+    "recipientRS": "BLX-BMUV-8QQR-47VK-CR7F3",
+    "recipient": "11580081983047651163",
+    "ecBlockHeight": 382777,
+    "deadline": 1440,
+    "transaction": "16662085316881435331",
+    "timestamp": 54328076,
+    "height": 2147483647
+  },
+  "verify": true,
+  "requestProcessingTime": 5,
+  "transactionBytes": "00100cfb3c03a00510f09c34f225d425306e5be55a4946908156072afbead4...",
+  "fullHash": "c34af8f1509e3be79c4562e24125ff2a8f026871fdd1a0366ad315bf8fab76b9",
+  "transaction": "16662085316881435331"
+}
+```
+
+## Voting System Operations
+
+### Cast Vote
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=castVote&
+  poll=5916389507928675673&
+  vote02=1&
+  secretPhrase=secretPhrase&
+  feeNQT=100000000&
+  deadline=60
+
+```
+
+**Response:**
+
+```json
+{
+  "signatureHash": "54fb93860d0668477d34f7828d6a2c19be1c9229e7cb5adcebdc4962319ab22b",
+  "transactionJSON": {
+    "senderPublicKey": "10f09c34f225d425306e5be55a4946908156072afbead4d574a512d7e086ef5c",
+    "signature": "d48873e936e74069a56ba0eecdbfe3abe706bb7443e51d6651f59ef2500694087bd...",
+    "feeNQT": "100000000",
+    "type": 1,
+    "fullHash": "ae7b714aadfe5efee0d690dfffac533dbf190827ed2f972d3dd552f4399ed648",
+    "version": 1,
+    "phased": false,
+    "ecBlockId": "1999174047197129566",
+    "signatureHash": "54fb93860d0668477d34f7828d6a2c19be1c9229e7cb5adcebdc4962319ab22b",
+    "attachment": {
+      "version.VoteCasting": 1,
+      "poll": "5916389507928675673",
+      "vote": [-128, -128, 1]
+    },
+    "senderRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+    "subtype": 3,
+    "amountNQT": "0",
+    "sender": "15295723609781267838",
+    "ecBlockHeight": 256208,
+    "deadline": 60,
+    "transaction": "18329367553676245934",
+    "timestamp": 43095711,
+    "height": 2147483647
+  },
+  "unsignedTransactionBytes": "01139f9691023c0010f09c34f225d425306e5be55a4946908156072a...",
+  "broadcasted": true,
+  "requestProcessingTime": 99,
+  "transactionBytes": "01139f9691023c0010f09c34f225d425306e5be55a4946908156072afbead4d5...",
+  "fullHash": "ae7b714aadfe5efee0d690dfffac533dbf190827ed2f972d3dd552f4399ed648",
+  "transaction": "18329367553676245934"
+}
+```
+
+### Create Poll
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=createPoll&
+  name=Gender Poll&
+  description=What is your gender?&
+  minNumberOfOptions=1&
+  maxNumberOfOptions=1&
+  minRangeValue=0&
+  maxRangeValue=1&
+  minBalance=100000000000&
+  minBalanceModel=1&
+  option00=Male&
+  option01=Female&
+  secretPhrase=secretPhrase&
+  feeNQT=1000000000&
+  deadline=60
+
+```
+
+**Response:**
+
+```json
+{
+  "signatureHash": "c55ceb631d9d9e92b99a326e0323f24d80b7859a28ca43c82e1a03a6b05f02fe",
+  "transactionJSON": {
+    "senderPublicKey": "10f09c34f225d425306e5be55a4946908156072afbead4d574a512d7e086ef5c",
+    "signature": "ffcd924f00e14c9e2cc14a04984f0d0c21bdf4551c3e332e1559c378b2975b0b9f8...",
+    "feeNQT": "1000000000",
+    "type": 1,
+    "fullHash": "fc9e0c8014853b7e48b16e2c51ca28c4cc74939ba193e8c040c97e36a42b89c5",
+    "version": 1,
+    "phased": false,
+    "ecBlockId": "11503767830531050607",
+    "signatureHash": "c55ceb631d9d9e92b99a326e0323f24d80b7859a28ca43c82e1a03a6b05f02fe",
+    "attachment": {
+      "minRangeValue": 0,
+      "votingModel": 0,
+      "description": "What is your gender?",
+      "minNumberOfOptions": 1,
+      "holding": "0",
+      "minBalance": "100000000000",
+      "name": "Gender Poll",
+      "finishHeight": 256453,
+      "options": ["Male", "Female"],
+      "maxNumberOfOptions": 1,
+      "minBalanceModel": 1,
+      "version.PollCreation": 1,
+      "maxRangeValue": 1
+    },
+    "senderRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+    "subtype": 2,
+    "amountNQT": "0",
+    "sender": "15295723609781267838",
+    "ecBlockHeight": 256410,
+    "deadline": 60,
+    "transaction": "9096010195498999548",
+    "timestamp": 43114026,
+    "height": 2147483647
+  },
+  "unsignedTransactionBytes": "01122ade91023c0010f09c34f225d425306e5be55a4946908156072afb...",
+  "broadcasted": true,
+  "requestProcessingTime": 6,
+  "transactionBytes": "01122ade91023c0010f09c34f225d425306e5be55a4946908156072afbead4d574...",
+  "fullHash": "fc9e0c8014853b7e48b16e2c51ca28c4cc74939ba193e8c040c97e36a42b89c5",
+  "transaction": "9096010195498999548"
+}
+```
+
+### Get Poll
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getPoll&
+  poll=9096010195498999548
+
+```
+
+**Response:**
+
+```json
+{
+  "minRangeValue": 0,
+  "votingModel": 0,
+  "description": "What is your gender?",
+  "finished": true,
+  "poll": "9096010195498999548",
+  "requestProcessingTime": 1,
+  "minNumberOfOptions": 1,
+  "minBalance": "100000000000",
+  "accountRS": "BLX-4VDY-LNVT-LMAY-FMCKA",
+  "name": "Gender Poll",
+  "options": ["Male", "Female"],
+  "finishHeight": 256453,
+  "maxNumberOfOptions": 1,
+  "minBalanceModel": 1,
+  "account": "15295723609781267838",
+  "maxRangeValue": 1
+}
+```
+
+### Get Poll Result
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getPollResult&
+  poll=16742897359122764363
+
+```
+
+**Response:**
+
+```json
+{
+  "votingModel": 0,
+  "minBalance": "0",
+  "options": ["Option 00", "Option 01", "Option 02"],
+  "finished": true,
+  "poll": "16742897359122764363",
+  "requestProcessingTime": 2,
+  "minBalanceModel": 0,
+  "results": [
+    {
+      "result": "3",
+      "weight": "1"
+    },
+    {
+      "result": "9",
+      "weight": "2"
+    },
+    {
+      "result": "9",
+      "weight": "2"
+    }
+  ]
+}
+```
+
+### Get Poll Vote
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getPollVote&
+  account=9096010195498999548
+
+```
+
+**Response:**
+
+```json
+{
+  "voterRS": "BLX-THLJ-CYAL-JQST-6FNS5",
+  "votes": ["1", ""],
+  "voter": "4747512364439223888",
+  "requestProcessingTime": 1,
+  "transaction": "6214591232702166122"
+}
+```
+
+### Get Poll Votes
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getPollVotes&
+  poll=9096010195498999548&
+  lastIndex=0
+
+```
+
+**Response:**
+
+```json
+{
+  "votes": [
+    {
+      "voterRS": "BLX-THLJ-CYAL-JQST-6FNS5",
+      "votes": ["1", ""],
+      "voter": "4747512364439223888",
+      "transaction": "6214591232702166122"
+    }
+  ],
+  "requestProcessingTime": 1
+}
+```
+
+### Get Polls
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getPolls&
+  lastIndex=0
+
+```
+
+**Response:**
+
+```json
+{
+  "polls": [
+    {
+      "minRangeValue": 0,
+      "votingModel": 3,
+      "description": "Should we start fully backing credits with something tangible?",
+      "finished": false,
+      "poll": "10307833923604182368",
+      "minNumberOfOptions": 1,
+      "holding": "415923435949896799",
+      "minBalance": "1000000000",
+      "accountRS": "BLX-3BCV-8Q5G-9NP6-576DP",
+      "name": "CRDTS owners poll",
+      "options": ["Yes", "No", "go for fractional reserve backing"],
+      "finishHeight": 260218,
+      "maxNumberOfOptions": 1,
+      "minBalanceModel": 3,
+      "account": "4227900615136683355",
+      "maxRangeValue": 1
+    }
+  ],
+  "requestProcessingTime": 0
+}
+```
+
+### Search Polls
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=searchPolls&
+  query=hello&
+  includeFinished=true
+
+```
+
+**Response:**
+
+```json
+{
+  "polls": [
+    {
+      "minRangeValue": 0,
+      "votingModel": 1,
+      "description": "Hello World Poll",
+      "finished": true,
+      "poll": "3043888702585899321",
+      "minNumberOfOptions": 1,
+      "minBalance": "0",
+      "accountRS": "BLX-XK4R-7VJU-6EQG-7R335",
+      "name": "Poll1",
+      "options": ["Hello", "World"],
+      "finishHeight": 255816,
+      "maxNumberOfOptions": 1,
+      "minBalanceModel": 1,
+      "account": "5873880488492319831",
+      "maxRangeValue": 1
+    }
+  ],
+  "requestProcessingTime": 3
+}
+```
+
+## Utilities
+
+### Decode QR Code
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=decodeQRCode&
+  qrCodeBase64=/9j/4AAQSkZJRgABAgAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRo...
+
+```
+
+**Response:**
+
+```json
+{
+  "qrCodeData": "BLX-7A48-47JL-T7LD-D5FS3",
+  "requestProcessingTime": 15
+}
+```
+
+### Detect Mime Type
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=detectMimeType&
+  data=/9j/4AAQSkZJRgABAgAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRo...&
+  isText=false
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 348,
+  "type": "image/png"
+}
+```
+
+### Encode QR Code
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=encodeQRCode&
+  qrCodeData=BLX-7A48-47JL-T7LD-D5FS3&
+  width=100&
+  height=100
+
+```
+
+**Response:**
+
+```json
+{
+  "qrCodeBase64": "/9j/4AAQSkZJRgABAgAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UH...",
+  "requestProcessingTime": 15
+}
+```
+
+### Full Hash To Id
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=fullHashToId&
+  fullHash=c34af8f1509e3be79c4562e24125ff2a8f026871fdd1a0366ad315bf8fab76b9
+
+```
+
+**Response:**
+
+```json
+{
+  "stringId": "16662085316881435331",
+  "requestProcessingTime": 0,
+  "longId": "-1784658756828116285"
+}
+```
+
+### Hash
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=hash&
+  hashAlgorithm=2&
+  secret=74657374
+
+**Note:** `74657374` is the UTF-8 hex string for the secret phrase "test".
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 1,
+  "hash": "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08"
+}
+```
+
+### Hex Convert
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=hexConvert&
+  string=616263
+
+```
+
+**Response:**
+
+```json
+{
+  "binary": "363136323633",
+  "text": "abc",
+  "requestProcessingTime": 1
+}
+```
+
+### Long Convert
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=longConvert&
+  id=15323192282528158131
+
+```
+
+**Response:**
+
+```json
+{
+  "stringId": "15323192282528158131",
+  "requestProcessingTime": 0,
+  "longId": "-3123551791181393485"
+}
+```
+
+### RS Convert
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=rsConvert&
+  account=BLX-L6FM-89WK-VK8P-FCRBB
+
+```
+
+**Response:**
+
+```json
+{
+  "accountRS": "BLX-L6FM-89WK-VK8P-FCRBB",
+  "requestProcessingTime": 1,
+  "account": "15323192282528158131"
+}
+```
+
+## Debug Operations
+
+### Clear Unconfirmed Transactions
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=clearUnconfirmedTransactions
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 814,
+  "done": true
+}
+```
+
+### Dump Peers
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=dumpPeers&
+  version=1.5.11&
+  connect=true
+
+```
+
+**Response:**
+
+```json
+{
+  "peers": "198.105.122.160; 174.140.167.239; ...",
+  "count": 37,
+  "requestProcessingTime": 176897
+}
+```
+
+### Full Reset
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=fullReset
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 4378,
+  "done": true
+}
+```
+
+### Get All Broadcasted Transactions
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=GetAllBroadcastedTransactions
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 1,
+  "transactions": []
+}
+```
+
+### Get All Waiting Transactions
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getAllWaitingTransactions
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 1,
+  "transactions": []
+}
+```
+
+### Get Log
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getLog&
+  count=3
+
+```
+
+**Response:**
+
+```json
+{
+  "messages": [
+    "2015-04-28 18:26:52 FINE: Known peers: 29\\n",
+    "2015-04-28 18:27:12 FINE: Got 0 confirmations\\n",
+    "2015-04-28 18:27:12 FINE: Downloaded 230 blocks\\n"
+  ],
+  "requestProcessingTime": 0
+}
+```
+
+### Get Stack Traces
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=getStackTrace
+
+```
+
+**Response:**
+
+```json
+
+{
+ "threads": [
+  ⋮
+  {
+   "trace": [
+    "java.lang.Object.wait(Native Method)",
+    "java.lang.Object.wait(Object.java:502)",
+    "java.lang.ref.Reference$ReferenceHandler.run(Reference.java:157)"
+   ],
+   "name": "Reference Handler",
+   "id": 2,
+   "state": "WAITING"
+  }
+ ],
+ "requestProcessingTime": 5,
+ "locks": []
+}
+```
+
+### Lucene Reindex
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=luceneReindex
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 4480,
+  "done": true
+}
+```
+
+### Pop Off
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=popOff&
+  numBlocks=1
+
+```
+
+**Response:**
+
+```json
+{
+  "blocks": [
+    {
+      "previousBlockHash": "5dd57ec106d9ba4cb1442017586b9df23c2c31ec5f1cb46fd3206015a96fd057",
+      "payloadLength": 0,
+      "totalAmountNQT": "0",
+      "generationSignature": "e23740a05b65aa01a890a9ba1c9766183a328455b6e347add727a823e151db99",
+      "generator": "16120433118765388429",
+      "generatorPublicKey": "f35600023d42e79cbf0518a174141bce1decb13332e397553c3f62df7261414a",
+      "baseTarget": "268653798",
+      "payloadHash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "generatorRS": "BLX-A6NF-JE4R-XB6L-FAUFZ",
+      "nextBlock": "12812496435932308379",
+      "numberOfTransactions": 0,
+      "blockSignature": "d9aba136c708e4f84b7ae1cf0415b25a75f9eefc8a47b1963b237ada9982a...",
+      "transactions": [],
+      "version": 3,
+      "totalFeeNQT": "0",
+      "previousBlock": "5528970115590051165",
+      "block": "8125766982300698657",
+      "height": 212194,
+      "timestamp": 23052841
+    }
+  ],
+  "requestProcessingTime": 109
+}
+```
+
+### Rebroadcast Unconfirmed Transactions
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=RebroadcastUnconfirmedTransactions
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 2,
+  "done": true
+}
+```
+
+### Requeue Unconfirmed Transactions
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=requeueUnconfirmedTransactions
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 1,
+  "done": true
+}
+```
+
+### Retrieve Pruned Data
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=retrievePrunedData
+
+```
+
+**Response:**
+
+```json
+{
+  "numberOfPrunedData": 0,
+  "requestProcessingTime": 4604,
+  "done": true
+}
+```
+
+### Scan
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=scan
+
+```
+
+**Response:**
+
+```json
+{
+  "scanTime": 8,
+  "requestProcessingTime": 8445,
+  "done": true
+}
+```
+
+### Set Logging
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=setLogging
+
+```
+
+**Response:**
+
+```json
+{
+  "loggingUpdated": true
+}
+```
+
+### Shutdown
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=shutdown
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 2,
+  "shutdown": true
+}
+```
+
+### Trim Derived Tables
+
+**Request:**
+
+```
+
+http://localhost:2022/nxt?
+  requestType=trimDerivedTables
+
+```
+
+**Response:**
+
+```json
+{
+  "requestProcessingTime": 394,
+  "done": true
+}
+```

@@ -16,7 +16,7 @@ Cast a vote on a poll. POST only.
 
 **Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API').
 
-**Example:** Refer to [Cast Vote](examples.mdx#cast-vote) example.
+**Example:** Refer to [Cast Vote](examples2.mdx#cast-vote) example.
 
 ### Create Poll
 
@@ -47,7 +47,7 @@ Create a new poll. POST only.
 
 **Response:** Refer to [Create Transaction Response](create_transaction.mdx#create-transaction-response 'The Blue0x API'). The transaction ID is also the poll ID.
 
-**Example:** Refer to [Create Poll](examples.mdx#create-poll) example.
+**Example:** Refer to [Create Poll](examples2.mdx#create-poll) example.
 
 ### Get Poll
 
@@ -81,7 +81,7 @@ Get the details of a poll.
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Poll](examples.mdx#get-poll) example.
+**Example:** Refer to [Get Poll](examples2.mdx#get-poll) example.
 
 ### Get Poll Result
 
@@ -116,7 +116,7 @@ Get the result of a poll.
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Poll Result](examples.mdx#get-poll-result) example.
+**Example:** Refer to [Get Poll Result](examples2.mdx#get-poll-result) example.
 
 ### Get Poll Vote
 
@@ -143,7 +143,7 @@ Get a poll vote given a poll ID and an account ID.
 
 **Note:** Votes are deleted from the database 1441 blocks after the poll is finished. Only aggregate results are kept (refer to [Get Poll Result](#get-poll-result 'The Blue0x API')).
 
-**Example:** Refer to [Get Poll Vote](examples.mdx#get-poll-vote) example.
+**Example:** Refer to [Get Poll Vote](examples2.mdx#get-poll-vote) example.
 
 ### Get Poll Votes
 
@@ -167,7 +167,7 @@ Get all votes on a poll in reverse chronological order.
 
 **Note:** Votes are deleted from the database 1441 blocks after the poll is finished. Only aggregate results are kept (refer to [Get Poll Result](#get-poll-result 'The Blue0x API')).
 
-**Example:** Refer to [Get Poll Votes](examples.mdx#get-poll-votes) example.
+**Example:** Refer to [Get Poll Votes](examples2.mdx#get-poll-votes) example.
 
 ### Get Polls
 
@@ -191,7 +191,7 @@ Get poll details in reverse creation order.
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Polls](examples.mdx#get-polls) example.
+**Example:** Refer to [Get Polls](examples2.mdx#get-polls) example.
 
 ### Search Polls
 
@@ -213,4 +213,4 @@ Search for poll details given a name/description query string.
 - `lastBlock` (S) is the last block ID on the blockchain (applies if `requireBlock` is provided but not `requireLastBlock`)
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Search Polls](examples.mdx#search-polls) example.
+**Example:** Refer to [Search Polls](examples2.mdx#search-polls) example.

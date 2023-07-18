@@ -13,7 +13,7 @@ Add a peer to the list of known peers and attempt to connect to it. Password pro
 
 - `isNewlyAdded` is `true` if the peer was not already known, omitted otherwise
 
-**Example:** Refer to [Add Peer](examples.mdx#add-peer) example.
+**Example:** Refer to [Add Peer](examples2.mdx#add-peer) example.
 
 ### Blacklist API Proxy Peer
 
@@ -30,7 +30,7 @@ Blacklist a remote node from the UI, so it won't be used when in roaming and lig
 - `done` (B) is `true` if the peer is blacklisted
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Blacklist API Proxy Peer](examples.mdx#blacklist-api-proxy-peer) example.
+**Example:** Refer to [Blacklist API Proxy Peer](examples2.mdx#blacklist-api-proxy-peer) example.
 
 ### Blacklist Peer
 
@@ -46,7 +46,7 @@ Blacklist a peer for the default blacklisting period. Password protected like th
 - `done` (B) is `true` if the peer is blacklisted
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Blacklist Peer](examples.mdx#blacklist-peer) example.
+**Example:** Refer to [Blacklist Peer](examples2.mdx#blacklist-peer) example.
 
 ### Get Inbound Peers
 
@@ -62,7 +62,7 @@ Get all peers that have sent a request to this peer in the last 30 minutes.
 - `peers` (A) is an array of peer addresses or peer objects (refer to [Get Peer](#get-peer) for details) depending on `includePeerInfo`
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Inbound Peers](examples.mdx#get-inbound-peers) example.
+**Example:** Refer to [Get Inbound Peers](examples2.mdx#get-inbound-peers) example.
 
 ### Get My Info
 
@@ -78,7 +78,7 @@ Get hostname and address of the requesting node.
 - `address` (S) is the node address
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get My Info](examples.mdx#get-my-info) example.
+**Example:** Refer to [Get My Info](examples2.mdx#get-my-info) example.
 
 ### Get Peer
 
@@ -112,7 +112,7 @@ Get information about a given peer.
 - `lastConnectAttempt` (B) is the timestamp (in seconds since the genesis block) of the last connection attempt to the peer
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Peer](examples.mdx#get-peer) example.
+**Example:** Refer to [Get Peer](examples2.mdx#get-peer) example.
 
 ### Get Peers
 
@@ -133,7 +133,7 @@ Get a list of peer IP addresses.
 - `peers` (A) is an array of peer addresses
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Get Peers](examples.mdx#get-peers) example.
+**Example:** Refer to [Get Peers](examples2.mdx#get-peers) example.
 
 ### Set API Proxy Peer
 
@@ -170,4 +170,4 @@ Set the remote node to use when in roaming and light client modes. POST only.
 - `lastConnectAttempt` (B) is the timestamp (in seconds since the genesis block) of the last connection attempt to the peer
 - `requestProcessingTime` (N) is the API request processing time (in millisec)
 
-**Example:** Refer to [Set API Proxy Peer](examples.mdx#set-api-proxy-peer) example.
+**Example:** Refer to [Set API Proxy Peer](examples2.mdx#set-api-proxy-peer) example.
