@@ -176,16 +176,16 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="relative from-gray-50 to-gray-100">
+      <div className="relative from-gray-50 to-gray-200">
         <div className="mx-auto px-4 pb-16 pt-8 sm:pb-24 sm:pt-20 lg:max-w-7xl lg:pt-24">
           <h2 className="text-4xl font-extrabold tracking-tight dark:text-white lg:text-center">
             Easy to setup and use
           </h2>
-          <p className="mx-auto mt-4 text-lg font-medium text-gray-400 lg:max-w-3xl lg:text-center lg:text-xl">
+          <p className="mx-auto mt-4 text-lg font-medium text-gray-400 lg:max-w-3xl lg:text-center">
             No matter your skill set or hardware, we got you covered.
           </p>
           <div className="mb-14 mt-8 flex justify-center">
-            <div className="overflow-hidden rounded-md shadow lg:w-7/12">
+            <div className="overflow-hidden rounded-md shadow lg:w-7/12 border border-[#343434]">
               <ReactCompareSlider
                 itemOne={<Image src={before} alt="Exchange image" className="w-full object-cover" />}
                 itemTwo={<Image src={after} alt="Market image" className="w-full object-cover" />}
