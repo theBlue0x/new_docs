@@ -177,7 +177,7 @@ export default function Home() {
       </div>
 
       <div className="relative from-gray-50 to-gray-200">
-        <div className="mx-auto px-4 pb-16 pt-8 sm:pb-24 sm:pt-20 lg:max-w-7xl lg:pt-24">
+        <div className="mx-auto px-6 pt-4 pb-12 sm:py-18 lg:max-w-7xl lg:pt-18">
           <h2 className="text-4xl font-extrabold tracking-tight dark:text-white lg:text-center">
             Easy to setup and use
           </h2>
