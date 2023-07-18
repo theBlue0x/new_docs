@@ -187,9 +187,7 @@ export default function Home() {
           <div className="mb-14 mt-8 flex justify-center">
             <div className="overflow-hidden rounded-md shadow lg:w-7/12">
               <ReactCompareSlider
-                itemOne={
-                  <Image src={before} alt="Exchange image" className="w-full object-cover" />
-                }
+                itemOne={<Image src={before} alt="Exchange image" className="w-full object-cover" />}
                 itemTwo={<Image src={after} alt="Market image" className="w-full object-cover" />}
               />
             </div>
