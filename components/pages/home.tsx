@@ -107,9 +107,9 @@ export default function Home() {
                   Everything you need is already here
                 </h1>
                 <p className="light:text-gray-700 mt-6 text-xl leading-8">
-                  Blue0x is not just a blockchain network. There is an entire decentralized
+                  Blue0x is not just a blockchain. There is an entire decentralized
                   ecosystem, built-in and ready to go. All transactions are executed on-chain and
-                  fully transparent.
+                  are fully transparent.
                 </p>
               </div>
             </div>
