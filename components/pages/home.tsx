@@ -34,7 +34,7 @@ export default function Home() {
                 We Are the Bank.
               </span>
             </h1>
-            <p className="mt-6 max-w-2xl text-lg font-medium leading-tight text-gray-400">
+            <p className="mt-6 max-w-2xl text-lg font-medium text-gray-400">
               Open-sourced. Decentralized. Secure.
               <br />
               <br />
@@ -106,7 +106,7 @@ export default function Home() {
                 <h1 className="light:text-gray-900 mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
                   Everything you need is already here
                 </h1>
-                <p className="light:text-gray-700 mt-6 text-xl leading-8">
+                <p className=" mt-6 text-lg font-medium text-gray-400">
                   Blue0x is not just a blockchain. There is an entire decentralized
                   ecosystem, built-in and ready to go. All transactions are executed on-chain and
                   are fully transparent.
