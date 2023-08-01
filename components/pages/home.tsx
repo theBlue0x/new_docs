@@ -34,10 +34,11 @@ export default function Home() {
                 We Are the Bank.
               </span>
             </h1>
-            <p className="mt-6 max-w-2xl text-lg font-medium text-gray-400">
+            <p className="mt-6 max-w-2xl text-lg font-medium text-white">
               Open-sourced. Decentralized. Secure.
               <br />
-              <br />
+              </p>
+              <p className="my-5 max-w-2xl font-medium text-gray-400">
               Blue0x is a monetary system built on computational trust that eliminates the need for
               intermediaries and returns control of national & personal finance back to the people.
               <br />
