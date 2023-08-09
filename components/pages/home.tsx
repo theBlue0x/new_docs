@@ -38,7 +38,7 @@ export default function Home() {
               Open-sourced. Decentralized. Secure.
               <br />
               </p>
-              <p className="my-5 max-w-2xl md:max-w-xl font-medium text-gray-400">
+              <p className="my-5 max-w-2xl md:max-w-xl text-lg font-medium text-gray-400">
               Blue0x is a monetary system built on computational trust that eliminates the need for
               intermediaries and returns control of national & personal finance back to the people.
               <br />
@@ -64,7 +64,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-        {/* <div className="w-1/12 md:w-3/12 lg:w-7/12 max-w-[436px] flex flex-col gap-1.5 m-auto md:justify-start"></div> */}
       </div>
 
       <div className="relative isolate overflow-hidden border-t px-6 py-24 dark:border-gray-900 sm:py-32 lg:overflow-visible lg:px-0">
@@ -107,9 +106,9 @@ export default function Home() {
                 <h1 className="light:text-gray-900 mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
                   Everything you need is already here
                 </h1>
-                <p className=" mt-6 text-lg font-medium leading-7 tracking-tight text-gray-400">
+                <p className=" mt-6 text-lg font-medium text-gray-400">
                   Blue0x is not just a blockchain. There is an entire decentralized
-                  ecosystem, built-in and ready to go. All transactions are executed on-chain and
+                  ecosystem, built-in and ready to go! All transactions are executed on-chain and
                   are fully transparent.
                 </p>
               </div>
@@ -183,7 +182,7 @@ export default function Home() {
             Easy to setup and use
           </h2>
           <p className="mx-auto mt-4 text-lg font-medium text-gray-400 lg:max-w-3xl lg:text-center">
-            No matter your skill set or hardware, we got you covered.
+            Whatever your skill set or hardware, we got you covered.
           </p>
           <div className="mb-14 mt-8 flex justify-center">
             <div className="overflow-hidden rounded-md shadow lg:w-7/12 border border-[#343434]">
