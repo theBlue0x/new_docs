@@ -47,7 +47,7 @@ export default function Home() {
           <div className="mb-6 mt-4 flex h-32 flex-col gap-3 md:my-0 md:flex-row md:items-center xl:flex-row">
             <div className="rounded-md xl:w-auto">
               <Link
-                href="/docs/introduction"
+                href="/docs/getting-started/installation"
                 className="flex w-full items-center justify-center rounded-md border border-transparent bg-black px-8 py-3 text-base font-medium text-white no-underline dark:bg-white dark:text-black md:px-10 md:py-3 md:text-lg md:leading-6 betterhover:hover:bg-gray-700 betterhover:dark:hover:bg-gray-300"
               >
                 Get Started →
@@ -56,10 +56,9 @@ export default function Home() {
             <div className="relative rounded-md xl:w-auto">
               <button
                 onClick={() => onClick('curl -L https://get.blue0x.com | bash')}
-                className="flex w-full items-center justify-center rounded-md border border-gray-200 bg-black/10 px-8 py-3 font-mono text-sm font-medium text-gray-600 dark:border-gray-700 dark:bg-white/10 dark:text-gray-300 md:px-10 md:py-3 md:text-base md:leading-6 betterhover:hover:bg-gray-50 betterhover:dark:hover:bg-gray-900"
+                className="flex w-full items-center justify-center rounded-md border border-gray-200 bg-black/10 px-4 py-3 font-mono text-sm font-medium text-gray-600 dark:border-gray-700 dark:bg-white/10 dark:text-gray-300 md:px-10 md:py-3 md:text-base md:leading-6 betterhover:hover:bg-gray-50 betterhover:dark:hover:bg-gray-900"
               >
                 curl -L https://get.blue0x.com | bash
-                <DocumentDuplicateIcon className="-mr-3 ml-2 h-6 w-6 text-gray-400" />
               </button>
             </div>
           </div>
