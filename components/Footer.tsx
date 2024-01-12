@@ -21,7 +21,7 @@ const Footer = () => {
   }, []);
 
   return (
-    <footer className="w-full p-4 dark:bg-black md:flex md:items-center md:justify-between md:p-">
+    <footer className="w-full p-4 dark:bg-[#111111] md:flex md:items-center md:justify-between md:p-">
       <span className="flex content-center items-center text-sm font-medium text-green-500">
         <span className="flex h-2.5 w-2.5 shrink-0 rounded-full bg-green-500"></span>
         <span className="flex h-2.5 w-2.5 shrink-0"></span>
