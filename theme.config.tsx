@@ -51,7 +51,7 @@ const config: DocsThemeConfig = {
   chat: {
     link: 'https://discord.gg/EbBWRSPW63',
   },
-  docsRepositoryBase: 'https://github.com/theBlue0x/new_docs',
+  docsRepositoryBase: 'https://github.com/theBlue0x/website',
   sidebar: {
     autoCollapse: true,
     defaultMenuCollapseLevel: 1,
