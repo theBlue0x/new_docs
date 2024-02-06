@@ -2,13 +2,6 @@
 
 @tailwind utilities;
 
-* {
-  -ms-overflow-style: none;
-}
-::-webkit-scrollbar {
-  display: none;
-}
-
 a:-webkit-any-link {
   text-decoration: none;
 }
