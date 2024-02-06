@@ -10,7 +10,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Ubuntu', ...defaultTheme.fontFamily.sans],
+        sans: ['Ubuntu'],
         mono: [
           'Menlo',
           'Monaco',

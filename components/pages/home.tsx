@@ -1,14 +1,12 @@
 import Image from 'next/image';
 import React from 'react';
 import {
-  DocumentDuplicateIcon,
   WalletIcon,
   BuildingStorefrontIcon,
   ArrowTrendingUpIcon,
 } from '@heroicons/react/24/outline';
 
 import { ReactCompareSlider } from 'react-compare-slider';
-
 import screenshot from '../../public/images/screenshot.png';
 import before from '../../public/images/before.png';
 import after from '../../public/images/after.png';
@@ -176,7 +174,7 @@ export default function Home() {
       </div>
 
       <div className="relative from-gray-50 to-gray-200">
-        <div className="mx-auto px-6 pt-4 pb-12 sm:py-18 lg:max-w-7xl lg:pt-18">
+        <div className="mx-auto px-6 pt-4 pb-12 lg:max-w-7xl">
           <h2 className="text-4xl font-extrabold tracking-tight dark:text-white lg:text-center">
             Easy to setup and use
           </h2>

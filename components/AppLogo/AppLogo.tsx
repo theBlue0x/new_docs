@@ -1,6 +1,5 @@
 import clsx from 'clsx';
 import React from 'react';
-import styles from './AppLogo.module.scss';
 
 export const AppLogo: React.FC<{
   url: string;
@@ -11,7 +10,6 @@ export const AppLogo: React.FC<{
   return (
     <div
       aria-label={alt}
-      className={clsx(styles.dropShadow, className)}
       style={{ width: size, height: size }}
     >
       <svg
