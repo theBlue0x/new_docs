@@ -144,10 +144,7 @@ export default function Home() {
                       <strong className="light:text-gray-900 font-semibold dark:text-blue-600">
                         Blue0x Marketplace.
                       </strong>{' '}
-                      Buy and sell anything, anytime, anywhere on the first decentralized crypto{' '}
-                      <a className="text-blue-400" href="https://market.blue0x.com">
-                        Marketplace.
-                      </a>{' '}
+                      Buy and sell anything, anytime, anywhere on the first decentralized crypto marketplace.
                     </span>
                   </li>
                   <li className="flex gap-x-3">
@@ -160,10 +157,7 @@ export default function Home() {
                         Blue0x Exchange.
                       </strong>{' '}
                       Trade a growing list of international currencies on the first decentralized
-                      foreign{' '}
-                      <a className="text-blue-400" href="https://exchange.blue0x.com">
-                        Exchange.
-                      </a>{' '}
+                      foreign exchange.
                     </span>
                   </li>
                 </ul>
