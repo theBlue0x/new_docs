@@ -6,7 +6,6 @@ const Footer = () => {
 
   useEffect(() => {
     const url = 'https://api.blue0x.com/nxt?=%2Fnxt&requestType=getState';
-
     const fetchData = async () => {
       try {
         const response = await fetch(url);
