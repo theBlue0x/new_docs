@@ -36,7 +36,7 @@ export default function Home() {
               Open-sourced. Decentralized. Secure.
               <br />
               </p>
-              <p className="my-5 max-w-2xl md:max-w-xl text-lg font-medium text-gray-400">
+              <p className="my-5 max-w-2xl md:max-w-xl text-lg text-gray-400">
               Blue0x is a monetary system built on computational trust that eliminates the need for
               intermediaries and returns control of national & personal finance back to the people.
               <br />
@@ -103,7 +103,7 @@ export default function Home() {
                 <h1 className="light:text-gray-900 mt-2 text-3xl font-bold tracking-tight sm:text-4xl">
                   Everything you need is already here
                 </h1>
-                <p className=" mt-6 text-lg font-medium text-gray-400">
+                <p className=" mt-6 text-lg text-gray-400">
                   Blue0x is not just a blockchain. There is an entire decentralized
                   ecosystem, built-in and ready to go! All transactions are executed on-chain and
                   are fully transparent.
