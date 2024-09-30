@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { DocsThemeConfig } from 'nextra-theme-docs';
 import logo from './public/logo.png';
+import Footer from './components/Footer';
 import { useRouter } from 'next/router';
 
 const config: DocsThemeConfig = {
@@ -54,6 +55,9 @@ const config: DocsThemeConfig = {
   sidebar: {
     autoCollapse: true,
     defaultMenuCollapseLevel: 1,
+  },
+  footer: {
+    component: <Footer />,
   },
   head: (
     <>
