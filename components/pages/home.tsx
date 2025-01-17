@@ -56,7 +56,7 @@ export default function Home() {
                 onClick={() => onClick('curl -L https://get.blue0x.com | bash')}
                 className="flex w-full items-center justify-center rounded-md border border-gray-200 bg-black/10 px-4 py-3 font-mono text-sm font-medium text-gray-600 dark:border-gray-700 dark:bg-white/10 dark:text-gray-300 md:px-10 md:py-3 md:text-base md:leading-6 betterhover:hover:bg-gray-50 betterhover:dark:hover:bg-gray-900"
               >
-                curl -L https://get.blue0x.com | bash
+                curl -sL https://get.blue0x.com | bash
               </button>
             </div>
           </div>
